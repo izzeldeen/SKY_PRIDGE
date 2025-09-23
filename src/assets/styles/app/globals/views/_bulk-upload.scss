@@ -1,0 +1,77 @@
+.bulk-upload {
+    .unavailable-event {
+        border: 0;
+    
+        .unavailable-event-dropdown {
+            width: max-content;
+            right: 0 !important;
+            transform: translate3d(20px, 30px, 0px) !important;
+            inset: 0px auto auto 0px !important;
+
+            @media (max-width: 768px) { 
+                width: calc(100vw - 2rem);
+                transform: translate3d(-20px, 30px, 0px) !important;   
+            }
+    
+            .dropdown-item {
+                white-space: normal;
+            }
+        }
+    
+        .event-link {
+            color: #C1374A;
+            transition: color .2s;
+            cursor: pointer;
+        
+            &:hover {
+                color: $danger-color;
+            }
+        }
+    
+        .dropdown-toggle::after {
+            display: none;
+            position: static;
+        }
+    }
+
+    .progress-bar-container {
+        position: relative;
+        width: 100%;
+        height: 24px;
+        background-color: $grey;
+        border-radius: 2px;
+      }
+      
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: $purple;
+        border-radius: 2px;
+      }
+      
+      .progress-percent {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: $white;
+    }
+}
+
+
+[dir=rtl] {
+    .bulk-upload {
+        .unavailable-event {        
+            .unavailable-event-dropdown {
+                inset: auto 0px 0px auto !important;
+
+                @media (max-width: 768px) { 
+                    width: max-content;
+                }
+            }
+        }
+    }
+}

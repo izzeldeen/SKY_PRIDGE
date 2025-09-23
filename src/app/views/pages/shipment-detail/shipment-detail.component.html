@@ -1,0 +1,1609 @@
+<div class="shipment-detail">
+	<div class="breadcrumb">
+		<h1>12345342321</h1>
+		<ul>
+			<li><strong>Hub ops</strong></li>
+			<li><a href="#/pages/shipments">Shipments management</a></li>
+			<li>12345342321</li>
+		</ul>
+		<div class="action-wrap">
+			<button class="btn btn-secondary btn-rounded" (click)="editShipmentModal(editShipment)">Edit</button>
+			<button class="btn btn-secondary btn-rounded" (click)="newItemModal(newItem)">
+				<i class="i-Plus"></i>
+				<span>Add item</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="tabs-to-dropdown" id="shipments-tabs" ngbDropdown>
+		<div ngbDropdown #shipmentsNavDropdown="ngbDropdown">
+			<button class="mobile-drop w-100 w-auto-md text-start" id="tabDropdown" ngbDropdownToggle>{{ active }}</button>
+			<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+				<a 
+					class="dropdown-item nav-link" 
+					[ngClass]="{'active': active === 'Shipment details'}" 
+					(click)="nav.select('Shipment details')"
+				>
+					Shipment details
+				</a>
+				<a 
+					class="dropdown-item nav-link" 
+					[ngClass]="{'active': active === 'Shipper & Consignee details'}" 
+					(click)="nav.select('Shipper & Consignee details')"
+				>
+					Shipper & Consignee details
+				</a>
+				<a 
+					class="dropdown-item nav-link" 
+					[ngClass]="{'active': active === 'Items'}" 
+					(click)="nav.select('Items')"
+				>
+					Items
+				</a>
+			</div>
+	   </div>
+
+		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs p-0">
+			<li ngbNavItem="Shipment details">
+				<a ngbNavLink>Shipment details</a>
+				<ng-template ngbNavContent>
+					<div class="content-block mw-100">
+						<div class="row">
+							<div class="col-12 col-xl-7">
+								<div class="c-card c-card-hover mb-4 c-card-branch-inf">
+									<div class="c-card-body">
+										<div class="c-header">
+											<div class="c-title text-20">General information</div>
+										</div>
+									
+										<div class="c-list gap-3">
+											<div class="item-type-1 grid-3x pb-3">
+												<div class="box-info">
+													<div class="label">Shipper name:</div>
+													<div class="value">Beauty company</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Shipper branch:</div>
+													<div class="value">Branch name</div>
+												</div>
+
+												<div class="box-info">
+													<div class="label">Product type:</div>
+													<div class="value">Clothes</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-3x pb-3">
+												<div class="box-info">
+													<div class="label">Shipping date:</div>
+													<div class="value">2023.01.01 15:50</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Expected delivery date:</div>
+													<div class="value">2023.01.03 14:30</div>
+												</div>
+
+												<div class="box-info">
+													<div class="label">Customs declared value:</div>
+													<div class="value">5000</div>
+												</div>
+											</div>
+				
+				
+											<div class="item-type-1 grid-3x pb-3">
+												<div class="box-info">
+													<div class="label">Customs declared currency:</div>
+													<div class="value">USD</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Length:</div>
+													<div class="value">50 cm</div>
+												</div>
+
+												<div class="box-info">
+													<div class="label">Width:</div>
+													<div class="value">50 cm</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-3x pb-3">
+												<div class="box-info">
+													<div class="label">Height:</div>
+													<div class="value">50 cm</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Weight:</div>
+													<div class="value">50 kg</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-1x">
+												<div class="box-info">
+													<div class="label">Goods description:</div>
+													<div class="value">Lorem ipsum dolor sit amet consectetur. Amet ut fermentum massa orci sagittis at sollicitudin rhoncus.</div>
+												</div>
+											</div>
+
+											<div class="item-type-1 grid-1x">
+												<div class="box-info">
+													<div class="label">Description of items:</div>
+													<div class="value">Lorem ipsum dolor sit amet consectetur. Amet ut fermentum massa orci sagittis at sollicitudin rhoncus.</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="c-card mb-4">
+									<div class="c-card-body">
+										<div class="c-header justify-content-center">
+											<div class="c-title text-20">Attachments</div>
+								
+											<div class="c-actions">
+												<button 
+													type="button" 
+													class="btn btn-rounded btn-secondary"
+													(click)="handleModal(addAttachmentPopup)"    
+												 >
+													<i class="i-Plus"></i>
+													<span>Add attachment</span>
+												</button>
+											</div>
+										</div>
+								
+										<ng-container *ngIf="dataAttachments.length; else notData">
+											<div class="c-list c-list-row">
+												<div *ngFor="let item of dataAttachments" class="file-item">
+													<div class="file-item-icon">
+														<img src="assets/images/file-extensions/{{item.fileExtension}}.svg" width="52" height="64" alt="">
+													</div>
+									
+													<div class="file-item-body">
+														<div class="file-item-top">
+															<div class="title text-16 font-weight-600 lh-sm text-primary-black" title="{{item.fileName}}">{{item.fileName}}</div>
+															<div class="actions lg-down-hidden">
+																<button type="button" class="btn btn-rounded btn-secondary">
+																	<i class="i-Pen-5 me-0"></i>
+																</button>
+									
+																<button type="button" class="btn btn-rounded btn-secondary">
+																	<i class="i-Download me-0"></i>
+																</button>
+									
+																<button type="button" class="btn btn-rounded btn-secondary btn-icon-danger">
+																	<i class="i-Close-Window me-0"></i>
+																</button>
+															</div>
+									
+															<div ngbDropdown class="dropdown-more lg-up-hidden">
+																<button ngbDropdownToggle class="btn btn-rounded btn-secondary">
+																	<i class="more-vertical me-0">
+																		<span></span>
+																	</i>
+																</button>
+									
+																<div ngbDropdownMenu>
+																	<button class="dropdown-item">Edit</button>
+																	<button class="dropdown-item">Download</button>
+																	<button class="dropdown-item">Delete</button>
+																</div>
+															</div>
+														</div>
+														<p class="text-12 lh-sm mb-0">
+															{{item.description}}
+														</p>
+													</div>
+												</div>
+											</div>
+										</ng-container>
+								
+										<ng-template #notData>
+											<div class="c-not-data">
+												<i class="i-Files"></i>
+												<p>There is no information in this section yet, to add it, click the <span>Add attachment</span> button</p>
+											</div>
+										</ng-template>
+									</div>
+								</div>
+							</div>
+				
+							<div class="col-12 col-xl-5 mb-4 d-flex">
+								<div class="c-card c-card-hover c-card-branch-inf">
+									<div class="c-card-body">
+										<div class="c-header">
+											<div class="c-title text-20">Shipment events</div>
+											<div class="c-actions">
+												<div class="btn btn-rounded btn-secondary" (click)="eventsShipmentModal(eventsShipment)">View all</div>
+											</div>
+										</div>
+				
+										<div class="c-list">
+											<div class="item-type-3 grid-1x">
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air way created</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Refused - due charges</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Lorem ipsum dolor sit.
+													</div>
+
+													<div class="content shipment-exception">
+														SHIPMENT DELIVERY EXCEPTION
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air way departed (not confirmed)</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. 
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air way departed (confirmed)</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air way arrived (not confirmed)</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Varius mattis commodo.
+													</div>
+												</div>
+
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air way departed (confirmed)</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis.
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air waybill recovered</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+													</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="item-header">
+														<div class="title">Master air waybill reconciled</div>
+														<div class="sub-info">2023.01.01 15:52</div>
+													</div>
+				
+													<div class="content">
+														Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li ngbNavItem="Shipper & Consignee details">
+				<a ngbNavLink>Shipper & Consignee details</a>
+				<ng-template ngbNavContent>
+					<div class="content-block mw-100">
+						<div class="row">
+							<div class="col-12 col-xl-7">
+								<div class="c-card c-card-hover mb-4 c-card-branch-inf">
+									<div class="c-card-body">
+										<div class="c-header">
+											<div class="c-title text-20">Shipper details</div>
+										</div>
+									
+										<div class="c-list gap-3">
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Address line:</div>
+													<div class="value">Vogacloset Warehouse</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Country:</div>
+													<div class="value">GBR</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">City:</div>
+													<div class="value">London</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">District:</div>
+													<div class="value">-</div>
+												</div>
+											</div>
+				
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Postcode:</div>
+													<div class="value">-</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Latitude:</div>
+													<div class="value">-</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Longiture:</div>
+													<div class="value">-</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Contact person name:</div>
+													<div class="value">Lana</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Email:</div>
+													<div class="value">lana.smith@gmail.com</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Phone number 1:</div>
+													<div class="value">0920004532</div>
+												</div>
+											</div>
+
+											<div class="item-type-1 grid-2x">
+												<div class="box-info">
+													<div class="label">Phone number 2:</div>
+													<div class="value">0920004544</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 col-xl-5">
+								<div class="c-card c-card-hover mb-4 c-card-branch-inf">
+									<div class="c-card-body">
+										<div class="c-header">
+											<div class="c-title text-20">Consignee details</div>
+										</div>
+									
+										<div class="c-list gap-3">
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Address line:</div>
+													<div class="value">Riyadh</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Country:</div>
+													<div class="value">SAU</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">City:</div>
+													<div class="value">Afif</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">District:</div>
+													<div class="value">Al Dirah Dist</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Type:</div>
+													<div class="value">-</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Postcode:</div>
+													<div class="value">-</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Latitude:</div>
+													<div class="value">-</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Longiture:</div>
+													<div class="value">-</div>
+												</div>
+											</div>
+				
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Contact person name:</div>
+													<div class="value">Ahmad</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Company name:</div>
+													<div class="value">GNTeq</div>
+												</div>
+											</div>
+
+											<div class="item-type-1 grid-2x pb-3">
+												<div class="box-info">
+													<div class="label">Email:</div>
+													<div class="value">lana.smith@gmail.com</div>
+												</div>
+				
+												<div class="box-info">
+													<div class="label">Phone number 1:</div>
+													<div class="value">0920004532</div>
+												</div>
+											</div>
+
+											<div class="item-type-1 grid-2x">
+												<div class="box-info">
+													<div class="label">Phone number 2:</div>
+													<div class="value">0920004544</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li ngbNavItem="Items">
+				<a ngbNavLink>Items</a>
+				<ng-template ngbNavContent>
+					<div class="custom-table-wrap">
+						<div class="table-wrap">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th style="width: 200px;">
+											HS code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th style="width: 480px; min-width: 400px;">
+											Description
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Origin
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Weight
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Quantity
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Amount
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Currency
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+				
+								<tbody>
+									<tr>
+										<td>112233445566778</td>
+										<td>Lorem ipsum dolor sit amet consectetur. Ut arcu vitae odio diam est adipiscing lectus est scelerisque.</td>
+										<td>GBR</td>
+										<td>15 kg</td>
+										<td>3</td>
+										<td>1000</td>
+										<td>USD</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item">Edit</button>
+													<button class="dropdown-item delete">Delete</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr>
+										<td>112233445566778</td>
+										<td>Lorem ipsum dolor sit amet consectetur. Ut arcu vitae odio diam est adipiscing lectus est scelerisque.</td>
+										<td>GBR</td>
+										<td>15 kg</td>
+										<td>3</td>
+										<td>1000</td>
+										<td>USD</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item">Edit</button>
+													<button class="dropdown-item delete">Delete</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner">
+							<div class="pages">
+								<div class="page-count">30 total</div>
+				
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+				
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+				
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+				
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+				
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+				
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+		</ul>
+		<div [ngbNavOutlet]="nav" class="mt-3 p-0"></div>
+	</div>
+
+	<ng-template #editShipment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Edit shipment</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body edit-shipment" id="editShipment">
+			<div class="tabs-to-dropdown" id="shipments-edit-tabs" ngbDropdown>
+				<div ngbDropdown #editShipmentNavDropdown="ngbDropdown">
+					<button class="mobile-drop w-100 w-auto-md text-start" id="editTabDropdown" ngbDropdownToggle>{{ editActive }}</button>
+					<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Shipment details'}" (click)="editNav.select('Shipment details')">Shipment details</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Shipper details'}" (click)="editNav.select('Shipper details')">Shipper details</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Consignee details'}" (click)="editNav.select('Consignee details')">Consignee details</a>
+					</div>
+			   </div>
+	
+				<ul ngbNav #editNav="ngbNav" [(activeId)]="editActive" class="nav-tabs p-0">
+					<li ngbNavItem="Shipment details">
+						<a ngbNavLink>Shipment details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="shipmentDetailsForm" id="shipmentDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Shipper name</label>
+															<select 
+																class="form-control" 
+																formControlName="ShipperName"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShipperName')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose name</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Shipping date</label>
+															<div class="input-group">
+																<p-calendar 
+																		formControlName="ShippingDate"
+																		[class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShippingDate')?.errors"
+																		inputStyleClass="form-control" 
+																		readonlyInput="true"
+																		placeholder="yyyy-mm-dd hh:mm"
+																		dateFormat="yy.mm.dd"
+																		[showTime]="true" 
+																		(onSelect)="onDateChange($event, 'ShippingDate', 'shipmentDetailsForm')"
+																		showClear="true">
+																</p-calendar>
+																<div class="invalid-feedback">This field is required</div>
+																<div class="input-group-append">
+																	<button class="btn"  type="button">
+																		<i class="i-Calendar-4"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Expected delivery date</label>
+															<div class="input-group">
+																<p-calendar 
+																		formControlName="ExpectedDate"
+																		[class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ExpectedDate')?.errors"
+																		inputStyleClass="form-control" 
+																		readonlyInput="true"
+																		placeholder="yyyy-mm-dd hh:mm"
+																		dateFormat="yy.mm.dd"
+																		[showTime]="true" 
+																		(onSelect)="onDateChange($event, 'ExpectedDate', 'shipmentDetailsForm')"
+																		showClear="true">
+																</p-calendar>
+																<div class="invalid-feedback">This field is required</div>
+																<div class="input-group-append">
+																	<button class="btn"  type="button">
+																		<i class="i-Calendar-4"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Product type</label>
+															<select 
+																class="form-control" 
+																formControlName="ProductType"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ProductType')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose type</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Customs declared value</label>
+															<input type="text" class="form-control" 
+																placeholder="Enter value"
+																formControlName="CustomsValue"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsValue')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Customs declared currency</label>
+															<select 
+																class="form-control" 
+																formControlName="CustomsCurrency"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsCurrency')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose currency</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group">
+															<label>Shipper branch</label>
+															<select 
+																class="form-control" 
+																formControlName="ShipperBranch"
+															>
+																<option value="" disabled selected hidden>Choose branch</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>                                                   
+													</div>
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group required">
+															<label>Goods description</label>
+															<textarea class="form-control form-control-rounded" 
+																		formControlName="GoodsDescription" 
+																		placeholder="Enter description" 
+																		[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('GoodsDescription')?.errors"
+																		id="notes"
+																		style="height: 56px"></textarea>
+																		<div class="invalid-feedback">
+																		This field is required
+																	</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group required">
+															<label>Description of Items</label>
+															<textarea class="form-control form-control-rounded" 
+																		formControlName="ItemsDescription" 
+																		placeholder="Enter description" 
+																		[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ItemsDescription')?.errors"
+																		id="notes"
+																		style="height: 56px"></textarea>
+																		<div class="invalid-feedback">
+																		This field is required
+																	</div>
+														</div>
+													</div>    
+													<div class="row">
+														<div class="mb-3">
+															<label class="checkbox checkbox-primary text-13">
+																<input 
+																	type="checkbox" 
+																	formControlName="COD" 
+																>
+																<span class="caption font-weight-400">COD</span>
+																<span class="checkmark"></span>
+															</label>
+														</div>
+													</div>   
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20">Dimensions</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Length</label>
+													<input type="text" class="form-control" placeholder="Enter length"
+														formControlName="Length"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Length')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Width</label>
+													<input type="text" class="form-control" placeholder="Enter width"
+														formControlName="Width"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Width')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Height</label>
+													<input type="text" class="form-control" placeholder="Enter height"
+														formControlName="Height"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Height')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Unit of measure (length measurements)</label>
+													<select 
+														class="form-control" 
+														formControlName="LengthMeasure"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('LengthMeasure')?.errors"
+													>
+														<option value="" disabled selected hidden>Choose unit</option>
+														<option value="1">Option 2</option>
+														<option value="2">Option 3</option>
+													</select>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Weight</label>
+													<input type="text" class="form-control" placeholder="Enter weight"
+														formControlName="Weight"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Weight')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>  
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Unit of measure (weight measurements)</label>
+													<select 
+														class="form-control" 
+														formControlName="WeightMeasure"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('WeightMeasure')?.errors"
+													>
+														<option value="" disabled selected hidden>Choose unit</option>
+														<option value="1">Option 2</option>
+														<option value="2">Option 3</option>
+													</select>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<button 
+								type="button" 
+								style="opacity: 0; pointer-events: none;" 
+								class="btn btn-secondary btn-rounded" 
+								id="shipment-button" 
+								(click)="resetShipmentDetailsForm();"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Shipper details">
+						<a ngbNavLink>Shipper details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="shipperDetailsForm" id="shipperDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">
+												<div class="c-header">
+													<div class="c-title text-20">Address info</div>
+												</div>
+						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Address line</label>
+															<input type="text" class="form-control" placeholder="Enter address" 
+																autocomplete="nope"
+																formControlName="Address"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Address')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Country</label>
+															<mat-select-country  
+																class="form-control select-country" 
+																#shipperCountry
+																describedBy="country"
+																placeHolder="Choose country" 
+																(onCountrySelected)="handleCountrySelected('shipperDetailsForm', 'Country', shipperCountry)"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Country')?.errors"
+																autocomplete="nope">
+															</mat-select-country>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>City</label>
+															<select 
+																class="form-control" 
+																formControlName="City"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('City')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose city</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>    
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Postcode</label>
+															<input type="text" class="form-control" placeholder="Enter postcode"
+																autocomplete="nope"
+																formControlName="Postcode"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Postcode')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>District</label>
+															<input type="text" class="form-control" placeholder="Enter district"
+																formControlName="District"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('District')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Latitude</label>
+															<input type="text" class="form-control" placeholder="Enter latitude"
+																formControlName="Latitude"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Latitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Longitude</label>
+															<input type="text" class="form-control" placeholder="Enter longitude"
+																formControlName="Longitude"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Longitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+													</div>                                                
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20 d-flex align-items-center">
+													Contact info
+													<span class="subtext">
+														Shipper name
+													</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Contact person name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="ContactName"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('ContactName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Email</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter email"
+														autocomplete="nope"
+														formControlName="Email"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Email')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Phone number 1</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone1"
+														#phone1
+														describedBy="phone1"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone1"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Phone1')?.errors"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Phone number 2</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone2"
+														#phone2
+														describedBy="phone2"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone2"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<button 
+								type="button" 
+								style="opacity: 0; pointer-events: none;" 
+								class="btn btn-secondary btn-rounded" 
+								id="shipper-button" 
+								(click)="resetShipperDetailsForm(shipperCountry, phone1, phone2);"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Consignee details">
+						<a ngbNavLink>Consignee details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="consigneeDetailsForm" id="consigneeDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">
+												<div class="c-header">
+													<div class="c-title text-20">Address info</div>
+												</div>
+						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Address line</label>
+															<input type="text" class="form-control" placeholder="Enter address" 
+																autocomplete="nope"
+																formControlName="Address"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Address')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Country</label>
+															<mat-select-country  
+																class="form-control select-country" 
+																#consigneeCountry
+																describedBy="country"
+																placeHolder="Choose country" 
+																(onCountrySelected)="handleCountrySelected('consigneeDetailsForm', 'Country', consigneeCountry)"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Country')?.errors"
+																autocomplete="nope">
+															</mat-select-country>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>City</label>
+															<select 
+																class="form-control" 
+																formControlName="City"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('City')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose city</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>    
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Postcode</label>
+															<input type="text" class="form-control" placeholder="Enter postcode"
+																autocomplete="nope"
+																formControlName="Postcode"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Postcode')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>District</label>
+															<input type="text" class="form-control" placeholder="Enter district"
+																formControlName="District"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('District')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Type</label>
+															<select 
+																class="form-control" 
+																formControlName="Type"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Type')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose type</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>  
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Latitude</label>
+															<input type="text" class="form-control" placeholder="Enter latitude"
+																formControlName="Latitude"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Latitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Longitude</label>
+															<input type="text" class="form-control" placeholder="Enter longitude"
+																formControlName="Longitude"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Longitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+													</div>                                                
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20">Contact info</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Contact person name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="ContactName"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('ContactName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Email</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter email"
+														autocomplete="nope"
+														formControlName="Email"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Email')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Phone number 1</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone1"
+														#phone1
+														describedBy="phone1"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone1"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Phone1')?.errors"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Phone number 2</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone2"
+														#phone2
+														describedBy="phone2"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone2"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Company name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="CompanyName"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('CompanyName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+								</form>
+								<button 
+									type="button" 
+									style="opacity: 0; pointer-events: none;" 
+									class="btn btn-secondary btn-rounded" 
+									id="consignee-button" 
+									(click)="resetConsigneeDetailsForm(consigneeCountry, phone1, phone2);"
+								>
+								</button>
+						</ng-template>
+					</li>
+				</ul>
+				<div [ngbNavOutlet]="editNav" class="mt-3 p-0"></div>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="triggerEditClear()" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitEditShipmentForm(editNav)" class="btn btn-primary btn-rounded" id="edit-shipment-button" tabindex="-1">Save</button>
+	  	</div>
+	</ng-template>
+
+	<ng-template #addAttachmentPopup let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Add attachment</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); componentArray = [{id: 0}]"></button>
+		</div>
+
+		<div class="modal-body attachments-wrap shipment-attachments">
+			<form id="addAttachmentForm">
+				<div id="create-attachment" (click)="addNewComponent()"></div>
+	
+				<div class="attachment-items">
+					<ng-container *ngFor="let component of componentArray">
+						<app-attachment-modal-item [id]="component.id"></app-attachment-modal-item>
+					</ng-container>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click'); componentArray = [{id: 0}]" tabindex="-1">Cancel</button>
+		  	<button type="button" (click)="uploadFile(errorLengthPopup)" class="btn btn-primary btn-rounded" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #errorLengthPopup let-modal>
+		<div class="modal-body" id="errorLengthPopup">
+			<i class="text-46 i-Information"></i>
+			<div class="note">
+				<div>Please upload at least one document</div>
+			</div>
+			<div class="note size-note">
+				<div>The document can't be added because it is over <strong>2 MB</strong></div>
+			</div>
+			<button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+				<div>
+					<div>Okay</div>
+				</div>
+			</button>
+		</div>
+	</ng-template>
+	
+	<ng-template #eventsShipment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Shipment events</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+	
+		<div class="modal-body">
+			<div class="item-type-3 grid-1x">
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air way created</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Refused - due charges</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Lorem ipsum dolor sit.
+					</div>
+	
+					<div class="content shipment-exception">
+						SHIPMENT DELIVERY EXCEPTION
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air way departed (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. 
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air way departed (confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air way arrived (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Varius mattis commodo.
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air way departed (confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis.
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill recovered</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+	
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill reconciled</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+	
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+
+	<ng-template #newItem let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Add item</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body">
+			<form [formGroup]="addItemForm" id="addItemForm" (ngSubmit)="submitAddItemForm()">
+				<div class="row">
+					<div class="form-group col-12 col-md-6">
+						<label>HS Code</label>
+						<input 
+							type="text" 
+							placeholder="Enter code" 
+							class="form-control" 
+							formControlName="HSCode"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6">
+						<label>Country of origin</label>
+						<mat-select-country  
+	                        class="form-control select-country" 
+	                        #countryOrigin
+	                        describedBy="country"
+	                        placeHolder="Choose country" 
+							(onCountrySelected)="handleCountrySelected('addItemForm', 'CountryOrigin', countryOrigin)"
+	                        autocomplete="off">
+	                    </mat-select-country>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-6 required">
+						<label>Quantity</label>
+						<input 
+							type="text" 
+							placeholder="Enter quantity" 
+							class="form-control" 
+							formControlName="Quantity"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Quantity')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6 required">
+						<label>Amount</label>
+						<input 
+							type="text" 
+							placeholder="Enter amount" 
+							class="form-control" 
+							formControlName="Amount"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Amount')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-6 required">
+						<label>Currency</label>
+						<select 
+							class="form-control" 
+							formControlName="Currency"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Currency')?.errors"
+						>
+							<option value="" disabled selected hidden>Choose currency</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6">
+						<label>Unit of measure (weight measurement)</label>
+						<select 
+							class="form-control" 
+							formControlName="WeightMeasure"
+						>
+							<option value="" disabled selected hidden>Choose unit</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-12 required">
+						<label>Weight</label>
+						<input 
+							type="text" 
+							placeholder="Enter weight" 
+							class="form-control" 
+							formControlName="Weight"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Weight')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label>Goods description</label>
+					<textarea class="form-control form-control-rounded" 
+							  formControlName="Goods" 
+							  placeholder="Enter description" 
+							  [class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Goods')?.errors"
+							  id="notes"
+							  style="height: 56px"></textarea>
+							  <div class="invalid-feedback">
+								This field is required
+							</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="resetAddItemForm(countryOrigin)" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitAddItemForm()" class="btn btn-primary btn-rounded" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+</div>  

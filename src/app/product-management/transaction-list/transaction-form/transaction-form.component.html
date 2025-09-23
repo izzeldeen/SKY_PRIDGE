@@ -1,0 +1,258 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ "transaction.addNewTransaction" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+
+
+    <p-steps [model]="steps" [activeIndex]="activeIndex" [readonly]="true"></p-steps>
+    <div *ngIf="activeIndex === 0" >
+  <form [formGroup]="form" id="form">
+<div class="row">
+     
+          <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.type" | translate }}</label>
+                            <select class="form-control" formControlName="type" name="type" (change)="onTypeChange(form.get('type').value)">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of types" value="{{item.id}}" >{{item.name | translate}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('type').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+                         <div *ngIf="form.get('type').value == recivingType || form.get('type').value ==  issueanceType" class="col-md-6 form-group mb-3 required">
+                            <!-- <label for="picker1"> {{  (form.get('type').value == recivingType ?   "Suppliers.Suppliers"  :   "customers.customers"  ) | translate }}</label>
+                            <select class="form-control" formControlName="customerId" name="customerId">
+                              <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of customers" value="{{item.id}}" >{{item.name}}</option>
+                            </select> -->
+                           
+                        <label for="picker1"> {{  (form.get('type').value == recivingType ?   "Suppliers.Suppliers"  :  
+                           "customers.customers"  ) | translate }}
+
+                        </label>
+                                 <p-autoComplete
+                                      formControlName="customerId"
+                                      [suggestions]="filteredCustomers"
+                                      (completeMethod)="filterCustomers($event)"
+                                      field="name"
+                                      [forceSelection]="true"
+                                      [placeholder]="searchCustomer"
+                                      [inputStyle]="{
+                                        backgroundColor: '#f8f9fa',
+                                        border: '1px solid #CED4DA',
+                                        borderRadius: '17px',
+                                        height: '32px',
+                                        padding: '0.375rem 0.75rem'
+                                      }"
+                                      />
+                                       <div *ngIf="isFormSubmitted && form.get('customerId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+
+                        </div>
+
+
+                        <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.warehouse" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseId" name="warehouseId" (change)="onWarehouseChange(form.get('warehouseId').value)">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of warehouses" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('warehouseId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                             <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.section" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseSectionId" name="warehouseSectionId"
+                            
+                            (change)="onSectionChange($event.target.value)">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of sections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('warehouseSectionId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                        <ng-container  *ngIf="form.get('type').value == transferType"> 
+
+                        <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.towarehouse" | translate }}</label>
+                            <select class="form-control" formControlName="toWarehouseId" name="toWarehouseId" (click)="getWarehouseToSections()">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option>
+                              <option *ngFor="let item of warehouses" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('toWarehouseId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                             <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.toSectionName" | translate }}</label>
+                            <select class="form-control" formControlName="toSectionId" name="toSectionId">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of toSections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('toSectionId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                           
+                        </ng-container>
+                      <ng-container  *ngIf="form.get('type').value == exportToBranchType">  
+                       
+                       
+                        <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "transaction.tobranch" | translate }}</label>
+                            <select class="form-control" formControlName="toBranchId" name="toBranchId">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option>
+                              <option *ngFor="let item of branchies" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && form.get('branch').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                        </ng-container>
+
+                                  
+ <div class="col-md-12 form-group">
+        <label>{{ "transaction.notes" | translate }}</label>
+        <textarea
+          type="textarea"
+          maxlength="100"
+          placeholder="{{ 'transaction.notes' | translate }}"
+          class="form-control"
+          formControlName="notes"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('notes')?.errors"
+        > </textarea>
+      </div>
+
+
+    </div>
+  </form>
+    </div>
+
+      <div *ngIf="activeIndex === 1"  >
+        
+        <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="width: 40%;">{{'transaction.product' | translate }}</th>
+        <th *ngIf="type == recivingType">{{'transaction.orderQuantity' | translate }}</th>
+        <th>{{'transaction.quantity' | translate }}</th>
+        <th>{{'product-line-item.action' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody  *ngIf="transactionItems?.length > 0">
+      <tr *ngFor="let item of transactionItems; let i = index" >
+        <td>
+          <!-- <select class="form-control" [(ngModel)]="item.productId" name="productId">
+            <option *ngFor="let product of products" [value]="product.id">
+              {{ product.name }}
+            </option>
+          </select> -->
+                    <div class="form-group m-0">
+<p-autoComplete
+  [(ngModel)]="item.product"
+  [suggestions]="filteredProducts"
+  (completeMethod)="filterProducts($event)"
+  field="name"
+  [forceSelection]="true"
+  [placeholder]="searchProduct"
+  [inputStyle]="{
+    backgroundColor: '#f8f9fa',
+    border: '1px solid #CED4DA',
+    borderRadius: '17px',
+    height: '32px',
+    padding: '0.375rem 0.75rem'
+  }"
+/>
+  </div>
+        </td>
+        <td *ngIf="type == recivingType">
+          <input type="number" class="form-control"   [(ngModel)]="item.orderedQuantity" name="orderedQuantity" />
+        </td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="item.quantity"  name="quantity" />
+        </td>
+        <td>
+          <button *ngIf="item.index == transactionItems.length - 1" type="button"  class="btn btn-success btn-sm me-1" (click)="addRow()">
+           <span class="text-white">+ </span> 
+          </button>
+          <button *ngIf="!(transactionItems?.length === 1)"
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="removeRow(item.index)"
+           
+          >
+            ×
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+      </div>
+    
+
+
+ <div class="mt-3 d-flex justify-content-between">
+  <!-- Previous Button -->
+  <button
+    type="button"
+    class="btn btn-light btn-rounded"
+    tabindex="-1"
+    (click)="previous()"
+    [disabled]="activeIndex === 0"
+  >
+    {{ "Previous" | translate }}
+  </button>
+
+  <!-- Next Button -->
+  <button
+    *ngIf="!(activeIndex === steps.length - 1)"
+    type="button"
+    (click)="next()"
+    class="btn btn-primary btn-rounded"
+  >
+    {{ "Next" | translate }}
+  </button>
+</div>
+
+
+
+</div>
+<div *ngIf="activeIndex === 1"  class="modal-footer position-absolute bottom-0 w-100">
+  <!-- Cancel Event -->
+  <button
+    type="button"
+    class="btn btn-secondary btn-rounded"
+    (click)="modal.dismiss('Cross click')"
+    tabindex="-1"
+  >
+    {{ "common.cancel" | translate }}
+  </button>
+  <!-- Save Event -->
+  <button
+    type="button"
+    (click)="submitForm()"
+    class="btn btn-primary btn-rounded"
+    tabindex="-1"
+    *ngIf="authSerivce.hasPermission('Transaction-Form')"
+  >
+    {{ "common.save" | translate }}
+  </button>
+</div>

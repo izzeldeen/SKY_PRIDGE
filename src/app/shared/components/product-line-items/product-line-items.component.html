@@ -1,0 +1,144 @@
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th  style="width: 15%;">{{'product-line-item.product' | translate }}</th>
+        <th  style="width: 15%;" >{{'product-line-item.unit' | translate }}</th>
+        <th  style="width: 10%" >{{'product-line-item.quantity' | translate }}</th>
+        <th  style="width: 15%" >{{    'product-line-item.unitPrice' | translate}}</th>
+        <th  style="width: 10%" >{{'product-line-item.discount' | translate }}</th>
+        <th  style="width: 10%" >{{'product-line-item.tax' | translate }}</th>
+        <!-- <th  style="width: 10%;" >{{'product-line-item.fees' | translate }}</th> -->
+        <th  style="width: 15%" >{{'product-line-item.total' | translate }}</th>
+        <th  style="width: 5%"  *ngIf="!invoice.isDeliveredOrReceived && showReserve" >{{'product-line-item.reserve' | translate}}</th>
+        <th  style="width: 5%" >{{'product-line-item.action' | translate }}</th>
+      </tr>
+    </thead>
+    <!-- <form  > -->
+
+    <tbody  *ngIf="productItems?.length > 0">
+      <tr *ngFor="let item of productItems; let i = index" >
+        <td>
+    <div class="row">
+      <div class="col-md-10 form-group  ">
+  <p-autoComplete
+    [(ngModel)]="item.product"
+    [suggestions]="filteredProducts"
+    (completeMethod)="filterProducts($event)"
+    [forceSelection]="isPurchase ? true : false" 
+    [disabled]="invoice.isBalanceUpdated"
+    field="name"
+    [placeholder]="searchProduct"
+    [inputStyle]="{
+      backgroundColor: '#f8f9fa',
+      border: '1px solid #CED4DA',
+      height: '32px',
+      padding: '0.375rem 0.75rem'
+    }"
+    (onSelect)="onSelectProduct(item , $event , i )"
+  />
+    <div class="input-group-append">
+                                    <label></label>
+      <button type="button" class="btn btn-primary remove-border-raduis " style=" margin-left: 10px;" (click)="onAddProducts(AddProductPopup)" >
+        <i class="i-Plus"></i>
+      </button>
+    </div>
+
+      </div>
+      <div  class="col-md-1 pt-2">
+         <i class="text-46 i-Information"  pTooltip="{{ item.product?.name || 'No product selected' }}"
+         tooltipPosition="top"
+         style="cursor: pointer; font-size: 1.2rem;"></i>
+      </div>
+
+    </div>
+
+
+
+
+        </td>
+        <td >
+
+    <p-autoComplete
+       [(ngModel)]="item.unitMeasure"
+    [suggestions]="filteredUnitOfMeasuers[i]"
+    (completeMethod)="onFilterUnitOfMeasuer($event , i , item)"
+    [forceSelection]="isPurchase ? true : false" 
+    field="name"
+    [forceSelection]="false" 
+    [dropdown]="true"
+    [dropdownIcon]="'i-Magnifi-Glass'"
+    [dropdownButtonClass]="'btn btn-primary p-button-icon-only'"
+    [disabled]="invoice.isBalanceUpdated"
+     [inputStyle]="{
+        backgroundColor: '#f8f9fa',
+        border: '1px solid #CED4DA',
+        height: '32px',
+        padding: '0.375rem 0.75rem',
+        width: '100%'
+      }"
+      (onSelect)="onSelectUnitMeasure($event , i , item)"
+/>
+        </td>
+        <td>
+  <div class="d-flex align-items-center">
+    <input 
+    
+      class="form-control me-2" 
+      [(ngModel)]="item.quantity" 
+      name="quantity{{i}}" 
+      [disabled]="invoice.isBalanceUpdated"
+      [attr.max]="item.maxQuantity"
+      [attr.min]="0"
+      [class.is-invalid]="(item.isInValid && showReserve) || item.quantity <= 0"
+      (change)="calculateTotal(item , 'quantity' , i)" 
+    />
+    <small *ngIf="showReserve" class="text-muted quantity-inside-inpit"> | {{item.maxQuantityView}}</small>
+  </div>
+</td>
+
+        <td>
+          <input  class="form-control"
+          [(ngModel)]="item.unitPrice" name="unitPrice{{i}}" [disabled]="invoice.isBalanceUpdated"  (change)="calculateTotal(item , 'unitPrice' , i)" 
+          min="1" 
+          [class.is-invalid]="(item.unitPrice <= 0)"
+          />
+        </td>
+          <td>
+          <input type="number" class="form-control" [(ngModel)]="item.discount" name="discount{{i}}" [disabled]="invoice.isBalanceUpdated" (change)="calculateTotal(item , 'discount' , i)"  />
+        </td>
+         <td>
+          <input type="number" class="form-control" [(ngModel)]="item.tax" name="tax{{i}}" [disabled]="invoice.isBalanceUpdated" (change)="calculateTotal(item , 'tax' , i)"  />
+        </td>
+         <!-- <td>
+          <input type="number" class="form-control" [(ngModel)]="item.feesAmount" name="feesAmount{{i}}"  [disabled]="invoice.isBalanceUpdated" (change)="calculateTotal(item , 'feesAmount')"  />
+        </td> -->
+         <td>
+          <input type="number" class="form-control" [(ngModel)]="item.total"  name="total{{i}}"   disabled />
+        </td>
+        <td *ngIf="!invoice.isDeliveredOrReceived && showReserve" >
+          <input type="checkbox"  [(ngModel)]="item.reserve" name="reserve{{i}}"  [disabled]="invoice.isBalanceUpdated" >
+        </td>
+
+        <td style="width: 7%;">
+          <button *ngIf="item.index == productItems.length - 1" type="button"  class="btn btn-success btn-sm mx-1p" (click)="addRow()" [disabled]="invoice.isBalanceUpdated">
+           <span class="text-white">+ </span> 
+          </button>
+          <button *ngIf="!(productItems?.length === 1)"
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="removeRow(item.index)"
+           [disabled]="invoice.isBalanceUpdated"
+          >
+           -
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- </form> -->
+
+  </table>
+
+    <ng-template #AddProductPopup let-modal>
+		<app-add-product-popup [modal]="modal" ></app-add-product-popup>
+</ng-template>

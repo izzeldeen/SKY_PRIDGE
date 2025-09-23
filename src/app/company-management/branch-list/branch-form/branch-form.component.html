@@ -1,0 +1,147 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isEditMood">
+    {{ "branch.addBranch" | translate }}
+  </h4>
+  <h4 class="modal-title" *ngIf="isEditMood">
+    {{ "branch.editBranch" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="form">
+    <div class="row">
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "branch.descriptionEn" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'branch.descriptionEn' | translate }}"
+          class="form-control"
+          formControlName="descriptionEn"
+          [class.is-invalid]=" isFormSubmitted && form && form.get('descriptionEn')?.errors"
+        />
+        <div *ngIf="form.get('descriptionEn').invalid &&  form.get('descriptionEn').errors['required']" class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+       
+      </div>
+
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "branch.descriptionAr" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'branch.descriptionAr' | translate }}"
+          class="form-control"
+          formControlName="descriptionAr"
+          [class.is-invalid]="isFormSubmitted && form && form.get('descriptionAr')?.errors" />
+        <div *ngIf="form.get('descriptionAr').invalid &&  form.get('descriptionAr').errors['required']" class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+                <div class="invalid-feedback"  *ngIf="form.get('descriptionAr').invalid && form.get('descriptionAr').errors?.arabicTextWithNumbers">
+                    {{ 'common.onlyArabicIsAllowed' | translate }}
+                </div>
+      </div>
+
+       <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "branch.currencyId" | translate }}</label>
+                            <select class="form-control" formControlName="currencyId" name="currencyId" 
+                            [class.is-invalid]="isFormSubmitted && form.get('currencyId')?.errors"
+                            >
+                                <option *ngFor="let item of currencies" value="{{item.id}}" >{{item.title}}</option>
+                            </select>
+                            <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                        </div>
+
+
+
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "branch.address" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'branch.address' | translate }}"
+          class="form-control"
+          formControlName="address"
+          [class.is-invalid]="isFormSubmitted && form && form.get('address')?.errors"
+        />
+      </div>
+ 
+
+
+
+      <div class="col-md-6 form-group mb-3 required">
+        <label for="timePicker">
+          {{ "branch.startWorkingHour" | translate }}
+        </label>
+        <div class="input-group">
+          <ngb-timepicker
+            [spinners]="true"
+            formControlName="startWorkingHour"
+            [seconds]="false"
+          ></ngb-timepicker>
+           <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 form-group mb-3 required">
+        <label for="timePicker">
+          {{ "branch.endWorkingHour" | translate }}
+        </label>
+        <div class="input-group">
+          <ngb-timepicker
+            [spinners]="true"
+            formControlName="endWorkingHour"
+            [seconds]="false"
+          ></ngb-timepicker>
+           <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+        </div>
+      </div>
+
+      
+      <div class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "branch.isActive" | translate }}
+          </span>
+          <input type="checkbox" checked formControlName="isActive" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+  </form>
+</div>
+<div class="modal-footer position-absolute bottom-0 w-100">
+  <!-- Cancel Event -->
+  <button
+    type="button"
+    class="btn btn-secondary btn-rounded"
+    (click)="modal.dismiss('Cross click')"
+    tabindex="-1"
+  >
+    {{ "common.cancel" | translate }}
+  </button>
+  <!-- Save Event -->
+  <button
+    type="button"
+    (click)="submitForm()"
+    class="btn btn-primary btn-rounded"
+    tabindex="-1"
+    *ngIf="authSerivce.hasPermission('Add-Branch')"
+  >
+    {{ "common.save" | translate }}
+  </button>
+</div>

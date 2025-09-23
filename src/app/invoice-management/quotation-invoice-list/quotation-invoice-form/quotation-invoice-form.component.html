@@ -1,0 +1,309 @@
+
+<div class="card">
+    <div class="card-body">
+<div class="modal-header">
+  <h4 class="modal-title" >
+    {{ "quotation.quotation" | translate }}
+  </h4>
+  	<button type="button" class="close" aria-label="Close" (click)="backToTransactionList()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+</div>
+<div class="modal-body">
+
+
+    <p-steps [model]="steps" [activeIndex]="activeIndex" [readonly]="true"></p-steps>
+    <div *ngIf="activeIndex === 0" >
+  <form [formGroup]="invoiceHeaderForm" id="form">
+<div class="row">
+ <div class="col-md-4 form-group mb-3 required">
+        <label for="picker1">{{
+          "quotation.invoiceDate" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="invoiceDate"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+            [class.is-invalid]="isInvoiceHeaderFormSubmitted &&  invoiceHeaderForm && invoiceHeaderForm.get('invoiceDate')?.errors"
+          
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+               <div  class="invalid-feedback">
+           {{ "common.fieldRequired" | translate }}
+        </div>
+        </div>
+
+      </div>
+
+      
+
+
+      
+         <div class="col-md-4 form-group mb-3">
+
+<label class="switch switch-primary me-3 mt-4">
+                    <span>
+
+                        {{
+          "quotation.isCustomer" | translate
+        }}
+                    </span>
+                    <input type="checkbox"   formControlName="isCustomer" (change)="onIsCustomerChange()"  >
+                    <span class="slider"></span>
+                </label>
+         </div>
+                    		<div *ngIf="invoiceHeaderForm.get('isCustomer')?.value  == true" class="col-md-4 form-group mb-3 required" >
+                                   <label for="sourceType"> {{ "sales-invoice.customers" | translate }} </label> 
+                                   <p-dropdown 
+                                  [options]="filteredCustomers"
+                                  [styleClass]="'form-control'" 
+                                  optionLabel="name" 
+                                  optionValue="id"
+                                  [filter]="true"
+                                  [styleClass]="'form-control w-100 ' + (isInvoiceHeaderFormSubmitted && invoiceHeaderForm.get('customerId')?.errors ? ' is-invalid' : '')"
+                                  placeholder="{{ 'sales-invoice.customers' | translate }}" 
+                                  formControlName="customerId"
+                                  [class.is-invalid]="isInvoiceHeaderFormSubmitted && invoiceHeaderForm.get('customerId')?.errors">
+                                </p-dropdown> 
+
+                                  <div class="input-group-append">
+                                    <label></label>
+      <button type="button" class="btn btn-primary remove-border-raduis " style="margin-top: 19px; margin-left: 10px;" (click)="onAddCustomers(AddCustomersPopup)" >
+        <i class="i-Plus"></i>
+      </button>
+    </div>
+
+                                  </div>
+
+<div *ngIf="(invoiceHeaderForm.get('isCustomer')?.value == false)" class="col-md-4 form-group required">
+  <label>{{ "sales-invoice.customerName" | translate }}</label>
+  <div class="input-group">
+    <input
+      type="text"
+      maxlength="100"
+      placeholder="{{ 'sales-invoice.customerName' | translate }}"
+      class="form-control"
+      formControlName="customerName"
+      [class.is-invalid]="isInvoiceHeaderFormSubmitted && invoiceHeaderForm && invoiceHeaderForm.get('customerName')?.errors"
+      [disabled]="invoice?.isBalanceUpdated"
+    />
+    <div class="input-group-append">
+      <button type="button" class="btn btn-primary" (click)="onAddCustomers(AddCustomersPopup)">
+        <i class="i-Plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="invalid-feedback">
+    {{ "common.fieldRequired" | translate }}
+  </div>
+</div>
+
+
+
+
+             <div class="col-md-4 form-group mb-3 required">
+                            <label for="sourceType"> {{ "quotation.sourceType" | translate }}</label>
+                            <select class="form-control" formControlName="sourceType" name="sourceType" 
+                            [class.is-invalid]="isInvoiceHeaderFormSubmitted &&  invoiceHeaderForm && invoiceHeaderForm.get('sourceType')?.errors"
+                            (change)="onSourceTypeChange($event.target.value)"
+                            >
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of sourceTypes" value="{{item.id}}" >{{item.name | translate}}</option>
+                            </select>
+                            <div  class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                             </div>
+                        </div>
+
+                         
+
+                            <div *ngIf="invoiceHeaderForm.get('sourceType')?.value == warehouseSourceType" class="col-md-4 form-group mb-3 required">
+                            <label for="picker1"> {{ "quotation.section" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseSectionId" name="warehouseSectionId"
+                            [class.is-invalid]="isInvoiceHeaderFormSubmitted &&  invoiceHeaderForm && invoiceHeaderForm.get('warehouseSectionId')?.errors"
+                           >
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of sections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div  class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+      <div class="col-md-8 form-group">
+        <label>{{ "quotation.note" | translate }}</label>
+        <textarea
+          type="textarea"
+          maxlength="100"
+          placeholder="{{ 'quotation.note' | translate }}"
+          class="form-control"
+          formControlName="note"
+        > </textarea>
+      </div>
+
+      
+           <div class="col-md-4 form-group">
+        <img *ngIf="additionalAttachmentPath" class="image-max-height"   src="{{additionalAttachmentPath}}"    />
+        <label>{{ "quotation.additionalAttachment" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'quotation.additionalAttachment' | translate }}"
+          class="form-control"
+          (change)="onFileChange($event)"
+           />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+
+
+    </div>
+  </form>
+    </div>
+
+      <div *ngIf="activeIndex === 1"  >
+        <ng-container *ngIf="entity" > 
+     <app-product-line-items #productLine  [sourceType]="sourceType"  [sourceId]="sourceId" [productItems]="invoiceProducts" [invoice]="entity" ></app-product-line-items>
+        </ng-container>
+      </div>
+
+      
+
+
+          <div *ngIf="activeIndex === 2"  >
+              <app-invoice-view [invoiceId]="entity.id"  ></app-invoice-view>
+
+        <!-- <ng-container *ngIf="entity"  > 
+        
+          <div class="col-md-3 form-group review-input">
+        <label>{{ "quotation.totalInvoiceAmount" | translate }}</label>
+        <input
+          type="number"
+          maxlength="100"
+          placeholder="{{ 'quotation.totalInvoiceAmount' | translate }}"
+          class="form-control"
+         [(ngModel)]="entity.totalAmount"
+         name="totalInvoiceAmount"
+          disabled
+        />
+      </div>
+
+        <div class="col-md-3 form-group review-input ">
+        <label>{{ "quotation.totalDiscount" | translate }}</label>
+        <input
+          type="number"
+          maxlength="100"
+          placeholder="{{ 'quotation.totalDiscount' | translate }}"
+          class="form-control"
+         [(ngModel)]="entity.totalDiscount"
+         name="totalDiscount"
+          disabled
+        />
+      </div>
+
+        <div class="col-md-3 form-group review-input ">
+        <label>{{ "quotation.totalTax" | translate }}</label>
+        <input
+          type="number"
+          maxlength="100"
+          placeholder="{{ 'quotation.totalTax' | translate }}"
+          class="form-control"
+         [(ngModel)]="entity.totalTax"
+         name="totalTax"
+          disabled
+        />
+      </div>
+
+       <div class="col-md-3 form-group review-input ">
+        <label>{{ "quotation.totalFees" | translate }}</label>
+        <input
+          type="number"
+          maxlength="100"
+          placeholder="{{ 'quotation.totalFees' | translate }}"
+          class="form-control"
+         [(ngModel)]="entity.totalFee"
+         name="totalFee"
+          disabled
+        />
+      </div>
+
+       <div class="col-md-3 form-group review-input ">
+        <label>{{ "quotation.netAmount" | translate }}</label>
+        <input
+          type="number"
+          maxlength="100"
+          placeholder="{{ 'quotation.netAmount' | translate }}"
+          class="form-control"
+         [(ngModel)]="entity.netAmount"
+         name="netAmount"
+          disabled
+        />
+      </div>
+
+    
+
+        
+
+      <div class="col-md-3 review-input">
+        <button type="button" class="btn btn-primary submit"
+        (click)="onSubmitInvoice()"
+         [disabled]="entity?.isBalanceUpdated"
+        >{{'quotation.submit' | translate}}</button>
+      </div>  </ng-container> -->
+
+
+       
+      </div>
+
+    
+
+
+<div class="mt-3 d-flex justify-content-between">
+  <!-- Previous Button -->
+  <button
+    type="button"
+    class="btn btn-light btn-rounded"
+    tabindex="-1"
+    (click)="previous()"
+    [disabled]="activeIndex === 0"
+  >
+    {{ "Previous" | translate }}
+  </button>
+
+  <!-- Next Button -->
+  <button
+    *ngIf="activeIndex < steps.length - 1"
+    type="button"
+    (click)="next()"
+    class="btn btn-primary btn-rounded"
+  >
+    {{ "Next" | translate }}
+  </button>
+</div>
+
+
+</div>
+
+    </div>
+</div>
+
+
+
+      <ng-template #AddCustomersPopup let-modal>
+	<app-customers-form [modal]="modal"></app-customers-form>
+</ng-template>

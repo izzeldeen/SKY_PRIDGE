@@ -1,0 +1,36 @@
+		
+        <div class="modal-header">
+					<h4 class="modal-title" id="modal-basic-title">{{'Change Invoice Status' | translate}}</h4>
+					<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+					<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+       
+             <div class="col-md-10 form-group mb-3 required">
+                            <label  for="status" 
+                              [class.text-dir]="lang === 'ar'">
+                               {{ "Invoice Status" | translate }}
+                        </label>
+                            <select 
+                            class="form-control" [(ngModel)]="status" name="status"  id="status"
+                            
+                            >
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of invoiceStatus" value="{{item.id}}" >{{item.name | translate}}</option>
+                            </select>
+                            <div  class="invalid-feedback">
+                                    {{ "Required" | translate }}
+                             </div>
+                        </div>
+
+
+          </div>
+						<button type="button" class="btn btn-rounded btn-secondary m-1" (click)="modal.dismiss('Cross click')">{{'Cancel' | translate }}</button>
+			    	<button type="button" class="btn btn-rounded btn-primary" [disabled]="!status"
+                    (click)="changeInvoiceStatus();modal.dismiss('Cross click')"
+                    >{{'Change'| translate  }}
+                </button>
+</div>

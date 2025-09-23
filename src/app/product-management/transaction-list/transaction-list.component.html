@@ -1,0 +1,156 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'transaction.transaction-management' | translate}}</h1>
+    <ul>
+        <li>{{'transaction.manageTransaction'  | translate}}</li>
+        <li><strong class="text-primary">{{'transaction.transaction'  | translate}}</strong></li>
+    </ul>
+</div>
+	
+		<div class="card">
+					<div class="card-body">
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+ <div class="col-md-4 form-group mb-3 ">
+                            <label for="picker1"> {{ "transaction.type" | translate }}</label>
+                            <select class="form-control" formControlName="type" name="type" >
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of types" value="{{item.id}}" >{{item.name | translate }}</option>
+                            </select>
+                           
+                        </div>
+
+								<div class="col-md-4 form-group mb-3">
+        <label for="picker1">{{
+          "transaction.transactionDateFrom" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="transactionDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="transactionDateFrom"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+	   <div class="col-md-4 form-group mb-3 ">
+        <label for="picker1">{{
+          "transaction.transactionDateTo" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="transactionDateTo"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="transactionDateTo"
+            formControlName="transactionDateTo"
+            ngbDatepicker
+            #transactionDateTo="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="transactionDateTo.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+<!-- 
+                        <div class="col-md-4 form-group mb-3 ">
+                            <label for="picker1"> {{ "transaction.warehouse" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseId" name="warehouseId" (change)="onWarehouseChange(searchForm.get('warehouseId').value)">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of warehouses" value="{{item.id}}" >{{item.nameEn}}</option>
+                            </select>
+                        </div>
+
+                             <div class="col-md-4 form-group mb-3 ">
+                            <label for="picker1"> {{ "transaction.section" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseSectionId" name="warehouseSectionId">
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of sections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                        </div> -->
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+		<div class="table-heading">
+			<div class="table-search form-group">
+
+				
+				<!-- Searching Lookups -->
+				<!-- <input 
+					id="table-search" 
+					placeholder="{{'product-management.productSsearch' | translate}}"
+					class="form-control" 
+					type="text"
+					maxlength="100"
+					(keydown.enter)="onSearch()"
+				> -->
+			</div>
+			<div *ngIf="authService.hasPermission('Transaction-Form')" class="heading-actions">
+				<!-- Add Lookups -->
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddTransaction(AddTransactionPop)" 
+					*ngIf="authService.hasPermission('Transaction-Form') "
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'transaction.addNewTransaction' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , EditTransctionPopup )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddTransactionPop let-modal>
+	<app-transaction-form [modal]="modal" [TypeId]="TypeId"></app-transaction-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditTransctionPopup let-modal>
+     	<app-transction-form [modal]="modal" [TypeId]="TypeId" [id]="id" [isEditMood]="true" ></app-transction-form>
+
+</ng-template>

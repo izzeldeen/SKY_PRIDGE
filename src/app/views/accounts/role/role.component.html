@@ -1,0 +1,1698 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>Administrator</h1>
+
+        <ul>
+			<li><strong>Users</strong></li>
+			<li><a href="#/accounts/roles">Roles</a></li>
+			<li>Administrator</li>
+		</ul>
+
+        <div class="action-wrap">
+			<button class="btn btn-secondary btn-rounded" (click)="handleModal(EditRolePopup)">Edit</button>
+			<button class="btn btn-secondary btn-rounded">Duplicate role</button>
+		</div>
+    </div>
+
+    <div class="c-card h-100">
+        <div class="c-card-body h-100 d-flex flex-column">
+            <div class="c-header">
+                <div class="c-title text-20">Permissions</div>
+
+                <div class="search">
+                    <input id="table-search" placeholder="Search by permission..."  class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="card-body d-flex flex-column">
+                <div class="tabs-to-dropdown">
+                    <div ngbDropdown #permissionsNavDropdown="ngbDropdown">
+                        <button class="mobile-drop w-100 w-auto-md text-start" id="tabDropdown" ngbDropdownToggle>{{ active }}</button>
+                        <div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+                            <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Configuration'}" (click)="permissionsTabs.select('Configuration')">Configuration</a>
+                            <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'CRM'}" (click)="permissionsTabs.select('CRM')">CRM</a>
+                            <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'GNConnect'}" (click)="permissionsTabs.select('GNConnect')">GNConnect</a>
+                            <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Billing'}" (click)="permissionsTabs.select('Billing')">Billing</a>
+                            <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Identify'}" (click)="permissionsTabs.select('Identify')">Identify</a>
+                        </div>
+                    </div>
+
+                    <ul ngbNav #permissionsTabs="ngbNav" [(activeId)]="active" class="nav-tabs p-0">
+                        <li ngbNavItem="Configuration">
+                            <a ngbNavLink>Configuration</a>
+                            <ng-template ngbNavContent>
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">City</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read city</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create city</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit city</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete city</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Product type</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read product type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create product type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit product type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete product type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Event</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read event</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create event</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit event</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete event</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Global zone</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read global zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create global zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit global zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete global zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Local zone</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read local zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create local zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit local zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete local zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Product service</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read product service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create product service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit product service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete product service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipping type</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipping type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipping type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipping type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete shipping type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Weight</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read weight</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create weight</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit weight</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete weight</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Weight envelope</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read weight envelope</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create weight envelope</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit weight envelope</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete weight envelope</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Zone</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">User type</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read user type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create user type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit user type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete user type</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipment service</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipment service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipment service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipment service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete shipment service</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Airport</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read airport</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create airport</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit airport</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete airport</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Carrier</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read carrier</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create carrier</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit carrier</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete carrier</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="CRM">
+                            <a ngbNavLink>CRM</a>
+                            <ng-template ngbNavContent>
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Customer</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read customer</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create customer</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit customer</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete customer</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Branch</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read branch</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create branch</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit branch</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete branch</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Branch attachment</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read branch attachment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create branch attachment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit branch attachment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete branch attachment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Branch e-invoice</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read branch e-invoice</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create branch e-invoice</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit branch e-invoice</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete branch e-invoice</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Branch SLA</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read branch SLA</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create branch SLA</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit branch SLA</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete branch SLA</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="GNConnect">
+                            <a ngbNavLink>GNConnect</a>
+                            <ng-template ngbNavContent>
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipment</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipment void</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipment tracking</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Manifest</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read manifest</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create manifest</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit manifest</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete manifest</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create manifest shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete manifest shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Master air waybill</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read master air waybill</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create master air waybill</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit master air waybill</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Export master air waybills items as Excel</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete master air waybill</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create master air waybill manifests</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete master air waybill manifests</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Failure tower dashboard</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read connect result</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create connect result</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit connect result</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete connect result</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Tracking</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read tracking</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create tracking</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit tracking</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete tracking</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Control tower dashboard</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Verify shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read control tower dashboard</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Control tower dashboard invalid address</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Resend Shipment</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="Billing">
+                            <a ngbNavLink>Billing</a>
+                            <ng-template ngbNavContent>
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Rate sheet</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read rate sheet</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create rate sheet</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit rate sheet</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete rate sheet</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Rate sheet product</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read rate sheet product</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create rate sheet product</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit rate sheet product</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete rate sheet product</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read rate sheet zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create rate sheet zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit rate sheet zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete rate sheet zone</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone extra value</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read rate sheet zone extra value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create rate sheet zone extra value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit rate sheet zone extra value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete rate sheet zone extra value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone value</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read rate sheet zone value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create rate sheet zone value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit rate sheet zone value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete rate sheet zone value</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Billing setting</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read billing setting</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create billing setting</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit billing setting</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete billing setting</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Top up shipping credit</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Top up customs credit</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Customer billing profile</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read customer billing profile</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create customer billing profile</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit customer billing profile</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete customer billing profile</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Surcharge</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read surcharge</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create surcharge</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit surcharge</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete surcharge</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Customs charges</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Calculate customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Identify customs charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipping charges</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Calculate shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Identify shipping charges</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Customs credit transaction</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read customs credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create customs credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit customs credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete customs credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipping credit transaction</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipping credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipping credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipping credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete shipping credit transaction</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Customs invoices</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read customs invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create customs invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit customs invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete customs invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Shipping invoices</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read shipping invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create shipping invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit shipping invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete shipping invoices</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="Identify">
+                            <a ngbNavLink>Identify</a>
+                            <ng-template ngbNavContent>
+                                <div class="accordion-row parent-toggle active">
+                                    <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                    <div class="row">
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Users</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read users</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create users</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit users</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete users</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Roles</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read roles</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create roles</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit roles</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete roles</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                            <div class="caption" (click)="toggleClass($event.target)">Permissions</div>
+                                            <div class="checkbox-list">
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Read permissions</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Create permissions</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Edit permissions</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <label class="checkbox checkbox-primary text-13">
+                                                        <input type="checkbox" tabindex="-1">
+                                                        <span>Delete permissions</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="permissionsTabs" class="mt-3 p-0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #EditRolePopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit role</h4>
+        <button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="roleEditForm" (ngSubmit)="submitRoleEditForm()">
+            <div class="form-group">
+                <label for="roleName">Role name</label>
+                <input 
+                    type="text" 
+                    placeholder="Enter name" 
+                    class="form-control" 
+                    formControlName="RoleName"
+                    id="roleName"
+                    value="roleName">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control form-control-rounded" 
+                          formControlName="Description" 
+                          placeholder="Enter description" 
+                          id="description"
+                          style="height: 56px">
+                </textarea>
+            </div>
+
+            <div class="form-field">
+                <label for="activeRole" class="checkbox checkbox-primary text-13">
+                    <input id="activeRole"
+                           type="checkbox"
+                           formControlName="ActiveRole"
+                           value="activeRole"
+                           checked>
+                    <span>Active role</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-rounded" (click)="resetRoleEditForm()" tabindex="-1">Clear fields</button>
+        <button type="button" (click)="submitRoleEditForm()" class="btn btn-primary btn-rounded" tabindex="-1">Save changes</button>
+    </div>
+</ng-template>

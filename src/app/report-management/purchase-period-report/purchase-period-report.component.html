@@ -1,0 +1,132 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'purchase-period-report.purchase-period-report' | translate}}</h1>
+    <ul>
+        <li>{{'purchase-period-report.report-management'  | translate}}</li>
+        <li><strong class="text-primary">{{'purchase-period-report.purchase-period-report'  | translate}}</strong></li>
+    </ul>
+</div>
+	
+		<div class="card">
+					<div class="card-body">
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+
+        			<div class="col-md-4 form-group mb-3">
+        <label for="picker1">{{
+          "sales-invoice.invoiceDateFrom" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="invoiceDateFrom"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+	   <div class="col-md-4 form-group mb-3 ">
+        <label for="picker1">{{
+          "sales-invoice.invoiceDateTo" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDateTo"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="invoiceDateTo"
+            formControlName="invoiceDateTo"
+            ngbDatepicker
+            #invoiceDateTo="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="invoiceDateTo.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+                      <div class="col-md-4 form-group mb-3 ">
+                            <label for="picker1"> {{ "sales-period-report.period" | translate }}</label>
+                            <select class="form-control" formControlName="period"  name="period"  >
+                              <option *ngFor="let item of periods" value="{{item.id}}" >{{item.name | translate }}</option>
+                            </select>
+                        </div>
+                    
+
+
+               
+
+                         
+			
+
+
+
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+    	<div class="table-heading">
+			<div class="table-search form-group">
+			</div>
+			<div  class="heading-actions">
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="downloadReport()" 
+				>
+					<i class="i-Download m-1"></i>
+					<span>
+						{{ 'sales-invoice.generateReport' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+
+
+
+     
+
+
+
+

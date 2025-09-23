@@ -1,0 +1,67 @@
+<div class="breadcrumb">
+    <h1>{{ 'companyManagement.info' | translate }}</h1>
+    <ul>
+        <li>{{'navigation.production-products' | translate}}</li>
+        <li>
+            <a (click)="router.navigate(['/company-management/companies'])">
+                <strong>{{'companyManagement.company' | translate}}</strong>
+            </a>
+        </li>
+      
+    </ul>
+
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+             <div class="card-header">
+                    <h4>{{ entity.nameEn }}</h4>
+                 </div>
+
+            <div class="card-body">
+                    <div *ngIf="entity" class="row">
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.nameEn' | translate}}</label>
+                             <span class="value" > {{entity.nameEn}} </span>
+                        </div>
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.nameAr' | translate}}</label>
+                             <span class="value" > {{entity.nameAr}} </span>
+                        </div>
+
+                           <div class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.mainAccountEmail' | translate}}</label>
+                             <span class="value" > {{entity.mainAccountEmail}} </span>
+                        </div>
+
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.address' | translate}}</label>
+                             <span class="value" > {{entity.address}} </span>
+                        </div>
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.currencyId' | translate}}</label>
+                             <span class="value" > {{entity.currencyTitle  }} </span>
+                        </div>
+
+                         <div *ngIf="entity.timezone" class="col-md-4 form-group mb-3">
+                            <label>{{'companyManagement.timezone' | translate}}</label>
+                             <span class="value" > {{entity.timezone  }} </span>
+                        </div>
+                    </div>
+
+              
+
+            </div>
+
+          
+
+        </div>
+    </div>
+</div>

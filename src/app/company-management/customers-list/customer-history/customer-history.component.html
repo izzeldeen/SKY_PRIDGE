@@ -1,0 +1,96 @@
+<div class="customers">
+  <div class="breadcrumb">
+   
+    <ul>
+      <li>
+        <a 
+        (click)="router.navigate(['/company-management/customers'])"> {{'customer-history.manageCustomers' | translate}} 
+       </a>
+       </li>
+      <li><strong class="text-primary">{{'customer-history.customer-history' | translate}}</strong></li>
+    </ul>
+  </div>
+  <div class="custom-table-wrap">
+    <div class="card">
+      <div class="modal-header">
+  <h4 class="modal-title" >
+   {{'customer-history.customer-history' | translate}}
+  </h4>
+  	<a (click)="router.navigate(['/company-management/customers'])"  type="button" class="close" aria-label="Close" >
+						<span aria-hidden="true">&times;</span>
+    </a>
+</div>
+
+      <div class="card-body p-3">
+        <div  class="text-right">
+
+
+        </div>
+      
+
+
+
+                 <div *ngIf="customer" class="row">
+
+                         <div  class="col-md-4 form-group mb-3">
+                            <label>{{'customers.nameEn' | translate}}</label>
+                             <span class="value" > {{customer.nameEn}} </span>
+                        </div>
+
+                           <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.nameAr' | translate}}</label>
+                             <span class="value" > {{customer.nameAr}} </span>
+                        </div>
+
+                          <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.address' | translate}}</label>
+                             <span class="value" > {{customer.address}} </span>
+                        </div>
+
+                        <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.mobileNumber' | translate}}</label>
+                             <span class="value" > {{customer.mobileNumber}} </span>
+                        </div>     
+                          <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.initialBalance' | translate}}</label>
+                             <span class="value" > {{customer.initialBalance}} </span>
+                        </div>      
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.creditLimit' | translate}}</label>
+                             <span class="value" > {{customer.creditLimit}} </span>
+                        </div>    
+                           <!-- <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.periodInDays' | translate}}</label>
+                             <span class="value" > {{customer.periodInDays}} </span>
+                        </div>     
+                          <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.discount' | translate}}</label>
+                             <span class="value" > {{customer.discount}} </span>
+                        </div>      
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.accountNumber' | translate}}</label>
+                             <span class="value" > {{customer.accountNumber}} </span>
+                        </div>
+                          <div class="col-md-4 form-group mb-3">
+                            <label>{{'customers.customerTypeId' | translate}}</label>
+                             <span class="value" > {{customer.customerTypeName}} </span>
+                        </div> -->
+                        </div>
+   <p-tabView>
+ <p-tabPanel header="{{'customer-history.products' | translate}}">
+<app-customer-history-invoice></app-customer-history-invoice>
+ </p-tabPanel>
+  <p-tabPanel header="{{'customer-history.sales-invoices' | translate}}">
+<app-customer-history-transaction [customerId]="customerId" > </app-customer-history-transaction>
+  </p-tabPanel>
+
+   <p-tabPanel header="{{'customer-history.installments' | translate}}">
+<app-customer-history-installment [customerId]="customerId" > </app-customer-history-installment>
+  </p-tabPanel>
+
+        </p-tabView>
+      </div>
+    </div>
+ 
+
+  </div>

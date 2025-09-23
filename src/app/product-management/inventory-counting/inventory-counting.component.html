@@ -1,0 +1,166 @@
+<div class="customers">
+  <div class="breadcrumb">
+    <h1>{{'inventory-counting.inventoryCounting' | translate}}</h1>
+    <ul>
+      <li>{{'inventory-counting.manageInventoryCounting' | translate}}</li>
+      <li><strong class="text-primary">{{'inventory-counting.inventoryCounting' | translate}}</strong></li>
+    </ul>
+  </div>
+  <div class="custom-table-wrap">
+    <p-tabView>
+      <p-tabPanel header="{{'inventory-counting.search' | translate}}">
+        <div class="card mb-50">
+          <div class="card-body form-group ">
+            <form [formGroup]="searchForm" id="form" (submit)="onSearch()">
+              <div class="row">
+
+
+
+
+                <div class="col-md-4 form-group mb-3">
+                  <label for="picker1"> {{ "inventory-counting.section" | translate }}</label>
+                  <select class="form-control" formControlName="sectionId" name="sectionId">
+                    <option [ngValue]="null" selected>{{ "select" | translate }}</option>
+                    <option *ngFor="let item of sections" value="{{item.id}}">{{item.name}}</option>
+                  </select>
+                </div>
+
+                <div class=" col-md-4 form-group mb-3">
+                  <label for="product"> {{ "inventory-counting.product" | translate }}</label>
+                  <p-autoComplete formControlName="product" [suggestions]="filteredProducts"
+                    (completeMethod)="filterProducts($event)" field="name" [forceSelection]="true"
+                    [placeholder]="searchProduct"
+                    [inputStyle]="{ backgroundColor: '#f8f9fa', border: '1px solid #CED4DA',
+                            borderRadius: '17px',    height: '32px',    width: '486px',    padding: '0.375rem 0.75rem'  }" />
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                  <label for="from">{{ 'inventory-counting.from' | translate }}</label>
+                  <input type="date" class="form-control" formControlName="from" id="from" required />
+                  <div *ngIf="searchForm.get('from')?.invalid && searchForm.get('from')?.touched" class="text-danger">
+                    {{ 'common.fieldRequired' | translate }}
+                  </div>
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                  <label for="to">{{ 'inventory-counting.to' | translate }}</label>
+                  <input type="date" class="form-control" formControlName="to" id="to" required />
+                  <div *ngIf="searchForm.get('to')?.invalid && searchForm.get('to')?.touched" class="text-danger">
+                    {{ 'common.fieldRequired' | translate }}
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="row"
+                [ngStyle]="{'text-align': languageService.getCurrentLanguage() === 'en' ? 'right' : 'left'}">
+                <div class="col-2 search-section">
+                  <button class="btn btn-light  btn-block mt-3 mr-1" type="button"
+                    (click)="resetSearchForm()">{{'common.clear' | translate}}
+                  </button>
+                  <button class="btn btn-primary btn-block mt-3 mr-1" type="submit">
+                    {{'common.search' | translate}}
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+            <br>
+            <app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"
+              (EventHandler)="onHandleAction($event  )" [PageSize]="baseSearch.pageSize" [TotalRecords]="totalCount"
+              (PageChange)="onPageChange($event)">
+            </app-table>
+          </div>
+
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="{{'inventory-counting.calculation' | translate}}">
+        <div class="card mb-50">
+          <div class="card-body form-group">
+            <form [formGroup]="calculationForm" id="form" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <!-- Source Type -->
+                <div class="col-md-4 form-group mb-3 required">
+                  <label for="sourceType"> {{ "sales-invoice.sourceType" | translate }}</label>
+                  <select class="form-control" formControlName="sourceType" name="sourceType"
+                    [class.is-invalid]="isFormSubmitted && calculationForm.get('sourceType')?.errors">
+                    <option [ngValue]="null" selected>{{ "select" | translate }}</option>
+                    <option *ngFor="let item of sourceTypes" [value]="item.id">{{ item.name | translate }}</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    {{ "common.fieldRequired" | translate }}
+                  </div>
+                </div>
+
+                <!-- Section (conditionally shown if sourceType is Warehouse) -->
+                <div class="col-md-4 form-group required mb-3" *ngIf="calculationForm.get('sourceType')?.value == 2">
+                  <label>{{ "inventory-counting.section" | translate }}</label>
+                  <select class="form-control" formControlName="sectionId"
+                    [class.is-invalid]="isFormSubmitted && calculationForm.get('sectionId')?.invalid">
+                    <option [ngValue]="null" selected>{{ "select" | translate }}</option>
+                    <option *ngFor="let item of sections" [value]="item.id">{{ item.name }}</option>
+                  </select>
+                  <div *ngIf="isFormSubmitted && calculationForm.get('sectionId')?.errors" class="invalid-feedback">
+                    <div *ngIf="calculationForm.get('sectionId')?.errors['required']">{{ "common.fieldRequired" |
+                      translate }}</div>
+                  </div>
+                </div>
+
+                <!-- Product -->
+                <div class="col-md-4 form-group required mb-3">
+                  <label>{{ "inventory-counting.product" | translate }}</label>
+                  <p-autoComplete formControlName="product" [suggestions]="filteredProducts"
+                    (completeMethod)="filterProducts($event)" field="name" [forceSelection]="true"
+                    [placeholder]="searchProduct"
+                    [class.is-invalid]="isFormSubmitted && calculationForm.get('product')?.invalid">
+                  </p-autoComplete>
+                  <div *ngIf="isFormSubmitted && calculationForm.get('product')?.errors"
+                    class="invalid-feedback d-block">
+                    <div *ngIf="calculationForm.get('product')?.errors['required']">{{ "common.fieldRequired" |
+                      translate }}</div>
+                  </div>
+                </div>
+
+                <!-- Actual Quantity -->
+                <div class="col-md-4 form-group required mb-3">
+                  <label>{{ "inventory-counting.actualQuantity" | translate }}</label>
+                  <input type="number" class="form-control" formControlName="actualQuantity"
+                    [class.is-invalid]="isFormSubmitted && calculationForm.get('actualQuantity')?.invalid" />
+                  <div *ngIf="isFormSubmitted && calculationForm.get('actualQuantity')?.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="calculationForm.get('actualQuantity')?.errors['required']">{{ "common.fieldRequired" |
+                      translate }}</div>
+                  </div>
+                </div>
+
+                <!-- Count Date -->
+                <div class="col-md-4 form-group mb-3">
+                  <label>{{ "inventory-counting.countDate" | translate }}</label>
+                  <input type="date" class="form-control" formControlName="countDate" disabled />
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="row">
+                <div class="col-2 search-section">
+                  <button class="btn btn-light btn-block mt-3 mr-1" type="button" (click)="resetCalculationForm()">
+                    {{ 'common.clear' | translate }}
+                  </button>
+                  <button class="btn btn-primary btn-block mt-3 mr-1" type="submit">
+                    {{ 'inventory-counting.calculation' | translate }}
+                  </button>
+                </div>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+      </p-tabPanel>
+
+    </p-tabView>
+
+  </div>
+</div>

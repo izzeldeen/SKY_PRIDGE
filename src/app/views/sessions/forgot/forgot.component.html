@@ -1,0 +1,22 @@
+<div class="auth-content o-hidden d-flex align-items-center" [@animate]="{value:'*',params:{x:'-120px',opacity:'0',delay:'500ms', duration: '500ms'}}">
+	<div class="auth-wrap">
+		<div class="auth-logo text-center">
+			<img src="assets/images/logo.svg" alt="">
+		</div>
+
+        <h1 class="text-18 text-center">Forgot Password</h1>
+
+        <form action="" tabindex="-1">
+        	<div class="form-group">
+            	<label for="email">Email address</label>
+            	<input id="email" class="form-control form-control-rounded" placeholder="Email address" type="email" [(ngModel)]="emailAddress" name="emailAddress">
+          	</div>
+
+          	<button class="btn btn-primary w-100 btn-rounded mt-3" (click)="sendForgetPasswordEmail()">Send Forget Password Email</button>
+        </form>
+
+        <div class="text-center">
+        	<a href="" class="text-muted" routerLink="/sessions/signin"><u>Sign in</u></a>
+        </div>
+    </div>
+</div>

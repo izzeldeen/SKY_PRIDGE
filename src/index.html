@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>MES Panel</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css' rel='stylesheet' />
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js"></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-gantt.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+        <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+        <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+    </head>
+    <body class="text-left mat-typography">
+        <app-root>
+            <div class="loadscreen">
+                <img src="assets/images/icon2.png" 
+                    class="logo mb-3" 
+                    style="display: none" 
+                    alt=""
+                >
+                <div class="loader-bubble loader-bubble-primary d-block"></div>
+            </div>
+        </app-root>
+    </body>
+    <script>
+
+        anychart.onDocumentReady(function () {
+            console.log('anychart loaded');
+            // The data used in this sample can be obtained from the CDN
+            // https://cdn.anychart.com/samples/gantt-charts/server-status-list/data.json
+            anychart.data.loadJsonFile(
+                'https://cdn.anychart.com/samples/gantt-charts/server-status-list/_data.json',
+                function (data) {
+                    // create data tree on our data
+                    var treeData = anychart.data.tree(data, 'as-table');
+
+                    // create project gantt chart
+                    var chart = anychart.ganttResource();
+
+                    // set data for the chart
+                    chart.data(treeData);
+
+                    // set start splitter position settings
+                    chart.splitterPosition(320);
+
+                    // get chart data grid link to set column settings
+                    var dataGrid = chart.dataGrid();
+
+                    // hide first column
+                    dataGrid.column(0).enabled(false);
+
+                    // get chart timeline
+                    var timeLine = chart.getTimeline();
+                    // set base fill
+                    timeLine.elements().fill(function () {
+                        // get status from data item
+                        var status = this.period.status;
+
+                        // create fill object
+                        var fill = {
+                            // if this element has children, then add opacity to it
+                            opacity: this.item.numChildren() ? 1 : 0.6
+                        };
+
+                        // set fill color by status
+                        switch (status) {
+                            case 'online':
+                                fill.color = 'green';
+                                break;
+                            case 'maintenance':
+                                fill.color = 'orange';
+                                break;
+                            case 'offline':
+                                fill.color = 'red';
+                                break;
+                            default:
+                        }
+
+                        return fill;
+                    });
+
+                    // set base stroke
+                    timeLine.elements().stroke('none');
+                    // set select fill
+                    timeLine.elements().selected().fill('#ef6c00');
+
+                    // set first column settings
+                    var firstColumn = dataGrid.column(1);
+                    firstColumn.labels().hAlign('left');
+                    firstColumn
+                        .title('Server')
+                        .width(140)
+                        .labelsOverrider(labelTextSettingsOverrider)
+                        .labels()
+                        .format(function () {
+                            return this.name;
+                        });
+
+                    // set first column settings
+                    var secondColumn = dataGrid.column(2);
+                    secondColumn.labels().hAlign('right');
+                    secondColumn
+                        .title('Online')
+                        .width(60)
+                        .labelsOverrider(labelTextSettingsOverrider)
+                        .labels()
+                        .format(function () {
+                            return this.item.get('online') || '';
+                        });
+
+                    // set first column settings
+                    var thirdColumn = dataGrid.column(3);
+                    thirdColumn.labels().hAlign('right');
+                    thirdColumn
+                        .title('Maintenance')
+                        .width(60)
+                        .labelsOverrider(labelTextSettingsOverrider)
+                        .labels()
+                        .format(function () {
+                            return this.item.get('maintenance') || '';
+                        });
+
+                    // set first column settings
+                    var fourthColumn = dataGrid.column(4);
+                    fourthColumn.labels().hAlign('right');
+                    fourthColumn
+                        .title('Offline')
+                        .width(60)
+                        .labelsOverrider(labelTextSettingsOverrider)
+                        .labels()
+                        .format(function () {
+                            return this.item.get('offline') || '';
+                        });
+
+                    // set container id for the chart
+                    chart.container('gantt-container');
+
+                    // initiate chart drawing
+                    chart.draw();
+
+                    // zoom chart to specified date
+                    chart.zoomTo(
+                        Date.UTC(2008, 0, 31, 1, 36),
+                        Date.UTC(2008, 1, 15, 10, 3)
+                    );
+                }
+            );
+        });
+
+        function labelTextSettingsOverrider(label, item) {
+            switch (item.get('status')) {
+                case 'online':
+                    label.fontColor('green').fontWeight('bold');
+                    break;
+                case 'maintenance':
+                    label.fontColor('orange').fontWeight('bold');
+                    break;
+                case 'offline':
+                    label.fontColor('red').fontWeight('bold');
+                    break;
+                default:
+            }
+        }
+
+    </script>
+</html>

@@ -1,0 +1,6 @@
+<ng-content></ng-content>
+<div class="actions-wrap">
+	<div class="step-wrap"><span id="cur-pass-step">1</span>/2</div>
+	<button type="button" class="btn btn-primary btn-rounded" (click)="next()" [disabled]="!activeStep.isValid" [hidden]="!hasNextStep || !activeStep.showNext">Next</button>
+	<button type="button" class="btn btn-primary btn-rounded" (click)="complete()" [disabled]="!activeStep.isValid" [hidden]="hasNextStep">Next</button>
+</div>

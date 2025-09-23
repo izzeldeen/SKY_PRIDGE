@@ -1,0 +1,76 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>{{'rolesManagment.manageRoles' | translate}}</h1>
+        <ul>
+            <li>{{'navigation.users_management' | translate}}</li>
+            <li><strong class="text-primary">{{'rolesManagment.manageRoles' | translate}}</strong></li>
+        </ul>
+    </div>
+    <div class="table-heading">
+        <div class="table-search form-group">
+            <!-- Searching Roles -->
+            <input 
+                id="table-search" 
+                placeholder="{{'rolesManagment.SearchbyRoles' | translate}}" 
+                class="form-control"
+                type="text"
+                maxlength="100"
+                (keydown.enter)="onSearch()" 
+                [formControl]="searchForm.get('searchValue')"
+            >
+        </div>
+        <div class="heading-actions">
+            <!-- Add Role -->
+            <button 
+                type="button" 
+                class="btn btn-rounded btn-primary" 
+                (click)="onAddRole(AddRolePopup)" 
+                *ngIf="authService.hasPermission('Add-Roles')"
+            >
+                <i class="i-Plus"></i>
+                <span>{{'rolesManagment.addRoles' | translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Roles -->
+        <div class="col-12 col-sm-6 col-xl-4 col-xxl-3 mb-3" *ngFor="let data of dataSource">
+            <div class="c-card h-100">
+                <div class="c-card-body h-100 d-flex flex-column">
+                    <div class="c-header">
+                        <div class="c-title text-18">{{languageService.getCurrentLanguage() == 'en' ?  data.viewName : data.nameAr}}</div>
+                        <div class="c-badge " [ngClass]="{'text-success': data.status == 1}">
+                            <span>{{data.status == 1 ? ('Active' | translate) : ('Inactive' | translate)}}</span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="c-actions">
+                            <!-- Update Role -->
+                            <a class="btn btn-rounded btn-secondary" 
+                                *ngIf="authService.hasPermission('Update-Roles')"
+                                (click)="onEditRole(data, UpdateRolePopup)"
+                            >
+                                {{'rolesManagment.editRoles' | translate}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" *ngIf="dataSource.length <=0">
+            {{'table.NodataFound' | translate}}
+        </div>
+        <!-- App Pager -->
+        <div class="col-md-12 mt-3 bottom-0" >
+            <app-pagger [TotalRecords]="totalCount" (PageChange)="onPageChange($event)"></app-pagger>
+        </div>
+    </div>
+</div>
+<!-- Add Role -->
+<ng-template #AddRolePopup let-modal>
+    <app-add-edit-roles [modal]="modal"></app-add-edit-roles>
+</ng-template>
+<!-- Update Role -->
+<ng-template #UpdateRolePopup let-modal>
+    <app-add-edit-roles [modal]="modal" [RoleID]="RoleID" [isEditMood]="true"></app-add-edit-roles>
+</ng-template>

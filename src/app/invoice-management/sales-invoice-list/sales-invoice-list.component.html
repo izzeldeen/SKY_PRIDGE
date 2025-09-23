@@ -1,0 +1,93 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'Invoices' | translate}}</h1>
+    <ul>
+        <li>{{'Sales Management'  | translate}}</li>
+        <li><strong class="text-primary">{{'Invoices'  | translate}}</strong></li>
+    </ul>
+</div>
+	
+		<div class="card">
+					<div class="card-body">
+	<div class="row">
+
+		 <div class="col-md-4 form-group required">
+        <label>{{ "Customer , Supplier , Invoice number" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'Customer , Supplier , Invoice number' | translate }}"
+          class="form-control"
+          [(ngModel)]="searchKeyWord"
+        />
+        <div class="invalid-feedback">
+        </div>
+      </div>
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'Clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit"  (click)="onSearch()" >{{'Search' | translate}}</button>
+  </div>
+</div>
+				
+
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+		<div class="table-heading">
+			<div class="table-search form-group">
+			</div>
+			<div  class="heading-actions">
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddSalesInvoice(AddInvoicePopup)" 
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'Invoice' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , ViewInvoicePoup , ChangeInvoiceStatus )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+
+
+
+     
+
+<ng-template #AddInvoicePopup let-modal>
+	<app-sales-invoice-form [modal]="modal"></app-sales-invoice-form>
+</ng-template>
+
+
+
+
+
+<ng-template #ViewInvoicePoup let-modal>
+	<app-sales-invoice-view [modal]="modal" [entity]="model"></app-sales-invoice-view>
+</ng-template>
+
+
+
+<ng-template #ChangeInvoiceStatus let-modal>
+		<app-change-invoice-status [invoiceId]="id" [modal]="modal" [invoice]="model"></app-change-invoice-status>
+</ng-template>
+
+
+

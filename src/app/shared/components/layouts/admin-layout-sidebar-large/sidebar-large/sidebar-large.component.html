@@ -1,0 +1,106 @@
+<div [ngClass]="{ open: navService.sidebarState.sidenavOpen }" class="sidebar-left rtl-ps-none">
+	<ul class="navigation-left">
+		<li 
+			[ngClass]="{ active: item.active, mobile: item.name === 'Language' || item.name === 'Help' }" 
+			(click)="onClickChangeActiveFlag(item)" 
+			class="nav-item lvl1" 
+			*ngFor="let item of nav"
+		>
+      		<div class="nav-item-hold" routerLink="{{ item.state }}" (click)="closeChildNav()" *ngIf="!item.disabled && item.type === 'link' && authSerivce.hasPermission(item.permissions)">
+        		<div class="d-flex flex-column">
+					<div class="d-flex align-items-center nav-item-inner">
+						<i [class]="'nav-icon ' + item.icon"></i>
+						<span class="nav-text">{{ item.name | translate }} </span>
+					</div>
+				</div>
+      		</div>
+
+			<div 
+				class="nav-item-hold" 
+				(mouseenter)="selectItem(item)" 
+				*ngIf="!item.disabled && item.type === 'dropDown' && authSerivce.hasPermission(item.permissions)"
+			>
+				<div class="d-flex flex-column w-100">
+					<div 
+						class="d-flex align-items-center nav-item-inner w-100" 
+						[ngClass]="{ canOpen: item.type === 'dropDown', opened: item.name === navService.selectedItem.name && this.navService.sidebarState.childnavOpen}"
+					>
+					
+						<ng-container *ngIf="item.name !== 'Language'; else languageIcon">
+							<i [class]="'nav-icon ' + item.icon"></i>
+						</ng-container>
+						<ng-template #languageIcon>
+							<span class="nav-icon" style="font-size: 18px;">{{ directionService.getCurrentLanguage() | uppercase }}</span>
+						</ng-template>
+						  
+						<span class="nav-text">{{ item.name | translate }} </span>
+					</div>
+
+					<ng-container *ngIf="navService.selectedItem.name === item.name && this.navService.sidebarState.childnavOpen">
+						<div [ngClass]="{ open: navService.sidebarState.childnavOpen }" class="mobile" (mouseleave)="closeChildNav()">
+							<ng-container *ngTemplateOutlet="menuTemplate; context: { parentItem: navService.selectedItem }"></ng-container>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+
+      		<div class="nav-item-hold" *ngIf="!item.disabled && item.type === 'extLink'">
+				<a [href]="item.state" target="_blank">
+					<i [class]="'nav-icon ' + item.icon"></i>
+					<span class="nav-text">{{ item.name | translate }}</span>
+				</a>
+			</div>
+
+      		<div class="triangle" *ngIf="!item.disabled"></div>
+    	</li>
+  	</ul>
+</div>
+
+<div class="mobile-menu-overlay" (click)="navService.sidebarState.sidenavOpen = false"></div>
+<!-- [perfectScrollbar]="{ suppressScrollX: true }"  -->
+<div 
+	[ngClass]="{ open: navService.sidebarState.childnavOpen && (navService.selectedItem.name !== 'Language' && navService.selectedItem.name !== 'Help') }" 
+	class="sidebar-left-secondary rtl-ps-none" 
+	(mouseleave)="closeChildNav()"
+>
+	<ng-container *ngTemplateOutlet="menuTemplate; context: { parentItem: navService.selectedItem }"></ng-container>
+</div>
+
+<ng-template #menuTemplate let-parentItem="parentItem">
+	<div class="mobile-back" (click)="navService.sidebarState.childnavOpen = false">Back</div>
+	<ul class="childNav" appDropdown>
+		<li *ngFor="let item of parentItem?.sub" appDropdownLink class="nav-item">
+			<a routerLink="{{ item.state }}" *ngIf="item.type === 'link' && authSerivce.hasPermission(item.permissions)" class="" routerLinkActive="open">
+				<i *ngIf="item.icon" [class]="'nav-icon ' + item.icon"></i>
+				<span class="item-name lvl1">{{ item.name | translate }} </span>
+			</a>
+
+			<span *ngIf="item.type === ''">
+				<i *ngIf="item.icon" [class]="'nav-icon ' + item.icon"></i>
+				<ng-container *ngIf="parentItem.name === 'Language'; else notLang">
+					<span 
+						class="item-name lvl1 sas" 
+						(click)="changeLanguage(item.name.toLowerCase()); navService.sidebarState.childnavOpen = false"
+					>
+						{{ item.name | translate }}
+					</span>
+				</ng-container>
+				<ng-template #notLang>
+					<span class="item-name lvl1 sss">{{ item.name | translate }}</span>
+				</ng-template>
+			</span>
+
+			<div *ngIf="item.type === 'dropDown'">
+				<a appDropdownToggle [ngClass]="{ open: item.active }" routerLinkActive="open">
+					<i *ngIf="item.icon" [class]="'nav-icon ' + item.icon"></i>
+					<span class="item-name">{{ item.name | translate }}</span>
+					<i class="dd-arrow i-Arrow-Down"></i>
+				</a>
+
+				<ng-container *ngTemplateOutlet="menuTemplate; context: { parentItem: item }"></ng-container>
+			</div>
+		</li>
+	</ul>
+</ng-template>
+
+<div [ngClass]="{ open: navService.sidebarState.childnavOpen }" class="sidebar-overlay" (click)="closeChildNav()"></div>

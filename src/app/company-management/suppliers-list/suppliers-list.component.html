@@ -1,0 +1,41 @@
+<div class="Suppliers">
+	<div class="breadcrumb">
+		<h1>{{'Suppliers.manageSuppliers' | translate}}</h1>
+		<ul>
+			<li>{{'Suppliers.manageSuppliers' | translate}}</li>
+			<li><strong class="text-primary">{{'Suppliers.Suppliers' | translate}}</strong></li>
+		</ul>
+	</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Lookups -->
+				<input id="table-search" placeholder="{{'Suppliers.Searchby' | translate}}" class="form-control"
+					type="text" maxlength="100" (keydown.enter)="onSearch($event)">
+			</div>
+			<div class="heading-actions">
+				<!-- Add Lookups -->
+				<button type="button" class="btn btn-rounded btn-primary" (click)="onAddSuppliers(AddSuppliersPopup)"
+					*ngIf="authService.hasPermission('Add-Suppliers') ">
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'Suppliers.addSuppliers' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"
+			(EventHandler)="onHandleAction($event , EditSuppliersPopup )" [PageSize]="baseSearch.pageSize"
+			[TotalRecords]="totalCount" (PageChange)="onPageChange($event)">
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddSuppliersPopup let-modal>
+	<app-suppliers-form [modal]="modal"></app-suppliers-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditSuppliersPopup let-modal>
+	<app-suppliers-form [modal]="modal" [id]="id" [isEditMood]="true"></app-suppliers-form>
+</ng-template>

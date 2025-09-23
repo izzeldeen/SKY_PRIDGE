@@ -1,0 +1,109 @@
+
+
+<div class="card" *ngIf="entity" >
+    <div class="card-body">
+<div class="modal-header">
+  <h4 class="modal-title" >
+    {{entity.number }}
+  </h4>
+  
+  	<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" >
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+                   
+</div>
+<div class="modal-body" >
+
+    <div class="row">
+
+   
+
+
+          <div class="col-md-6 form-group mb-3">
+                            <label>{{'Client' | translate}}</label>
+                             <span class="value" > {{entity.customer}} </span>
+     </div>
+
+       <div class="col-md-6 form-group mb-3">
+                            <label>{{'Supplier' | translate}}</label>
+                             <span class="value" > {{entity.supplier}} </span>
+     </div>
+
+       <div class="col-md-6 form-group mb-3">
+                            <label>{{'Sale Amount' | translate}}</label>
+                             <span class="value" > {{entity.saleAmount}} </span>
+     </div>
+
+
+         <div class="col-md-6 form-group mb-3">
+                            <label>{{'Purchase Amoun' | translate}}</label>
+                             <span class="value" > {{entity.purchaseAmount}} </span>
+     </div>
+
+
+           <div class="col-md-6 form-group mb-3">
+                            <label>{{'Net Amount' | translate}}</label>
+                             <span class="value" > {{entity.netAmount}} </span>
+     </div>
+
+     
+           <div class="col-md-6 form-group mb-3">
+                            <label>{{'Employee' | translate}}</label>
+                             <span class="value" > {{entity.employee}} </span>
+     </div>
+
+
+        <div class="col-md-6 form-group mb-3">
+                            <label>{{'Commission %' | translate}}</label>
+                             <span class="value" > {{entity.commissionPerc}} % </span>
+     </div>
+
+         <div class="col-md-6 form-group mb-3">
+                            <label>{{'Commission' | translate}}</label>
+                             <span class="value" > {{entity.commission}} </span>
+     </div>
+
+           <div class="col-md-6 form-group mb-3">
+                            <label>{{'Status' | translate}}</label>
+                             <span class="value" > {{entity.status}} </span>
+     </div>
+
+      <div class="col-md-6 form-group mb-3">
+                            <label>{{'Date' | translate}}</label>
+                             <span class="value" > {{entity.createdAt | date:'medium'}} </span>
+     </div>
+
+       <div class="col-md-6 form-group mb-3">
+         <a 
+    href="{{ entity.salePDF }}" 
+    target="_blank" 
+    class="btn btn-outline-primary m-1"
+  >     
+        <i class="i-Data-Download" > </i> {{'Sales Invoice' | translate}}
+    </a>
+     </div>
+
+       <div class="col-md-6 form-group mb-3">
+            <a href="" type="button" class="btn btn-outline-secondary m-1" href="{{ entity.purchasePDF }}"     target="_blank"  ><i class="i-Data-Download" > </i>{{ 'Purchase Invoice' | translate}}</a>
+     </div>
+
+
+     
+
+    </div>
+  
+
+
+
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+

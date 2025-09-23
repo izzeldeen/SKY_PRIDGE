@@ -1,0 +1,175 @@
+
+
+<div class="card">
+    <div class="card-body">
+<div class="modal-header">
+  <h4 class="modal-title" >
+    {{ "New Invoice" | translate }}
+  </h4>
+  	<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" >
+						<span aria-hidden="true">&times;</span>
+					</button>
+</div>
+<div class="modal-body">
+
+   <form [formGroup]="form" id="form">
+    <div class="row">
+
+       <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "Customer" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'Customer' | translate }}"
+          class="form-control"
+          formControlName="customer"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('customer')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "Required" | translate }}
+        </div>
+      </div>
+
+         <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "Supplier" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'Supplier' | translate }}"
+          class="form-control"
+          formControlName="supplier"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('supplier')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "Required" | translate }}
+        </div>
+      </div>
+
+
+       <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "Sale Amount" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'saleAmount' | translate }}"
+          class="form-control"
+          formControlName="saleAmount"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('saleAmount')?.value <= 0"
+        />
+        <div class="invalid-feedback">
+          {{ "Required And Greater Than Zero" | translate }}
+        </div>
+      </div>
+
+   
+         <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "Purchase Amount" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'purchaseAmount' | translate }}"
+          class="form-control"
+          formControlName="purchaseAmount"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('purchaseAmount')?.value <= 0"
+        />
+        <div class="invalid-feedback">
+           {{ "Required And Greater Than Zero" | translate }}
+        </div>
+      </div>
+
+
+           	<div class="col-md-6 form-group mb-3 required"> 
+  <label>{{ "Employee" | translate }}</label>
+  <select class="form-control"  name="employeeId"   formControlName="employeeId" >
+                              <option *ngFor="let item of employees" value="{{item.id}}"
+                              
+                              [class.is-invalid]="isFormSubmitted &&  form && form.get('employeeId')?.errors"
+                              >{{item.name | translate}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted &&  form && form.get('employeeId')?.errors"  class="text-danger">
+                                    {{ "Required" | translate }}
+                             </div>
+    </div>
+
+
+
+        <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "Commission" | translate }} %</label> 
+        <input
+          type="text"
+          placeholder="{{ 'commission %' | translate }}"
+          class="form-control"
+          formControlName="commissionPerc"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('commissionPerc')?.value <= 0"
+        />
+        <div class="invalid-feedback">
+          {{ "Required And Value must be between 0 and 100" | translate }}
+        </div>
+      </div>
+
+   
+
+      <div class="col-md-6 form-group required">
+        <label>{{ "Sales Invoice" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'Sales Invoice' | translate }}"
+          class="form-control"
+          (change)="onSalesInvoiceFileChange($event)"
+           />
+
+             <div *ngIf="isFormSubmitted &&  !salesInvoiceFile"  class="text-danger">
+                                    {{ "Required" | translate }}
+                             </div>
+
+      </div>
+
+          <div class="col-md-6 form-group  required">
+        <label>{{ "Purchase Invoice" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'Purchase Invoice' | translate }}"
+          class="form-control"
+          (change)="onPurchaseInvoiceFileChange($event)"
+           />
+
+             <div *ngIf="isFormSubmitted &&  !purchaseInvoiceFile"  class="text-danger">
+                                    {{ "Required" | translate }}
+                             </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </div>
+
+      </form>
+
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+<div class="modal-footer position-absolute bottom-0 w-100">
+  <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
+    {{ "Cancel" | translate }}
+  </button>
+  <button type="button" (click)="seedInvoice()" class="btn btn-primary btn-rounded" tabindex="-1" [disabled]="form.invalid || !salesInvoiceFile  || !purchaseInvoiceFile" >
+    {{ "Save" | translate }}
+  </button>
+</div>

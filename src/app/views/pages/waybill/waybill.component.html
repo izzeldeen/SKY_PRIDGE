@@ -1,0 +1,823 @@
+<div class="waybill">
+	<div class="breadcrumb">
+		<h1>MAW3339513</h1>
+
+		<ul>
+			<li><strong>Hub Ops</strong></li>
+			<li><a href="#/pages/airwaybills">Master Air Waybill management</a></li>
+			<li>MAW3339513</li>
+		</ul>
+
+		<div class="action-wrap">
+			<button class="btn btn-secondary btn-rounded" (click)="editAirwaybillModal(editAirwaybill)">Edit</button>
+		</div>
+	</div>
+
+	<div class="content-block mw-100">
+        <div class="row">
+            <div class="col-12 col-xl-6 mb-4 d-flex">
+                <div class="c-card c-card-hover c-card-branch-inf">
+					<div class="c-card-body">
+						<div class="c-header">
+							<div class="c-title text-20">Master Air Waybill information</div>
+						</div>
+					
+						<div class="c-list gap-3">
+							<div class="item-type-1 grid-2x pb-3">
+								<div class="box-info">
+									<div class="label">Next stop (ISO):</div>
+									<div class="value">JOR</div>
+								</div>
+
+								<div class="box-info">
+									<div class="label">Origin (ISO):</div>
+									<div class="value">JOR</div>
+								</div>
+							</div>
+
+							<div class="item-type-1 grid-2x pb-3">
+								<div class="box-info">
+									<div class="label">Airline number:</div>
+									<div class="value">900</div>
+								</div>
+
+								<div class="box-info">
+									<div class="label">Flight number:</div>
+									<div class="value">900</div>
+								</div>
+							</div>
+
+
+							<div class="item-type-1 grid-2x pb-3">
+								<div class="box-info">
+									<div class="label">MAWB total weight:</div>
+									<div class="value">50</div>
+								</div>
+
+								<div class="box-info">
+									<div class="label">MAWB chargeable weight:</div>
+									<div class="value">50</div>
+								</div>
+							</div>
+
+							<div class="item-type-1 grid-2x pb-3">
+								<div class="box-info">
+									<div class="label">Shipping type:</div>
+									<div class="value">Normal</div>
+								</div>
+
+								<div class="box-info">
+									<div class="label">Number of pieces:</div>
+									<div class="value">5</div>
+								</div>
+							</div>
+
+							<div class="item-type-1 grid-2x">
+								<div class="box-info">
+									<div class="label">Arrival date time:</div>
+									<div class="value">2023.01.01 15:52</div>
+								</div>
+
+								<div class="box-info">
+									<div class="label">Departure date time:</div>
+									<div class="value">2023.01.01 15:52</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+
+            <div class="col-12 col-xl-6 mb-4 d-flex">
+				<div class="c-card c-card-hover c-card-branch-inf">
+					<div class="c-card-body">
+						<div class="c-header">
+							<div class="c-title text-20">Master Air Waybill events</div>
+							<div class="c-actions">
+								<div class="btn btn-rounded btn-secondary" (click)="eventsAirwaybillModal(eventsAirwaybill)">View all</div>
+							</div>
+						</div>
+
+						<div class="c-list">
+							<div class="item-type-3 grid-1x">
+								<div class="box-info">
+									<div class="item-header">
+										<div class="title">Master air way created</div>
+										<div class="sub-info">2023.01.01 15:52</div>
+									</div>
+
+									<div class="content">
+										Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+									</div>
+								</div>
+
+								<div class="box-info">
+									<div class="item-header">
+										<div class="title">Master air way complited</div>
+										<div class="sub-info">2023.01.01 15:52</div>
+									</div>
+
+									<div class="content">
+										Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Lorem ipsum dolor sit.
+									</div>
+								</div>
+
+								<div class="box-info">
+									<div class="item-header">
+										<div class="title">Master air way departed (not confirmed)</div>
+										<div class="sub-info">2023.01.01 15:52</div>
+									</div>
+
+									<div class="content">
+										Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+									</div>
+								</div>
+
+								<div class="box-info">
+									<div class="item-header">
+										<div class="title">Master air way departed (not confirmed)</div>
+										<div class="sub-info">2023.01.01 15:52</div>
+									</div>
+
+									<div class="content">
+										Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+									</div>
+								</div>
+
+								<div class="box-info">
+									<div class="item-header">
+										<div class="title">Master air way arrived (not confirmed)</div>
+										<div class="sub-info">2023.01.01 15:52</div>
+									</div>
+
+									<div class="content">
+										Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Varius mattis commodo.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+
+		<h4 class="text-20 font-weight-600 text-primary-black mb-3">Containers</h4>
+
+		<div class="custom-table-wrap">
+			<div class="table-wrap">
+				<table class="custom-table">
+					<thead>
+						<tr>
+							<th>
+								Container code
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Destination
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Client reference
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Truck number
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Container Type
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Сreation Date
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/airwaybills/waybill">
+							<td>MFST5638716</td>
+							<td>GBR</td>
+							<td>70</td>
+							<td>2</td>
+							<td>Document & Non-Document</td>
+							<td>10/16/2022</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div class="table-footer-inner">
+				<div class="pages">
+					<div class="page-count">30 total</div>
+	
+					<div class="entries">
+						Show per page
+						<div class="entries-dropdown" ngbDropdown>
+							<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+					
+							<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>10</a>
+									<ng-template ngbNavContent>10</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>50</a>
+									<ng-template ngbNavContent>50</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>70</a>
+									<ng-template ngbNavContent>70</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>100</a>
+									<ng-template ngbNavContent>100</ng-template>
+								</ng-container>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="table-pager">
+					<div class="action disabled pager-position" aria-label="go to first page">
+						<i class="datatable-icon-prev"></i>
+					</div>
+	
+					<div class="action disabled pager-step" aria-label="go to previous page">
+						<i class="datatable-icon-left"></i>
+					</div>
+	
+					<div class="action pager-page active">1</div>
+					<div class="action pager-page">2</div>
+					<div class="action pager-page">3</div>
+	
+					<div class="action pager-step" aria-label="go to next page">
+						<i class="datatable-icon-right"></i>
+					</div>
+	
+					<div class="action pager-position"  aria-label="go to last page">
+						<i class="datatable-icon-skip"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+	
+	<ng-template #editAirwaybill let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Edit Master Air Waybill</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body" id="airwaybillEditForm">
+			<div class="tabs-to-dropdown" id="edit-mawb-tabs" ngbDropdown>
+				<div ngbDropdown #editMawbNavDropdown="ngbDropdown">
+					<button class="mobile-drop w-100 w-auto-md text-start" id="editMawbTabDropdown" ngbDropdownToggle>{{ editMawbActive }}</button>
+					<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editMawbActive === 'General information'}" (click)="editMawbNav.select('General information')">General information</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editMawbActive === 'Containers'}" (click)="editMawbNav.select('Containers')">Containers</a>
+					</div>
+			   </div>
+
+				<ul ngbNav #editMawbNav="ngbNav" [(activeId)]="editMawbActive" class="nav-tabs p-0">
+					<li ngbNavItem="General information">
+						<a ngbNavLink>General information</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="airwaybillEditForm" (ngSubmit)="submitAirwaybillEditForm()">
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Next stop</label>
+										<mat-select-country  
+											class="form-control select-country" 
+											#editNextStop
+											[class.is-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('nextStop')?.errors"
+											describedBy="editNextStop"
+											placeHolder="Choose country"
+											(onCountrySelected)="handleCountrySelected('airwaybillEditForm', 'nextStop', editNextStop)"
+											autocomplete="off">
+										</mat-select-country>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Airline number</label>
+										<input id="airlineNumber"
+											   formControlName="airlineNumber"
+											   [class.is-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('airlineNumber')?.errors"
+											   type="text"
+											   class="form-control"
+											   placeholder="Enter airline number">
+										<div class="invalid-feedback">This field is required</div>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Departure date time</label>
+										<div class="input-group">
+											<p-calendar 
+													formControlName="departureTime"
+													[class.ng-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('departureTime')?.errors"
+													inputStyleClass="form-control" 
+													readonlyInput="true"
+													placeholder="yyyy-mm-dd hh:mm"
+													dateFormat="yy.mm.dd"
+													[showTime]="true" 
+													(onSelect)="onDateChange($event, 'departureTime')"
+													showClear="true">
+											</p-calendar>
+											<div class="invalid-feedback">This field is required</div>
+											<div class="input-group-append">
+												<button class="btn"  type="button">
+													<i class="i-Calendar-4"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Arrival date time</label>
+										<div class="input-group">
+											<p-calendar 
+													formControlName="arrivalTime"
+													[class.ng-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('arrivalTime')?.errors"
+													inputStyleClass="form-control" 
+													readonlyInput="true"
+													placeholder="yyyy-mm-dd hh:mm"
+													dateFormat="yy.mm.dd"
+													[showTime]="true" 
+													(onSelect)="onDateChange($event, 'arrivalTime')"
+													showClear="true">
+											</p-calendar>
+											<div class="invalid-feedback">This field is required</div>
+											<div class="input-group-append">
+												<button class="btn"  type="button">
+													<i class="i-Calendar-4"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Flight number</label>
+										<input id="flightNumber" 
+											   formControlName="flightNumber"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter flight number">
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>Shipping type</label>
+										<select 
+											class="form-control" 
+											formControlName="shippingType"
+										>
+											<option value="" disabled selected hidden>Normal</option>
+											<option value="option2">Option 2</option>
+											<option value="option3">Option 3</option>
+										</select>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>MAWB total weight</label>
+										<input id="mawbTotalweight"
+											   formControlName="mawbTotalweight"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter weight">
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>MAWB chargeable weight</label>
+										<input id="mawbChargeableWeight" 
+											   formControlName="mawbChargeableWeight"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter weight">
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Customer code</label>
+										<input id="customerCode" 
+											   formControlName="customerCode"
+											   [class.is-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('customerCode')?.errors"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter customer code">
+										<div class="invalid-feedback">This field is required</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Branch code</label>
+										<input id="branchCode" 
+											   formControlName="branchCode"
+											   [class.is-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('branchCode')?.errors"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter branch code">
+										<div class="invalid-feedback">This field is required</div>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Number of pieces</label>
+										<input id="numberOfPieces" 
+											   formControlName="numberOfPieces"
+											   type="text" 
+											   class="form-control" 
+											   placeholder="Enter number">
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Origin (ISO)</label>
+										<mat-select-country  
+											class="form-control select-country" 
+											#originIso
+											[class.is-invalid]="isSubmittedAirwaybillEditForm && airwaybillEditForm.get('originIso')?.errors"
+											describedBy="originIso"
+											placeHolder="Choose country"
+											(onCountrySelected)="handleCountrySelected('airwaybillEditForm', 'originIso', originIso)"
+											autocomplete="off">
+										</mat-select-country>
+										<div class="invalid-feedback">This field is required</div>
+									</div>
+								</div>
+							</form>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="edit-general-button" 
+								(click)="resetGeneralMawbEditForm(originIso, editNextStop);"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Containers">
+						<a ngbNavLink>Containers</a>
+						<ng-template ngbNavContent>
+							<div class="form-group required">
+								<label>Container codes</label>
+								<div class="d-flex flex-column codes-textarea-block">
+									<textarea id="container-code"
+											class="form-control codes-textarea border-0 border-bottom"
+											[(ngModel)]="container_code" 
+											(ngModelChange)="onTextAreaChange($event)"
+											placeholder="Enter shipment codes separated by commas" 
+											value=""
+											style="height: 110px"></textarea>
+									<div class="invalid-feedback">This field is required</div>
+									<div class="d-flex justify-content-end w-100">
+										<button 
+											type="button"
+											class="btn btn-rounded btn-primary m-1"
+											(click)="addContainer()"
+											style="margin-left: auto; min-width: 120px;"
+										>
+											Add containers
+										</button>
+									</div>
+								</div>				
+							</div>
+				
+							<div id="container-code-table" class="custom-table-wrap" style="display: none;">
+								<div class="table-wrap">
+									<table class="custom-table" id="containerTable">
+										<thead>
+											<tr>
+												<th>
+													Container code
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th>
+													Remark
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th class="desktop-hide">&nbsp;</th>
+											</tr>
+										</thead>
+						
+										<tbody>
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge">Not valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge">Already in master air waybill</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge">Duplicated</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+				
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+				
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteContainerModal(deleteContainer)"><span></span></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+						
+								<div class="table-footer-inner">
+									<div class="pages">
+										<div class="page-count">16 total</div>
+						
+										<div class="entries">
+											Show per page
+											<div class="entries-dropdown" ngbDropdown>
+												<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+										
+												<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>10</a>
+														<ng-template ngbNavContent>10</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>50</a>
+														<ng-template ngbNavContent>50</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>70</a>
+														<ng-template ngbNavContent>70</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>100</a>
+														<ng-template ngbNavContent>100</ng-template>
+													</ng-container>
+												</div>
+											</div>
+										</div>
+									</div>
+						
+									<div class="table-pager">
+										<div class="action disabled pager-position" aria-label="go to first page">
+											<i class="datatable-icon-prev"></i>
+										</div>
+						
+										<div class="action disabled pager-step"  aria-label="go to previous page">
+											<i class="datatable-icon-left"></i>
+										</div>
+						
+										<div class="action pager-page active">1</div>
+										<div class="action pager-page">2</div>
+						
+										<div class="action pager-step" aria-label="go to next page">
+											<i class="datatable-icon-right"></i>
+										</div>
+						
+										<div class="action pager-position"  aria-label="go to last page">
+											<i class="datatable-icon-skip"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="edit-containers-button" 
+								(click)="resetContainersMawbEditForm();"
+							>
+							</button>
+						</ng-template>
+					</li>
+				</ul>
+				<div [ngbNavOutlet]="editMawbNav" class="mt-4 p-0"></div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="triggerEditMawbClear()" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitAirwaybillEditForm(saveContainer, editMawbNav)" id="edit-mawb-button" class="btn btn-primary btn-rounded" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #deleteContainer let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Delete container</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="deleteContainer">
+			<div class="note">Are you sure you want to delete the container from the master air waybill?</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded" (click)="modal.close('Close click')" ngbAutoFocus>Yes, delete it</button>
+			</div>
+		</div>
+    </ng-template>
+
+	<ng-template #saveContainer let-modal>
+		<div class="modal-header save-block">
+			<h4 class="modal-title" id="modal-basic-title">Save master air waybill</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="saveContainer">
+			<i class="text-46 i-Information alert-block"></i>
+			<div class="note save-block">There are invalid values in the Containers, they will be deleted after saving. Are you sure you want to continue saving?</div>
+			<div class="note alert-block">Please add at least one container</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded save-block" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded save-block" (click)="modal.close('Close click')" ngbAutoFocus>Yes, save it</button>
+				<button type="button" class="btn btn-secondary btn-rounded alert-block" (click)="modal.close('Close click')" tabindex="-1">Okay</button>
+			</div>
+		</div>
+    </ng-template>
+
+
+	<ng-template #eventsAirwaybill let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Master Air Waybill events</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body">
+			<div class="item-type-3 grid-1x">
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill created</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill complited</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Lorem ipsum dolor sit.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill departed (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill departed (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill arrived (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Varius mattis commodo.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill arrived (not confirmed)</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet. Varius mattis commodo.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill recovered</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="item-header">
+						<div class="title">Master air waybill reconciled</div>
+						<div class="sub-info">2023.01.01 15:52</div>
+					</div>
+
+					<div class="content">
+						Lorem ipsum dolor sit amet consectetur. Mauris tristique fames est sed et. Varius mattis commodo nisi lectus lacus amet.
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+</div> 

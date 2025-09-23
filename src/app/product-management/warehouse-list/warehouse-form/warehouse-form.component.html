@@ -1,0 +1,127 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isEditMood">
+        {{ "warehouse.addwarehouse" | translate }}
+    </h4>
+    <h4 class="modal-title" *ngIf="isEditMood">
+        {{ "warehouse.editwarehouse" | translate }}
+    </h4>
+    <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body">
+    <form [formGroup]="form" id="form">
+        <div class="row">
+            <!-- Name En -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{ "warehouse.nameEn" | translate }}</label>
+                <input type="text" maxlength="100" class="form-control" formControlName="nameEn"
+                    placeholder="{{ 'warehouse.nameEn' | translate }}"
+                    [class.is-invalid]="isFormSubmitted && form.get('nameEn')?.invalid" />
+                <div *ngIf="isFormSubmitted && form.get('nameEn')?.errors" class="invalid-feedback">
+                    <div *ngIf="form.get('nameEn')?.errors['required']">{{ "common.fieldRequired" | translate }}</div>
+                    <div *ngIf="form.get('nameEn')?.errors['englishTextWithNumbers']">{{ "common.onlyEnglishIsAllowed" |
+                        translate }}</div>
+                    <div *ngIf="form.get('nameEn')?.errors['noWhitespace']">{{ "common.noWhitespace" | translate }}
+                    </div>
+                    <div *ngIf="form.get('nameEn')?.errors['maxlength']">{{ "common.maxLength" | translate:{length:100}
+                        }}</div>
+                </div>
+            </div>
+
+            <!-- Name Ar -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{ "warehouse.nameAr" | translate }}</label>
+                <input type="text" maxlength="100" class="form-control" formControlName="nameAr"
+                    placeholder="{{ 'warehouse.nameAr' | translate }}"
+                    [class.is-invalid]="isFormSubmitted && form.get('nameAr')?.invalid" />
+                <div *ngIf="isFormSubmitted && form.get('nameAr')?.errors" class="invalid-feedback">
+                    <div *ngIf="form.get('nameAr')?.errors['required']">{{ "common.fieldRequired" | translate }}</div>
+                    <div *ngIf="form.get('nameAr')?.errors['arabicTextWithNumbers']">{{ "common.onlyArabicIsAllowed" |
+                        translate }}</div>
+                    <div *ngIf="form.get('nameAr')?.errors['noWhitespace']">{{ "common.noWhitespace" | translate }}
+                    </div>
+                    <div *ngIf="form.get('nameAr')?.errors['maxlength']">{{ "common.maxLength" | translate:{length:100}
+                        }}</div>
+                </div>
+            </div>
+
+            <!-- Location En -->
+            <div class="col-12 col-sm-6 form-group">
+                <label>{{ "warehouse.locationEn" | translate }}</label>
+                <input type="text" class="form-control" formControlName="locationEn"
+                    placeholder="{{ 'warehouse.locationEn' | translate }}" />
+            </div>
+
+            <!-- Location Ar -->
+            <div class="col-12 col-sm-6 form-group">
+                <label>{{ "warehouse.locationAr" | translate }}</label>
+                <input type="text" class="form-control" formControlName="locationAr"
+                    placeholder="{{ 'warehouse.locationAr' | translate }}" />
+            </div>
+
+            <!-- Is Main -->
+            <div class="col-md-4 form-group">
+                <label class="switch switch-primary me-3 mt-4">
+                    <span>{{ "warehouse.isMain" | translate }}</span>
+                    <input type="checkbox" formControlName="isMain" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Act As Branch -->
+            <!-- <div class="col-md-4 form-group">
+                <label class="switch switch-primary me-3 mt-4">
+                    <span>{{ "warehouse.actAsBranch" | translate }}</span>
+                    <input type="checkbox" formControlName="actAsBranch" (change)="onActAsBranchChange($event)" />
+                    <span class="slider"></span>
+                </label>
+            </div> -->
+
+
+            <!-- Is Active -->
+            <div class="col-md-4 form-group">
+                <label class="switch switch-primary me-3 mt-4">
+                    <span>{{ "warehouse.isActive" | translate }}</span>
+                    <input type="checkbox" formControlName="isActive" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Warehouse Branches -->
+            <div class="col-12 form-group required" *ngIf="form?.get('actAsBranch')?.value !== null">
+                <label>{{ "warehouse.branches" | translate }}</label>
+
+                <!-- Multi Select if NOT acting as a branch -->
+                <p-multiSelect *ngIf="form?.get('actAsBranch')?.value === false" [options]="branchesList"
+                    [styleClass]="'form-control'" optionLabel="name" optionValue="id"
+                    placeholder="{{ 'warehouse.select' | translate }}" formControlName="warehouseBranchesIds"
+                    [class.is-invalid]="isFormSubmitted && form.get('warehouseBranchesIds')?.errors"></p-multiSelect>
+
+                <!-- Single Select if IS acting as a branch -->
+                <select *ngIf="form?.get('actAsBranch')?.value === true" class="form-control required"
+                    formControlName="warehouseBranchesIds"
+                    [class.is-invalid]="isFormSubmitted && form.get('warehouseBranchesIds')?.errors">
+                    <option value="" disabled selected>{{ "warehouse.select" | translate }}</option>
+                    <option *ngFor="let item of branchesList" [value]="item.id">{{ item.name }}</option>
+                </select>
+
+                <!-- Validation Message -->
+                <div class="invalid-feedback"
+                    *ngIf="isFormSubmitted && form.get('warehouseBranchesIds')?.errors?.['required']">
+                    {{ "common.fieldRequired" | translate }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer position-absolute bottom-0 w-100">
+    <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
+        {{ "common.cancel" | translate }}
+    </button>
+    <button type="button" (click)="submitForm()" class="btn btn-primary btn-rounded" tabindex="-1" *ngIf="
+    authSerivce.hasPermission('Warehouse-Form') || authSerivce.hasPermission('Update-Warehouse')">
+        {{ "common.save" | translate }}
+    </button>
+</div>

@@ -1,0 +1,66 @@
+<div class="attachments-wrap" #attacnments>
+    <div class="attachments-inner" ng-app="">
+        <div class="title">
+            <h1>Upload documents for shipment<span class="sub-lang">تحميل المستندات للشحن</span></h1>
+            <img src="assets/images/gn-teq-logo.svg" alt="GNteq" width="131" height="80">
+        </div>
+
+        <div class="text">
+            <p>Please upload at least one required document for shipment</p>
+            <span>يرجى تحميل مستند مطلوب واحد على الأقل للشحن</span>
+        </div>
+        
+        <div class="shipment-id">GNTUPD0100002617GBSA</div>
+
+        <form #curForm>
+            <div id="create-attachment" (click)="addNewComponent()"></div>
+
+            <div class="attachment-items">
+                <ng-container *ngFor="let component of componentArray">
+                    <app-attachment-item [id]="component.id"></app-attachment-item>
+                </ng-container>
+            </div>
+
+            <div class="text">
+                <p>Please ensure the documents type is one of the following: PDF, Word or JPEG with size not exceed 2 MB.</p>
+                <span>يرجى التأكد من أن نوع المستندات هو أحد الأنواع التالية: PDF أو Word أو JPEG بحجم لا يتجاوز 2 ميجا بايت</span>
+            </div>
+    
+            <div class="action-wrap">
+                <button class="btn btn-secondary btn-rounded">Cancel<span class="sub-lang">يلغي</span></button>
+                <div class="btn btn-primary btn-rounded" (click)="uploadFile(errorLengthPopup)">Submit<span class="sub-lang">يُقدِّم</span></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="attachments-success" #success>
+    <div class="success-inner">
+        <img src="assets/images/gn-teq-logo.svg" alt="GNteq" width="196" height="120">
+
+        <div class="text">
+            <span>Thank you, your documents have been successfully sent</span>
+            <span class="with-devider">شكرا لك ، تم إرسال المستندات الخاصة بك بنجاح</span>
+        </div>
+    </div>
+</div>
+
+<ng-template #errorLengthPopup let-modal>
+    <div class="modal-body">
+        <i class="text-46 i-Information"></i>
+        <div class="note columns">
+            <div class="col">Please upload at least one document</div>
+            <div class="col">يرجى تحميل وثيقة واحدة على الأقل</div>
+        </div>
+        <div class="note columns size-note">
+            <div class="col">The document can't be added because it is over <strong>2 MB</strong></div>
+            <div class="col">لا يمكن إضافة المستند لأن حجمه يزيد عن 2 ميغابايت.</div>
+        </div>
+        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+            <div class="columns">
+                <div class="col">Okay</div>
+                <div class="col">تمام</div>
+            </div>
+        </button>
+    </div>
+</ng-template>

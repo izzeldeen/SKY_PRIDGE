@@ -1,0 +1,41 @@
+<div class="warehouse">
+    <div class="breadcrumb">
+        <h1>{{'warehouse.warehouseManagement' | translate}}</h1>
+        <ul>
+            <li>{{'warehouse.warehouseManage' | translate}}</li>
+            <li><strong class="text-primary">{{'warehouse.warehouse' | translate}}</strong></li>
+        </ul>
+    </div>
+    <div class="custom-table-wrap">
+        <div class="table-heading">
+            <div class="table-search form-group">
+                <!-- Searching Lookups -->
+                <input id="table-search" placeholder="{{'warehouse.Searchby' | translate}}" class="form-control"
+                    type="text" maxlength="100" (keydown.enter)="onSearch($event)">
+            </div>
+            <div class="heading-actions">
+                <!-- Add Lookups -->
+                <button type="button" class="btn btn-rounded btn-primary" (click)="onAddWarehouse(AddWarehousePopup)"
+                    *ngIf="authService.hasPermission('Warehouse-Form') ">
+                    <i class="i-Plus"></i>
+                    <span>
+                        {{ 'warehouse.addwarehouse' | translate }}
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- Lookups -->
+        <app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"
+            (EventHandler)="onHandleAction($event , EditWarehousePopup )" [PageSize]="baseSearch.pageSize"
+            [TotalRecords]="totalCount" (PageChange)="onPageChange($event)">
+        </app-table>
+    </div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddWarehousePopup let-modal>
+    <app-warehouse-form [modal]="modal"></app-warehouse-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditWarehousePopup let-modal>
+    <app-warehouse-form [modal]="modal" [id]="id" [isEditMood]="true"></app-warehouse-form>
+</ng-template>

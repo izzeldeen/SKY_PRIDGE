@@ -1,0 +1,59 @@
+<div class="customers">
+	<div class="breadcrumb">
+		<h1>{{'userManagment.manageAdmins' | translate}}</h1>
+		<ul>
+			<li>{{'navigation.users_management' | translate}}</li>
+			<li><strong class="text-primary">{{'userManagment.manageAdmins' | translate}}</strong></li>
+		</ul>
+	</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Users -->
+				<input 
+					id="table-search" 
+					placeholder="{{'userManagment.SearchbyUsers' | translate}}"
+					class="form-control" 
+					type="text"
+					maxlength="100"
+					(keydown.enter)="onSearch($event)"
+				>
+			</div>
+			<div class="heading-actions">
+				<!-- Add User -->
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddNewUser(AddUserPopup)"
+					*ngIf="authSerivce.hasPermission('Add-Admin')"
+				>
+					<i class="i-Plus"></i>
+					<span>{{'userManagment.AddNewUser' | translate}}</span>
+				</button>
+			</div>
+		</div>
+		<!-- Users -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , UpdateUserPopup , ChangePassword)"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add User -->
+<ng-template #AddUserPopup let-modal>
+	<app-add-edit-users [modal]="modal"></app-add-edit-users>
+</ng-template>
+<!-- Update User -->
+<ng-template #UpdateUserPopup let-modal>
+	<app-add-edit-users [UserId]="userId" [isEditMood]="true" [modal]="modal"></app-add-edit-users>
+</ng-template>
+<!-- Change User Password -->
+<ng-template #ChangePassword let-modal>
+	<app-change-password [UserId]="userId" [FullName]="FullName" [modal]="modal"></app-change-password>
+</ng-template>

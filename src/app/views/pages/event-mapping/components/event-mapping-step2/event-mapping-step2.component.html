@@ -1,0 +1,84 @@
+<ng-container *ngFor="let component of eventsArray; let i = index">
+    <div class="c-form c-card item-type-2">
+        <div class="row gap-2 step-2-container">
+            <div class="col-10 col-md-6 col-xl-5 mb-0 form-group">
+                <label>GNTeq event</label>
+                <div ngbDropdown #dropdownSelect="ngbDropdown" autoClose="outside" class="form-control form-control-gntevent p-0" (click)="checkElementPosition(i)">
+                    <div ngbDropdownToggle class="gnt-event-toggle">
+                        {{ component.GNTeqEvent || GNTeqPlaceholder }}
+                    </div>
+                    <div ngbDropdownMenu class="event-dropdown gnt-dropdown" [class.top-drop]="isOpen" (mouseleave)="dropdownOptions.close(); mouseOvered = false;">
+                        <div class="event-search">
+                            <i class="i-Magnifi-Glass1 event-search-icon"></i>
+                            <input class="form-control" type="text" (keydown.enter)="$event.preventDefault()">
+                        </div>
+                        <div ngbDropdown 
+                            #dropdownOptions="ngbDropdown" 
+                            (mouseenter)="dropdownOptions.open(); mouseOvered = true"
+                        >
+                            <div class="dropdown-item dropdown-item-toggle d-flex align-items-center gap-2" (click)="onStatusSelected('GN001. Shipment on-hold', i)">
+                                <span 
+                                    class="gntevent-toggle" 
+                                >
+                                    GN001. Shipment on-hold
+                                </span>
+                                <div 
+                                    class="gntevent-arrow"
+                                    (click)="dropdownOptions.toggle(); 
+                                    mouseOvered = !mouseOvered; 
+                                    $event.stopPropagation();"
+                                    [class.show]="mouseOvered" 
+                                >
+                                </div>
+                            </div>
+                            <div ngbDropdownMenu class="gnt-event-dropdown">
+                                <div class="dropdown-item" (click)="onStatusSelected('G001. Location update', i)">G001. Location update</div>
+                                <div class="dropdown-item" (click)="onStatusSelected('GN02. Shipment on-hold intact', i)">GN02. Shipment on-hold intact</div>
+                                <div class="dropdown-item" (click)="onStatusSelected('GN03. Courier route overload', i)">GN03. Courier route overload</div>
+                                <div class="dropdown-item" (click)="onStatusSelected('GN04. Delivery attempts completed', i)">GN04. Delivery attempts completed</div>
+                                <div class="dropdown-item" (click)="onStatusSelected('GN05. Detained - Misdeclaration by sender', i)">GN05. Detained - Misdeclaration by sender</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" (click)="onStatusSelected('GN001. Shipment added to container', i)">GN001. Shipment added to container</div>
+                        <div class="dropdown-item" (click)="onStatusSelected('GN001. Shipment added to MAWB', i)">GN001. Shipment added to MAWB</div>
+                        <div class="dropdown-item" (click)="onStatusSelected('GN001. Shipment left origin facility', i)">GN001. Shipment left origin facility</div>
+                        <div class="dropdown-item" (click)="onStatusSelected('GN001. Shipment broker notified', i)">GN001. Shipment broker notified</div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="component.GNTeqEvent" class="flex-row">
+                <div class="arrows d-xl-block"></div>
+                <div class="col-10 col-md-6 col-xl-5 mb-0 form-group">
+                    <label>Supplier event</label>
+                    <div class="d-flex flex-column gap-2">
+                        <ng-container *ngFor="let event of component.supplierEvents; let j = index">
+                            <div ngbDropdown class="form-control form-control-event p-0" [class.delete]="event.value" tabindex="-1" (click)="removeSupplierEvent($event.target, j, i)">
+                                <div ngbDropdownToggle>
+                                    <p class="m-0 overflow-hidden">{{ event.value || SupplierPlaceholder }}</p>
+                                    <span [class.delete]="event.value"></span>
+                                </div>
+                                <div ngbDropdownMenu aria-labelledby="shipment-status-dropdown" class="event-dropdown supplier-dropdown">                                    
+                                    <div class="event-search">
+                                        <i class="i-Magnifi-Glass1 event-search-icon"></i>
+                                        <input class="form-control" type="text" (keydown.enter)="$event.preventDefault()">
+                                    </div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '295. Handover to the airline at origin')">295. Handover to the airline at origin</div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '299. MAWB arrived')">299. MAWB arrived</div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '297. MAWB departured')">297. MAWB departured</div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '328. Processed for clearance')">328. Processed for clearance</div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '45. Your shipment has arrived (office name)')">45. Your shipment has arrived (office name)</div>
+                                    <div class="dropdown-item" (click)="handleNewComponent(j, component, '344. Your shipment is out for delivery')">344. Your shipment is out for delivery</div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="hover-element trash-container">
+            <button [disabled]="eventsArray.length === 1 && !component.GNTeqEvent" tabindex="-1" type="button" class="btn btn-rounded btn-secondary btn-trash" (click)="removeComponent($event, i)">
+                <i class="trash-icon me-0"></i>
+            </button>
+        </div>
+    </div>
+</ng-container>

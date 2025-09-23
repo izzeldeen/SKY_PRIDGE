@@ -1,0 +1,21 @@
+<div class="c-card mb-4">
+    <div class="c-card-body">
+        <div class="c-header">
+            <div class="c-title text-20">{{'Employees' | translate}}</div>
+
+            <div class="c-actions">
+              
+            </div>
+        </div>
+
+        <div *ngIf="employees" class="c-list c-list-statistics">
+            <div *ngFor="let item of employees" class="item-info">
+                <div class="title">{{item.name}}</div>
+                <div class="body">
+                    <i class="icon i-Boy"></i>
+                    <span class="value">{{item.commission}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,303 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isEditMood">
+    {{ "companyManagement.addCompany" | translate }}
+  </h4>
+  <h4 class="modal-title" *ngIf="isEditMood">
+    {{ "companyManagement.editCompany" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button *ngIf="!isCompanyUser"
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="form">
+    <div class="row">
+      <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "companyManagement.code" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.code' | translate }}"
+          class="form-control"
+          formControlName="code"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('code')?.errors"
+         
+          
+        />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "companyManagement.nameEn" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.nameEn' | translate }}"
+          class="form-control"
+          formControlName="nameEn"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('nameEn')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "companyManagement.nameAr" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.nameAr' | translate }}"
+          class="form-control"
+          formControlName="nameAr"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('nameAr')?.errors"
+        />
+        <div class="invalid-feedback"
+                    *ngIf="form.get('nameAr').invalid && (form.get('nameAr').errors?.required || form.get('nameAr').errors?.whitespace)">
+                    {{ 'common.fieldRequired' | translate }}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="form.get('nameAr').invalid && form.get('nameAr').errors?.arabicTextWithNumbers">
+                    {{ 'common.onlyArabicIsAllowed' | translate }}
+                </div>
+      </div>
+
+         <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "companyManagement.mainAccountEmail" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.mainAccountEmail' | translate }}"
+          class="form-control"
+          formControlName="mainAccountEmail"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('mainAccountEmail')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+        <div class="col-12 col-sm-6 form-group required">
+                <label>{{'companyManagement.mobile' | translate}}</label>
+                <ngx-mat-intl-tel-input [preferredCountries]="['iq']"
+                                        [onlyCountries]="onlyCountries"
+                                        [enablePlaceholder]="true"
+                                        [enableSearch]="true"
+                                        name="Phone"
+                                        #phoneInput
+                                        describedBy="phoneInput"
+                                        class="form-control input-group input-phone-selector"
+                                        formControlName="mobile"
+                                        [class.is-invalid]="isFormSubmitted && form.get('mobile')?.errors">
+                </ngx-mat-intl-tel-input>
+                <div class="invalid-feedback" *ngIf="isFormSubmitted && form.get('mobile')?.errors">
+                    <div *ngIf="form.get('mobile')?.errors?.validatePhoneNumber ">
+                        {{ 'common.insertCorrectPhoneNumber' | translate }}
+                    </div>
+                    <div *ngIf="form.get('mobile')?.errors?.required">
+                        {{ 'common.fieldRequired' | translate }}
+                    </div>
+                </div>
+            </div>
+
+      
+
+   
+
+      <!-- <div class="col-md-6 form-group mb-3">
+        <label for="picker1">{{
+          "companyManagement.subscriptionStart" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="subscriptionStartDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="subscriptionStartDate"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-md-6 form-group mb-3 required">
+        <label for="picker1">{{
+          "companyManagement.subscriptionEnd" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="endDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="endDate"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+            [class.is-invalid]="isFormSubmitted &&  form && form.get('endDate')?.errors"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+         <div class="invalid-feedback" *ngIf="isFormSubmitted && form.get('endDate')?.errors">
+                    <div *ngIf="form.get('endDate')?.errors?.required">
+                        {{ 'common.fieldRequired' | translate }}
+                    </div>
+                </div>
+      </div>
+
+            <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "companyManagement.currencyId" | translate }}</label>
+                            <select class="form-control" formControlName="currencyId" name="currencyId"
+                                       [class.is-invalid]="isFormSubmitted &&  form && form.get('currencyId')?.errors"
+
+                            >
+                                <option *ngFor="let item of currencies" value="{{item.id}}" >{{item.title}}</option>
+                            </select>
+
+                   <div class="invalid-feedback" *ngIf="isFormSubmitted && form.get('currencyId')?.errors">
+                    <div *ngIf="form.get('currencyId')?.errors?.required">
+                        {{ 'common.fieldRequired' | translate }}
+                    </div>
+                </div>
+             </div>
+
+
+
+         <div class="col-md-6 form-group mb-3">
+
+<label class="switch switch-primary me-3 mt-4">
+                    <span>
+
+                        {{
+          "companyManagement.isActive" | translate
+        }}
+                    </span>
+                    <input type="checkbox"   formControlName="isActive" >
+                    <span class="slider"></span>
+                </label>
+         </div>
+
+               
+
+
+       <div class="col-md-12 form-group">
+        <img *ngIf="logoPath && isEditMood" class="image-max-height"   src="{{logoPath}}"    />
+        <label>{{ "companyManagement.logo" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.logo' | translate }}"
+          class="form-control"
+          (change)="onFileChange($event)"
+           />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+      <div class="col-md-12 form-group required">
+        <label>{{ "companyManagement.address" | translate }}</label>
+        <textarea
+          type="textarea"
+          maxlength="100"
+          placeholder="{{ 'companyManagement.address' | translate }}"
+          class="form-control"
+          formControlName="address"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('address')?.errors"
+        > </textarea>
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+      
+
+          
+ 
+    </div>
+  </form>
+</div>
+<div *ngIf="isCompanyUser" class="modal-footer">  <!-- Cancel Event -->
+  <!-- Save Event -->
+
+
+     <ng-container *ngIf="isCompanyUser" >
+                        <button
+    type="button"
+    class="btn btn-light btn-rounded mr-2"
+    tabindex="-1"
+  >
+    {{ "companyManagement.getbackup" | translate }}
+  </button>
+  <!-- Save Event -->
+  <button
+    type="button"
+    class="btn btn-warning btn-rounded mr-2" 
+    tabindex="-1"
+  >
+    {{ "companyManagement.renewSubscription" | translate }}
+  </button>
+
+
+    <button
+    type="button"
+    (click)="submitForm()"
+    class="btn btn-primary btn-rounded mr-2"
+    tabindex="-1"
+    *ngIf="
+      authSerivce.hasPermission('Add-Admin') ||
+      authSerivce.hasPermission('Update-Admin')
+    "
+  >
+    {{ "common.save" | translate }}
+  </button>
+
+         </ng-container>
+         
+
+       
+</div>
+
+
+<div  *ngIf="!isCompanyUser" class="modal-footer position-absolute bottom-0 w-100">
+    <!-- Clear Event -->
+    <button 
+        type="button" 
+        class="btn btn-secondary btn-rounded" 
+        (click)="modal.dismiss('Cross click')"
+        tabindex="-1"
+    >
+         {{ "common.cancel" | translate }}
+    </button>
+    <!-- Save Event -->
+    <button 
+        type="button"
+        (click)="submitForm()"
+        class="btn btn-primary btn-rounded" 
+        tabindex="-1" 
+        *ngIf="authSerivce.hasPermission('Company-List')"
+    >
+        {{'common.save'|translate}}
+    </button>
+</div>

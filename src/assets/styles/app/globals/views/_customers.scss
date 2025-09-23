@@ -1,0 +1,88 @@
+// add new customer page
+.add-new-block {
+    .img-wrap {
+        max-width: 240px;
+        margin: auto;
+
+        picture {
+            position: relative;
+            display: block;
+            padding-bottom: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .btn-upload {
+        position: relative;
+        
+        img-cropper {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            overflow: hidden;
+            cursor: pointer;
+
+            span {
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.drop-action:not(.show) + .drop-row {
+    display: none;
+}
+
+.drop-row {
+    margin-top: 16px;
+}
+
+.hint-branch {
+    border: 0;
+
+    .hint-dropdown {
+        width: fit-content;
+        transform: translate3d(25px, -65%, 0px) !important;
+
+        @media (max-width: 768px) {
+            width: calc(100vw - 2rem);
+            transform: translate3d(-57px, 50px, 0px) !important;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+
+            @media (max-width: 768px) {
+                white-space: break-spaces;
+            }
+        }
+    }
+
+    .event-link {
+        color: $gray-500;
+        transition: color .2s;
+        cursor: pointer;
+    
+        &:hover {
+            color: $primary-black;
+        }
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+        position: static;
+    }
+}

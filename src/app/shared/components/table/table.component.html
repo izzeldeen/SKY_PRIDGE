@@ -1,0 +1,65 @@
+<div class="table-wrap">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th *ngFor="let header of Headers" style="width: auto;">{{ header.name | translate }}</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let data of dataSource">
+                <ng-container *ngFor="let header of Headers">
+
+                    <td  *ngIf="
+                        header.field  !== 'status'
+                     && header.type  !== 'number'  
+                     && header.type  !== 'currency'  
+                     && header.field  !== 'userType' 
+                     && header.field  !== 'isActive' 
+                     && header.type !== 'boolean'
+                     && header.type !== 'date'">
+                        <!-- Check if the text exceeds the character limit -->
+                        <span *ngIf="data[header.field]?.length > 40">{{ data[header.field] | slice: 0:40 }}...</span>
+                        <!-- If it doesn't exceed the character limit, display the full text -->
+                        <span *ngIf="data[header.field]?.length <= 40">{{ header.isTranslate ? (data[header.field] | translate)  : data[header.field] }}</span>
+                    </td>
+                    <td *ngIf="(header.field | translate) === 'status'">{{ data[header.field] | translate }}</td>
+                    <td *ngIf="(header.field | translate) === 'isActive'" class="status c-badge "[ngClass]="{'active':data[header.field]}"> {{ getActiveText(data[header.field]) }} </td>
+                    <td *ngIf="header.field === 'userType'">{{ getuserTypeText(data[header.field]) }}</td>
+                    <td *ngIf="header.type === 'number'" class="ltr-text">{{ data[header.field] }}</td>
+                    <td *ngIf="header.type === 'date'" class="ltr-text">{{ data[header.field] | date:'MM-dd-yyyy' }}</td>
+                    <td *ngIf="header.type === 'boolean'" >{{ ( data[header.field] ? 'true' : 'false') | translate }}</td>
+                    <td *ngIf="header.type === 'currency'" >{{ data[header.field] }} {{'IQD' | translate}}</td>
+
+                    
+                </ng-container>
+             <td class="actions">
+  <div ngbDropdown *ngIf="actionList.length > 0" container="body" >
+    <i ngbDropdownToggle class="row-menu"><span></span></i>
+    <div ngbDropdownMenu>
+      <ng-container *ngFor="let action of actionList">
+     
+        <button
+          class="dropdown-item"
+          *ngIf="authService.hasPermission(action.permission)"
+          (click)="onItemEvent(action, data)">
+          {{ action.name | translate }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</td>
+            </tr>
+
+            <tr *ngIf="dataSource.length <= 0">
+                <td style="font-weight:bold;">{{'No Data Found' | translate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<app-pagger (PageChange)="onPageChange($event)" [TotalRecords]="TotalRecords" [pageSize]="PageSize"
+    *ngIf="TotalRecords > 1"></app-pagger>

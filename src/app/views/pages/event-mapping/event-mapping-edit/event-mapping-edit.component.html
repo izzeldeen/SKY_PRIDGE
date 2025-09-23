@@ -1,0 +1,192 @@
+<div class="event-mapping">
+	<div class="breadcrumb">
+		<h1>Edit Supplier_name event mapping</h1>
+		<ul>
+			<li><strong>Fuse</strong></li>
+			<li><strong><a href="#/pages/event-mapping">Event Mapping</a></strong></li>
+			<li><strong><a href="#/pages/event-mapping-supplier">Supplier_name event mapping</a></strong></li>
+			<li>Edit Supplier_name event mapping</li>
+		</ul>
+		<div class="d-flex gap-3 supplier-actions mt-2">
+			<button tabindex="-1" class="btn btn-secondary btn-rounded supplier-event-button" (click)="availableEventsModal(availableEvents)">
+				View supplier events
+			</button>
+			<button tabindex="-1" class="btn btn-primary btn-rounded supplier-event-button" (click)="handleSave()">
+				Save
+			</button>
+		</div>
+	</div>
+	<form [formGroup]="createCustomerForm">
+		<div class="row">
+			<div class="col-12 col-sm-12 col-xl-9 col-xxl-9 mb-9 ">
+				<div class="c-card pb-0">
+					<div class="card-body mb-4">
+						<div class="c-header">
+							<div class="c-title text-20">Add supplier events to the GNTeq events map</div>
+						</div>
+						<app-event-mapping-step2 [eventsArray]="eventsArray"></app-event-mapping-step2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>  
+
+<ng-template #availableEvents let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Supplier events</h4>
+        <button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+		<div class="table-search form-group">
+			<input id="table-search" placeholder="Search by event..."  class="form-control" type="text">
+		</div>
+        <div class="item-type-3 grid-1x">
+
+            <div class="box-info">
+                <div class="item-header w-100">
+                    <div class="info d-flex justify-content-between align-items-center w-100">53. Your shipment has arrived</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">350. Your shipment is delivered, Thank you for choosing us</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">263. SMS sent</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">221. Shipment is damaged</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">191. Your address is incomplete</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">47. Thank you for trusting us with your shipment (office name)</div>
+                </div>
+            </div>
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">320. Waiting for the customs declaration</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">319. Waiting for shipment documents from the customer</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">336. Waiting for customs payment</div>
+                </div>
+            </div>
+
+            <div class="box-info">
+                <div class="item-header">
+                    <div class="info d-flex justify-content-between align-items-center w-100">77. Your shipment is under the customs clearance process</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+                    <div class="info d-flex justify-content-between align-items-center w-100">295. Handover to the airline at origin
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+					<div class="info d-flex justify-content-between align-items-center w-100">299. MAWB arrived
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+					<div class="info d-flex justify-content-between align-items-center w-100">297. MAWB departured
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+					<div class="info d-flex justify-content-between align-items-center w-100">328. Processed for clearance
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+					<div class="info d-flex justify-content-between align-items-center w-100">45. Your shipment has arrived (office name)
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+			<div class="unavailable-event box-info" ngbDropdown>
+                <div class="item-header w-100">
+					<div class="info d-flex justify-content-between align-items-center w-100">344. Your shipment is out for delivery
+						<i ngbDropdownToggle class="i-Information event-link"></i>
+						<div ngbDropdownMenu class="p-0 unavailable-event-dropdown pe-none">
+							<a class="dropdown-item">
+								Event is already used in Event mapping.<br>
+								Connected with GN007. Shipment inbound scanned.
+							</a>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

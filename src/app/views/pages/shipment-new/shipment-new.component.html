@@ -1,0 +1,1097 @@
+<div class="add-shipment">
+    <div class="breadcrumb">
+        <h1>Add shipment</h1>
+        <ul>
+            <li><strong>Hub Ops</strong></li>
+            <li><strong><a href="#/pages/shipments">Shipments management</a></strong></li>
+            <li>Add shipment</li>
+        </ul>
+    </div>
+
+    <div class="content-block mw-100 steps">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                <div class="tabs-to-dropdown" id="bulk-tabs" ngbDropdown>
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs p-0 nav-fill bulk-tabs steps-column">
+                        <li ngbNavItem="Shipment details" class="d-flex order-0 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled steps-nav-link d-flex align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Shipment details'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="1" 
+                                    [class.active]="nav.activeId === 'Shipment details' && !step1IsDone"
+                                    [class.delete]="step1IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step1IsDone"></div>
+                                <div [class.passed-link]="step1IsDone">Shipment details</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">  
+                                    <form [formGroup]="shipmentDetailsForm" id="shipmentDetailsForm" class="steps-content">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                                                <div class="c-card p-0">
+                                                    <div class="card-body steps-content">
+                                                        <div class="c-header">
+                                                            <div class="c-title text-20">General information</div>
+                                                        </div>
+                                
+                                                        <div class="c-form">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Shipper name</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="ShipperName"
+                                                                        [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShipperName')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose name</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Shipping date</label>
+                                                                    <div class="input-group">
+                                                                        <p-calendar 
+                                                                                formControlName="ShippingDate"
+                                                                                [class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShippingDate')?.errors"
+                                                                                inputStyleClass="form-control" 
+                                                                                readonlyInput="true"
+                                                                                placeholder="yyyy-mm-dd hh:mm"
+                                                                                dateFormat="yy.mm.dd"
+                                                                                [showTime]="true" 
+                                                                                (onSelect)="onDateChange($event, 'ShippingDate')"
+                                                                                showClear="true">
+                                                                        </p-calendar>
+                                                                        <div class="invalid-feedback">This field is required</div>
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn"  type="button">
+                                                                                <i class="i-Calendar-4"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Expected delivery date</label>
+                                                                    <div class="input-group">
+                                                                        <p-calendar 
+                                                                                formControlName="ExpectedDate"
+                                                                                [class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ExpectedDate')?.errors"
+                                                                                inputStyleClass="form-control" 
+                                                                                readonlyInput="true"
+                                                                                placeholder="yyyy-mm-dd hh:mm"
+                                                                                dateFormat="yy.mm.dd"
+                                                                                [showTime]="true" 
+                                                                                (onSelect)="onDateChange($event, 'ExpectedDate')"
+                                                                                showClear="true">
+                                                                        </p-calendar>
+                                                                        <div class="invalid-feedback">This field is required</div>
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn"  type="button">
+                                                                                <i class="i-Calendar-4"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Product type</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="ProductType"
+                                                                        [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ProductType')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose type</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Customs declared value</label>
+                                                                    <input type="text" class="form-control" 
+                                                                        placeholder="Enter value"
+                                                                        formControlName="CustomsValue"
+                                                                        [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsValue')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Customs declared currency</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="CustomsCurrency"
+                                                                        [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsCurrency')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose currency</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Shipper branch</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="ShipperBranch"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose branch</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>                                                   
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+                                                                    <label>Goods description</label>
+                                                                    <textarea class="form-control form-control-rounded" 
+                                                                                formControlName="GoodsDescription" 
+                                                                                placeholder="Enter description" 
+                                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('GoodsDescription')?.errors"
+                                                                                id="notes"
+                                                                                style="height: 56px"></textarea>
+                                                                                <div class="invalid-feedback">
+                                                                                This field is required
+                                                                            </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+                                                                    <label>Description of Items</label>
+                                                                    <textarea class="form-control form-control-rounded" 
+                                                                                formControlName="ItemsDescription" 
+                                                                                placeholder="Enter description" 
+                                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ItemsDescription')?.errors"
+                                                                                id="notes"
+                                                                                style="height: 56px"></textarea>
+                                                                                <div class="invalid-feedback">
+                                                                                This field is required
+                                                                            </div>
+                                                                </div>
+                                                            </div>    
+                                                            <div class="row">
+                                                                <div class="mb-3">
+                                                                    <label class="checkbox checkbox-primary text-13">
+                                                                        <input 
+                                                                            type="checkbox" 
+                                                                            formControlName="COD" 
+                                                                        >
+                                                                        <span class="caption font-weight-400">COD</span>
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>   
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="c-header">
+                                                        <div class="c-title text-20">Dimensions</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Length</label>
+                                                            <input type="text" class="form-control" placeholder="Enter length"
+                                                                formControlName="Length"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Length')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Width</label>
+                                                            <input type="text" class="form-control" placeholder="Enter width"
+                                                                formControlName="Width"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Width')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Height</label>
+                                                            <input type="text" class="form-control" placeholder="Enter height"
+                                                                formControlName="Height"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Height')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Unit of measure (length measurements)</label>
+                                                            <select 
+                                                                class="form-control" 
+                                                                formControlName="LengthMeasure"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('LengthMeasure')?.errors"
+                                                            >
+                                                                <option value="" disabled selected hidden>Choose unit</option>
+                                                                <option value="1">Option 2</option>
+                                                                <option value="2">Option 3</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Weight</label>
+                                                            <input type="text" class="form-control" placeholder="Enter weight"
+                                                                formControlName="Weight"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Weight')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                            <label>Unit of measure (weight measurements)</label>
+                                                            <select 
+                                                                class="form-control" 
+                                                                formControlName="WeightMeasure"
+                                                                [class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('WeightMeasure')?.errors"
+                                                            >
+                                                                <option value="" disabled selected hidden>Choose unit</option>
+                                                                <option value="1">Option 2</option>
+                                                                <option value="2">Option 3</option>
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="action-wrap">
+                                        <button 
+                                            class="btn btn-primary btn-rounded" 
+                                            (click)="handleNext('Shipper details', 'step1IsDone', 'isShipmentSubmitted', 'shipmentDetailsForm')"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="Shipper details" class="d-flex order-1 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled steps-nav-link d-flex align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Shipper details'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="2" 
+                                    [class.active]="nav.activeId === 'Shipper details' && !step2IsDone"
+                                    [class.delete]="step2IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step2IsDone"></div>
+                                <div [class.passed-link]="step2IsDone">Shipper details</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">  
+                                    <form [formGroup]="shipperDetailsForm" id="shipperDetailsForm" class="steps-content">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                                                <div class="c-card p-0">
+                                                    <div class="card-body steps-content">
+                                                        <div class="c-header">
+                                                            <div class="c-title text-20">Address info</div>
+                                                        </div>
+                                
+                                                        <div class="c-form">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Address line</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter address" 
+                                                                        autocomplete="nope"
+                                                                        formControlName="Address"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Address')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Country</label>
+                                                                    <mat-select-country  
+                                                                        class="form-control select-country" 
+                                                                        #country
+                                                                        describedBy="country"
+                                                                        placeHolder="Choose country" 
+                                                                        (onCountrySelected)="handleCountrySelected('shipperDetailsForm', 'Country', country)"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Country')?.errors"
+                                                                        autocomplete="nope">
+                                                                    </mat-select-country>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>City</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="City"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('City')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose city</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>    
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Postcode</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter postcode"
+                                                                        autocomplete="nope"
+                                                                        formControlName="Postcode"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Postcode')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>District</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter district"
+                                                                        formControlName="District"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('District')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Latitude</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter latitude"
+                                                                        formControlName="Latitude"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Latitude')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Longitude</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter longitude"
+                                                                        formControlName="Longitude"
+                                                                        [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Longitude')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="c-header">
+                                                        <div class="c-title text-20 d-flex align-items-center">
+                                                            Contact info
+                                                            <span class="subtext">
+                                                                Shipper name
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Contact person name</label>
+                                                            <input type="text" class="form-control" 
+                                                                placeholder="Enter name"
+                                                                autocomplete="nope"
+                                                                formControlName="ContactName"
+                                                                [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('ContactName')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Email</label>
+                                                            <input type="text" class="form-control" 
+                                                                placeholder="Enter email"
+                                                                autocomplete="nope"
+                                                                formControlName="Email"
+                                                                [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Email')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Phone number 1</label>
+                                                            <ngx-mat-intl-tel-input
+                                                                [preferredCountries]="['gb', 'us', 'jo']"
+                                                                [enablePlaceholder]="true"
+                                                                [enableSearch]="true"
+                                                                name="Phone1"
+                                                                #phone1
+                                                                describedBy="phone1"
+                                                                class="form-control input-group input-phone-selector"
+                                                                formControlName="Phone1"
+                                                                [class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Phone1')?.errors"
+                                                            ></ngx-mat-intl-tel-input>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                            <label>Phone number 2</label>
+                                                            <ngx-mat-intl-tel-input
+                                                                [preferredCountries]="['gb', 'us', 'jo']"
+                                                                [enablePlaceholder]="true"
+                                                                [enableSearch]="true"
+                                                                name="Phone2"
+                                                                #phone2
+                                                                describedBy="phone2"
+                                                                class="form-control input-group input-phone-selector"
+                                                                formControlName="Phone2"
+                                                            ></ngx-mat-intl-tel-input>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="action-wrap justify-content-between">
+                                        <button 
+                                            class="btn btn-secondary btn-rounded" 
+                                            (click)="nav.select('Shipment details'); step1IsDone = false;"
+                                        >
+                                            Back
+                                        </button>
+                                        <button 
+                                            class="btn btn-primary btn-rounded" 
+                                            (click)="handleNext('Consignee details', 'step2IsDone', 'isShipperSubmitted', 'shipperDetailsForm');"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem="Consignee details" class="d-flex order-2 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled steps-nav-link d-flex align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Consignee details'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="3" 
+                                    [class.active]="nav.activeId === 'Consignee details' && !step3IsDone"
+                                    [class.delete]="step3IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step3IsDone"></div>
+                                <div [class.passed-link]="step3IsDone">Consignee details</div>
+                            </a>
+                            
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">  
+                                    <form [formGroup]="consigneeDetailsForm" id="consigneeDetailsForm" class="steps-content">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                                                <div class="c-card p-0">
+                                                    <div class="card-body steps-content">
+                                                        <div class="c-header">
+                                                            <div class="c-title text-20">Address info</div>
+                                                        </div>
+                                
+                                                        <div class="c-form">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Address line</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter address" 
+                                                                        autocomplete="nope"
+                                                                        formControlName="Address"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Address')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Country</label>
+                                                                    <mat-select-country  
+                                                                        class="form-control select-country" 
+                                                                        #country
+                                                                        describedBy="country"
+                                                                        placeHolder="Choose country" 
+                                                                        (onCountrySelected)="handleCountrySelected('consigneeDetailsForm', 'Country', country)"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Country')?.errors"
+                                                                        autocomplete="nope">
+                                                                    </mat-select-country>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>City</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="City"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('City')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose city</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>    
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                    <label>Postcode</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter postcode"
+                                                                        autocomplete="nope"
+                                                                        formControlName="Postcode"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Postcode')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>District</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter district"
+                                                                        formControlName="District"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('District')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Type</label>
+                                                                    <select 
+                                                                        class="form-control" 
+                                                                        formControlName="Type"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Type')?.errors"
+                                                                    >
+                                                                        <option value="" disabled selected hidden>Choose type</option>
+                                                                        <option value="1">Option 2</option>
+                                                                        <option value="2">Option 3</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>  
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Latitude</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter latitude"
+                                                                        formControlName="Latitude"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Latitude')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                    <label>Longitude</label>
+                                                                    <input type="text" class="form-control" placeholder="Enter longitude"
+                                                                        formControlName="Longitude"
+                                                                        [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Longitude')?.errors">
+                                                                    <div class="invalid-feedback">
+                                                                        This field is required
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="c-header">
+                                                        <div class="c-title text-20">Contact info</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Contact person name</label>
+                                                            <input type="text" class="form-control" 
+                                                                placeholder="Enter name"
+                                                                autocomplete="nope"
+                                                                formControlName="ContactName"
+                                                                [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('ContactName')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+                                                        
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Email</label>
+                                                            <input type="text" class="form-control" 
+                                                                placeholder="Enter email"
+                                                                autocomplete="nope"
+                                                                formControlName="Email"
+                                                                [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Email')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div> 
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                            <label>Phone number 1</label>
+                                                            <ngx-mat-intl-tel-input
+                                                                [preferredCountries]="['gb', 'us', 'jo']"
+                                                                [enablePlaceholder]="true"
+                                                                [enableSearch]="true"
+                                                                name="Phone1"
+                                                                #phone1
+                                                                describedBy="phone1"
+                                                                class="form-control input-group input-phone-selector"
+                                                                formControlName="Phone1"
+                                                                [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Phone1')?.errors"
+                                                            ></ngx-mat-intl-tel-input>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                            <label>Phone number 2</label>
+                                                            <ngx-mat-intl-tel-input
+                                                                [preferredCountries]="['gb', 'us', 'jo']"
+                                                                [enablePlaceholder]="true"
+                                                                [enableSearch]="true"
+                                                                name="Phone2"
+                                                                #phone2
+                                                                describedBy="phone2"
+                                                                class="form-control input-group input-phone-selector"
+                                                                formControlName="Phone2"
+                                                            ></ngx-mat-intl-tel-input>
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                            <label>Company name</label>
+                                                            <input type="text" class="form-control" 
+                                                                placeholder="Enter name"
+                                                                autocomplete="nope"
+                                                                formControlName="CompanyName"
+                                                                [class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('CompanyName')?.errors">
+                                                            <div class="invalid-feedback">
+                                                                This field is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </form>
+                                        <div class="action-wrap justify-content-between">
+                                            <button 
+                                                class="btn btn-secondary btn-rounded" 
+                                                (click)="nav.select('Shipper details'); step2IsDone = false;"
+                                            >
+                                                Back
+                                            </button>
+                                            <button 
+                                                class="btn btn-primary btn-rounded" 
+                                                (click)="handleNext('Items', 'step3IsDone', 'isConsigneeSubmitted', 'consigneeDetailsForm')"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
+                            </ng-template>
+                        </li>
+                        
+                        <li ngbNavItem="Items" class="d-flex order-3 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled steps-nav-link d-flex align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Items'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="4" 
+                                    [class.active]="nav.activeId === 'Items' && !step4IsDone"
+                                    [class.delete]="step4IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step4IsDone"></div>
+                                <div [class.passed-link]="step4IsDone">Items</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">  
+                                    <div class="d-flex justify-content-between flex-wrap">
+                                        <div class="text">
+                                            You can use the default item and continue the shipment creation process or add the custom item(s).
+                                        </div>
+                                        <div class="d-flex">
+                                            <label class="switch switch-primary mt-1">
+                                                <input type="checkbox" [(ngModel)]="isChecked" tabindex="-1">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <p class="switch-text">Use default item</p>
+                                        </div>
+                                    </div>
+
+                                    <ng-container *ngIf="isChecked; else notChecked">
+                                        <form [formGroup]="defaultItemForm" class="steps-content">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                                                    <div class="c-card p-0">
+                                                        <div class="card-body">
+                                                            <div class="c-header">
+                                                                <div class="c-title text-20">Item 1</div>
+                                                            </div>
+                                    
+                                                            <div class="c-form item-disabled">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Quantity</label>
+                                                                        <input 
+                                                                            type="text" 
+                                                                            formControlName="Quantity" 
+                                                                            class="form-control" 
+                                                                            placeholder="Enter quantity"
+                                                                        >
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Amount</label>
+                                                                        <input 
+                                                                            type="text" 
+                                                                            formControlName="Amount" 
+                                                                            class="form-control" 
+                                                                            placeholder="Enter amount"
+                                                                        >
+                                                                    </div>    
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>HS Code</label>
+                                                                        <input 
+                                                                            type="text" 
+                                                                            formControlName="HSCode" 
+                                                                            class="form-control" 
+                                                                            placeholder="Enter code"
+                                                                        >
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Currency</label>
+                                                                        <select 
+                                                                            class="form-control" 
+                                                                            formControlName="Currency"
+                                                                        >
+                                                                            <option value="" disabled hidden>Choose currency</option>
+                                                                            <option value="USD">USD</option>
+                                                                            <option value="2">Option 3</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Weight</label>
+                                                                        <input 
+                                                                            formControlName="Weight" 
+                                                                            type="text" 
+                                                                            class="form-control" 
+                                                                            placeholder="Enter weight"
+                                                                        >
+                                                                    </div>  
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>Unit of measure (weight measurement)</label>
+                                                                        <select 
+                                                                            class="form-control" 
+                                                                            formControlName="WeightMeasure" 
+                                                                        >
+                                                                            <option value="" disabled hidden>Choose unit</option>
+                                                                            <option value="kg">kg</option>
+                                                                            <option value="2">Option 3</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>Country of origin</label>
+                                                                        <select 
+                                                                            class="form-control" 
+                                                                            formControlName="Country" 
+                                                                        >
+                                                                            <option value="" disabled hidden>Choose country</option>
+                                                                            <option value="1">Option 2</option>
+                                                                            <option value="2">Option 3</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-12 col-xl-12 mb-4 form-group required">
+                                                                        <label>Goods description</label>
+                                                                        <textarea class="form-control form-control-rounded" 
+                                                                                    formControlName="Goods"
+                                                                                    placeholder="Enter description" 
+                                                                                    id="notes"
+                                                                                    style="height: 56px"></textarea>
+                                                                    </div>
+                                                                </div>                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </ng-container>   
+                                    
+                                    <ng-template #notChecked>
+                                        <form *ngFor="let itemForm of itemsForms; let i = index;" [formGroup]="itemForm" id="itemForm" class="steps-content step-form">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                                                    <div class="c-card p-0">
+                                                        <div class="card-body">
+                                                            <div class="c-header">
+                                                                <div class="c-title text-20">Item {{i + 1}}</div>
+                                                                <div class="hover-element">
+                                                                    <button 
+                                                                        [disabled]="itemsForms.length === 1" 
+                                                                        (click)="removeComponent($event, i)"
+                                                                        tabindex="-1" 
+                                                                        type="button" 
+                                                                        class="btn btn-rounded btn-secondary btn-trash"
+                                                                    >
+                                                                        <i class="trash-icon me-0"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                    
+                                                            <div class="c-form">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Quantity</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter quantity" 
+                                                                            formControlName="Quantity"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('Quantity')?.errors">
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Amount</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter amount" 
+                                                                            formControlName="Amount"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('Amount')?.errors">
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>    
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>HS Code</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter code"
+                                                                            formControlName="HSCode"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('HSCode')?.errors">
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Currency</label>
+                                                                        <select 
+                                                                            class="form-control" 
+                                                                            formControlName="Currency"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('Currency')?.errors"
+                                                                        >
+                                                                            <option value="" disabled selected hidden>Choose currency</option>
+                                                                            <option value="1">Option 2</option>
+                                                                            <option value="2">Option 3</option>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group required">
+                                                                        <label>Weight</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter weight"
+                                                                            formControlName="Weight"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('Weight')?.errors">
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>  
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>Unit of measure (weight measurement)</label>
+                                                                        <select 
+                                                                            class="form-control" 
+                                                                            formControlName="WeightMeasure"
+                                                                            [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('WeightMeasure')?.errors"
+                                                                        >
+                                                                            <option value="" disabled selected hidden>Choose unit</option>
+                                                                            <option value="1">Option 2</option>
+                                                                            <option value="2">Option 3</option>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">
+                                                                            This field is required
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-6 col-xl-3 mb-4 form-group">
+                                                                        <label>Country of origin</label>
+                                                                        <mat-select-country  
+                                                                            class="form-control select-country" 
+                                                                            #country
+                                                                            describedBy="country"
+                                                                            placeHolder="Choose country" 
+                                                                            (onCountrySelected)="handleMultipleCountrySelected('Country', country, i)"
+                                                                            autocomplete="off">
+                                                                        </mat-select-country>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-12 col-xl-12 mb-4 form-group required">
+                                                                        <label>Goods description</label>
+                                                                        <textarea class="form-control form-control-rounded" 
+                                                                                    formControlName="Goods" 
+                                                                                    placeholder="Enter description" 
+                                                                                    [class.is-invalid]="isItemsSubmitted[i] && itemForm.get('Goods')?.errors"
+                                                                                    id="notes"
+                                                                                    style="height: 56px"></textarea>
+                                                                                    <div class="invalid-feedback">
+                                                                                    This field is required
+                                                                                </div>
+                                                                    </div>
+                                                                </div>                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="itemsForms.length - 1 === i" class="d-flex justify-content-end">
+                                                <button 
+                                                    type="button"
+                                                    class="btn btn-rounded btn-secondary mb-4"
+                                                    (click)="addForm();"
+                                                >
+                                                    <i class="i-Plus"></i>
+                                                    <span>Add item</span>
+                                                </button>
+                                            </div>
+                                        </form> 
+                                    </ng-template>
+
+                                    <div class="action-wrap justify-content-between">
+                                        <button 
+                                            class="btn btn-secondary btn-rounded" 
+                                            (click)="nav.select('Consignee details'); step3IsDone = false;"
+                                        >
+                                            Back
+                                        </button>
+
+                                        <button 
+                                            class="btn btn-primary btn-rounded" 
+                                            (click)="submitItemsForm('Attachments', 'step4IsDone', 'isItemsSubmitted')"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="Attachments" class="d-flex order-4 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled steps-nav-link d-flex align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Attachments'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="5" 
+                                    [class.active]="nav.activeId === 'Attachments' && !step5IsDone"
+                                    [class.delete]="step5IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step5IsDone"></div>
+                                <div [class.passed-link]="step5IsDone">Attachments</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">  
+                                    <p class="text">This step is optional to create a shipment, you can add attachment(s) to the shipment later. If you want to add now, use the Upload document and Description fields below.</p>
+                                    <div class="attachments-wrap p-0" style="min-height: initial;"> 
+                                        <div class="attachments-inner p-0" ng-app=""> 
+                                            <form #curForm> 
+                                                <div id="create-attachment" (click)="addNewAttachment()"></div> 
+                                                <div class="attachment-items"> 
+                                                    <ng-container *ngFor="let component of componentArray"> 
+                                                        <app-attachment-step-item [id]="component.id"></app-attachment-step-item>
+                                                    </ng-container> 
+                                                </div> 
+                                            </form> 
+                                        </div> 
+                                    </div>
+                                    <div class="action-wrap justify-content-between">
+                                        <button 
+                                            class="btn btn-secondary btn-rounded" 
+                                            (click)="nav.select('Items'); step4IsDone = false; componentArray = [{id: 0}]"
+                                        >
+                                            Back
+                                        </button>
+                                        <button class="btn btn-primary btn-rounded" (click)="uploadFile(errorLengthPopup)">Create shipments</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+
+                        <div 
+                            [ngbNavOutlet]="nav" 
+                            [class.order-0]="nav.activeId === 'Shipment details'"
+                            [class.order-1]="nav.activeId === 'Shipper details'"
+                            [class.order-2]="nav.activeId === 'Consignee details'"
+                            [class.order-3]="nav.activeId === 'Items'"
+                            [class.order-4]="nav.activeId === 'Attachments'"
+                            class="p-0 w-100 d-flex order-mobile"
+                        ></div>
+                    </ul>
+                </div>
+                
+                <ng-template #errorLengthPopup let-modal>
+                    <div class="modal-body">
+                        <i class="text-46 i-Information"></i>
+                        <div class="note">
+                            <div>Please upload at least one document</div>
+                        </div>
+                        <div class="note size-note">
+                            <div>The document can't be added because it is over <strong>2 MB</strong></div>
+                        </div>
+                        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+                            <div>
+                                <div>Okay</div>
+                            </div>
+                        </button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

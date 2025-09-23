@@ -1,0 +1,54 @@
+.dashboard {
+    // billing 
+    .billing-dashboard {
+        background: $white;
+        color: $primary-black;
+
+        .row {
+            margin: 0 -30px;
+
+            > * {
+                padding: 0 30px;
+            }
+        }
+    }
+
+    .c-card {
+        .c-list-statistics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 16px;
+
+            .item-info {
+                .title {
+                    margin-bottom: 6px;
+                    font-size: 13px;
+                    color: $primary-grey;
+                }
+
+                .body {
+                    color: $purple;
+                }
+
+                .icon {
+                    font-size: 28px;
+                }
+
+                .value {
+                    padding-left: 8px;
+                    font-size: 32px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px){
+    .dashboard {
+        .c-card {
+            .c-list-statistics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    } 
+}

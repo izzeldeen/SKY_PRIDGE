@@ -1,0 +1,58 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'companyManagement.manageCompanies' | translate}}</h1>
+    <ul>
+        <li>{{'companyManagement.manageCompanies'  | translate}}</li>
+        <li><strong class="text-primary">{{'companyManagement.company'  | translate}}</strong></li>
+    </ul>
+</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Lookups -->
+				<input 
+					id="table-search" 
+					placeholder="{{'companyManagement.searchByCodeName' | translate}}"
+					class="form-control" 
+					type="text"
+					maxlength="100"
+					(keydown.enter)="onSearch($event)"
+				>
+			</div>
+			<div class="heading-actions">
+				<!-- Add Lookups -->
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddCompany(AddCompanyPopup)" 
+					*ngIf="authService.hasPermission('Lookups-Add') "
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'companyManagement.addCompany' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , EditCompanyPopup )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddCompanyPopup let-modal>
+	<app-company-form [modal]="modal" [TypeId]="TypeId"></app-company-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditCompanyPopup let-modal>
+     	<app-company-form [modal]="modal" [TypeId]="TypeId" [id]="id" [isEditMood]="true" ></app-company-form>
+
+</ng-template>

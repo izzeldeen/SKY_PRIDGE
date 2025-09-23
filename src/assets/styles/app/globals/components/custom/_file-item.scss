@@ -1,0 +1,252 @@
+// file item
+.file-item {
+    padding: 17px 22px;
+    display: flex;
+
+    border: 1px solid $c-gray;
+
+    .file-item-body {
+        padding-left: 22px;
+
+        width: calc(100% - 50px);
+    }
+
+    .file-item-top {
+        margin-bottom: 10px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .actions {
+            display: flex;
+
+            & > button {
+                margin-left: 8px;
+            }
+        }
+    }
+
+    .title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 12px;
+    }
+}
+
+// type 1
+.item-type-1 {
+    display: grid;
+    column-gap: 8px;
+    row-gap: 12px;
+
+    &:not(:last-child) {
+        padding-bottom: 12px;
+    
+        border-bottom: 1px solid $c-gray;;
+    }
+    
+    &.grid-2x {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.grid-3x {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.grid-4x {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &.grid-5x {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+// type 2
+.item-type-2 {
+    padding: 12px;
+    border: 1px solid $c-gray;
+
+    .item-header {
+        margin: 0 -4px 8px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        & > div {
+            padding: 0 4px;
+        }
+
+        .item-title {
+            flex: 1;
+
+            font-size: 18px;
+            color: $primary-black;
+        }
+
+        .actions {
+            button {
+                &:not(:last-child) {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .item-list {
+        display: grid;
+        column-gap: 8px;
+        row-gap: 8px;
+
+        &.grid-3x {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+// type 3
+.item-type-3 {
+    letter-spacing: 0;
+    line-height: 1.53;
+
+    .box-info {
+        padding: 10px 12px;
+        border: 1px solid $c-gray;
+        
+        &:not(:last-child) {
+            margin-bottom: 12px;
+        }
+    }
+
+    .item-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        color: $primary-black;
+
+        .title {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .sub-info {
+            font-size: 14px;
+        }
+    }
+
+    .content {
+        font-size: 12px;
+
+        &.shipment-exception {
+            border-top: 1px solid $gray-300; 
+            padding-top: 8px; 
+            margin-top: 8px;
+        }
+    }
+}
+
+@media (max-width: 992px){
+    // file item
+    .file-item {
+        padding: 16px;
+    }
+
+    // type 1
+    .item-type-1 {
+        display: grid;
+        column-gap: 8px;
+        row-gap: 12px;
+
+        &.grid-5x {
+            grid-template-columns: 1fr;
+        }
+    
+        &.grid-3x {
+            grid-template-columns: 1fr;
+        }
+    
+        &.grid-2x {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // type 2
+    .item-type-2 {
+        .item-header {
+            .item-title {
+                
+            }
+            .c-badge {
+                order: 3;
+                width: 100%;
+            }
+        }
+    
+        .item-list {
+            &.grid-3x {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    // file item
+    .file-item {
+        position: relative;
+
+        .file-item-body {
+            padding-left: 0;
+
+            width: 100%;
+        }
+
+        .file-item-icon {
+            position: absolute;
+            left: 16px;
+            top: 14px;
+
+            img {
+                width: 28px;
+                height: 32px;
+            }
+        }
+
+        .file-item-top {
+            padding-left: 40px;
+        }
+    }
+}
+
+[dir=rtl] {
+    .file-item {
+        .file-item-body {
+            padding-left: 0;
+            padding-right: 22px;
+        }
+
+        .file-item-top {
+            .actions {    
+                & > button {
+                    margin-right: 8px;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    .item-type-2 {    
+        .item-header {
+            .actions {
+                button {
+                    &:not(:last-child) {
+                        margin-left: 8px;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

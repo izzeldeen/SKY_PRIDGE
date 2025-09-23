@@ -1,0 +1,285 @@
+
+<div *ngIf="invoicePage" class="breadcrumb">
+    <!-- <h1>{{'invoice.view' | translate}}</h1> -->
+    <ul>
+        <li>
+           <a (click)="navigate()">
+          {{'invoice.invoice-management'  | translate}}
+           </a>
+         </li>
+        <li>
+               <strong class="text-primary">{{'invoice.invoice'  | translate}}</strong>
+        </li>
+    </ul>
+</div>
+
+<div   class="p-2">
+     <div  *ngIf="invoicePage" class="modal-header">
+  <h4 class="modal-title" >
+     {{'invoice.invoice-management'  | translate}}
+  </h4>
+  	<a (click)="navigate()"  type="button" class="close" aria-label="Close" >
+						<span aria-hidden="true">&times;</span>
+    </a>
+</div>
+
+    
+
+
+
+<div class="row">
+<div class="col-md-8">
+    <div class="card mb-2">
+        <div class="card-body m-1">
+        <div *ngIf="entity" class="row">
+                 <div class="col-md-12 mb-2" >
+                   <strong>   {{entity.typeName | translate }} |  {{entity.invoiceNumber}}</strong>
+                     <hr>
+                 </div>
+
+                 <div class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.invoiceDate' | translate}}</label>
+                             <span class="value" > {{entity.invoiceDate | date:'short'}} </span>
+                </div>
+                  <div class="col-md-4 form-group mb-3">
+                            <label>{{ (isPurchase ?  'purchase-invoice.supplier' : 'invoice.customerName' ) | translate}}</label>
+                             <span class="value" > {{entity.customerName}} </span>
+                </div>
+
+                 <div  class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.paymentMethod' | translate}}</label>
+                             <span class="value" > {{entity.paymentMethodName | translate}} </span>
+                </div>
+                  <div  class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.sourceType' | translate}}</label>
+                             <span class="value" > {{entity.sourceTypeName | translate}} </span>
+                </div>
+                 <div  class="col-md-4 form-group mb-3">
+                            <label>{{ (isPurchase ?  'purchase-invoice.isReceived' : 'invoice.isDeliverd' )  | translate}}</label>
+                             <span class="value" > {{ (entity.isDeliveredOrReceived ? 'true' : 'false') | translate}} </span>
+                </div>
+
+                  <div  *ngIf="entity.isDeliveredOrReceived" class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.deliveryDate' | translate}}</label>
+                             <span class="value" > {{entity.deliveryDate}} </span>
+                </div>
+
+
+                     <div  *ngIf="entity.sectionName" class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.section' | translate}}</label>
+                             <span class="value" > {{entity.sectionName }} </span>
+                </div>`
+          
+                     <div   class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.note' | translate}}</label>
+                             <span class="value" > {{entity.note }} </span>
+                </div>
+                  <div   class="col-md-4 form-group mb-3">
+                            <label>{{'invoice.status' | translate}}</label>
+                             <span class="value" > {{entity.statusName | translate}} </span>
+                </div>
+                    <div  class="col-md-4 form-group mb-3">
+                            <label>{{ 'sales-invoice.printed' | translate}}</label>
+                             <span class="value" > {{ (entity.printed ? 'true' : 'false') | translate}} </span>
+                </div>
+
+
+        </div>
+    </div>
+</div>
+
+  <div  class="card mb-2" *ngIf="products?.length > 0" >
+        <div class="card-body m-1">
+        <div *ngIf="entity" class="row">
+                 <div class="col-md-12 mb-2" >
+                   <strong>   {{'invoice.product-line-items' | translate}}</strong>
+                     <hr>
+                 </div>
+            
+                   <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th >{{'product-line-item.product' | translate}}</th>
+        <th >{{'product-line-item.unit' | translate}} </th>
+        <th >{{'product-line-item.quantity' | translate}} </th>
+        <th>{{'product-line-item.unitPrice' | translate}}</th>
+        <th>{{'product-line-item.discount' | translate}} </th>
+        <th>{{'product-line-item.tax' | translate}} </th>
+        <th>{{'product-line-item.fees' | translate}} </th>
+        <th>{{'product-line-item.total' | translate}} </th>
+        <th *ngIf="!hideQuotationValues && !isPurchase">{{'product-line-item.reserve' | translate}} </th>
+      </tr>
+    </thead>
+    <!-- <form  > -->
+
+    <tbody  >
+      <tr *ngFor="let item of products; let i = index" >
+        <td>
+           {{item.productName}}            
+        </td>
+        <td >
+          {{ item.unitMeasure }}
+        </td>
+        <td>
+            {{ item.quantity }}
+        <td>
+         {{item.unitPrice}}
+        </td>
+          <td>
+              {{item.discount}}
+        </td>
+         <td>
+              {{item.tax}}
+        </td>
+         <td>
+              {{item.feesAmount}}
+        </td>
+         <td>
+              {{item.total}}
+        </td>
+        <td *ngIf="!hideQuotationValues && !isPurchase">
+            {{ (item.reserve.toString() | translate) }}
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- </form> -->
+
+  </table>
+
+               
+        </div>
+    </div>
+</div>
+
+  <div *ngIf="!hideQuotationValues && installments?.length > 0" class="card mb-2">
+        <div class="card-body m-1">
+        <div *ngIf="entity" class="row">
+                 <div class="col-md-12 mb-2" >
+                   <strong>   {{'invoice.installments' | translate}}</strong>
+                     <hr>
+                 </div>
+            
+                   <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th >{{'invoice.dueDate' | translate}}</th>
+        <th >{{'invoice.amount' | translate}}</th>
+        <th >{{'invoice.status' | translate}}</th>
+        <th >{{'invoice.paidDate' | translate}}</th>
+      </tr>
+    </thead>
+    <!-- <form  > -->
+
+    <tbody >
+      <tr *ngFor="let item of installments; let i = index" >
+        <td>
+           {{item.sequence}}            
+        </td>
+       <td>
+           {{item.dueDate | date:'short'}}            
+        </td>
+         <td>
+           {{item.amount}}            
+        </td>
+         <td>
+           {{item.statusName | translate}}            
+        </td>
+        <td>
+           {{item.paidDate | date:'short'}}            
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- </form> -->
+
+  </table>
+
+               
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-md-4">
+
+   <div class="card mb-5">
+        <div class="card-body m-3">
+        <div *ngIf="entity" class="row">
+                 <div class="col-md-12 mb-2" >
+                   <strong>   {{'invoice.summary' | translate }}</strong>
+                     <hr> 
+                 </div>
+
+                
+                  <div class="col-md-12 form-group mb-3">
+                            <label>{{ "sales-invoice.totalDiscount" | translate }}</label>
+                             <span class="value" > {{entity.totalDiscount}} </span>
+                </div>
+
+                 <div  class="col-md-12 form-group mb-3">
+                            <label>{{ "sales-invoice.totalTax" | translate }}</label>
+                             <span class="value" > {{entity.totalTax }} </span>
+                </div>
+                  <div  class="col-md-12 form-group mb-3">
+                            <label>{{'invoice.totalFees' | translate}}</label>
+                             <span class="value" > {{entity.totalFee }} </span>
+                </div>
+                   <div  class="col-md-12 form-group mb-3">
+                            <label>{{'invoice.netAmount' | translate}}</label>
+                             <span class="value" > {{entity.netAmount }} </span>
+                </div>
+                   <div  *ngIf="!hideQuotationValues"  class="col-md-12 form-group mb-3">
+                            <label>{{'invoice.paidAmount' | translate}}</label>
+                             <span class="value" > {{entity.paidAmount }} </span>
+                </div>
+
+                  <div  *ngIf="!hideQuotationValues" class="col-md-12 form-group mb-3">
+                            <label>{{'invoice.unPaidAmount' | translate}}</label>
+                             <span class="value" > {{entity.unPaidAmount }} </span>
+                </div>
+                 <div class="col-md-12 form-group mb-3">
+                            <label>{{ "sales-invoice.totalInvoiceAmount" | translate }}</label>
+                             <span class="value" > {{entity.totalAmount}} </span>
+                </div>
+
+            
+                <div *ngIf="invoicePage"  class="col-md-6" >
+                        <button type="button" class="btn btn-secondary submit w-100"
+                               (click)="printReport(false)"
+                               >{{'sales-invoice.print-report' | translate}}</button>
+                </div>
+
+                
+
+                
+                  <div  *ngIf="!invoicePage" class="col-md-6 review-input">
+                               <button type="button" class="btn btn-secondary submit w-100"
+                               (click)="onSubmitInvoice(false)"
+                                [disabled]="entity?.isBalanceUpdated"
+                               >   {{'sales-invoice.submit' | translate}}</button>
+                 </div>
+
+                       <div *ngIf="!invoicePage"  class="col-md-6" >
+                        <button type="button" class="btn btn-primary submit w-100"
+                               (click)="onSubmitInvoice(true)"
+                               [disabled]="entity?.isBalanceUpdated"
+                               >{{'sales-invoice.submitAndPrint' | translate}}</button>
+                </div>
+
+
+                       
+        </div>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+

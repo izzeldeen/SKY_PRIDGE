@@ -1,0 +1,10 @@
+.codes-textarea-block {
+    background-color: $gray-100;
+    border-radius: 15px;
+    border: 1px solid #CED4DA;
+
+    .codes-textarea {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}

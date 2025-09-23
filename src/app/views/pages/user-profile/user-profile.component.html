@@ -1,0 +1,79 @@
+<div class="breadcrumb">
+    <h1>{{'common.MyProfile' | translate}}</h1>
+</div>
+
+<div class="row">
+	<div class="col-md-4 mb-2">
+		<div class="user-profile">
+			<div class="user-name">{{User?.fullName}}</div>
+			<div class="user-id">{{User?.id}}</div>
+			<ul class="user-info-list">
+				<li class="user-post">{{User?.roles?.join(', ')}}</li>
+				<li class="user-mail">{{User?.email}}</li>
+				<li class="user-phone">{{User?.phoneNumber}}</li>
+			</ul>
+
+
+ <div class="change-pass-action" (click)="openChangePassword(modalChangePassword)">
+		Change password
+		<input type="password" readonly value="1111111111111">
+	</div> 
+
+
+			<ng-template #modalChangePassword let-modal>
+				<div class="modal-header">
+					<h4 class="modal-title" id="modal-basic-title">Change password</h4>
+					<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+					<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<form-wizard>
+						<wizard-step [isValid]="firstForm.form.valid" (onNext)="onStep1Next($event)">
+							<form #firstForm="ngForm">
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="curPass">Current password</label>
+										<i class="i-Eye show-pass" (click)="triggerShowPass($event)"></i>
+										<input type="password" class="form-control" id="curPass" name="curPass" placeholder="Current password" [(ngModel)]="data.curPass">
+									</div>
+								</div>
+							</form>
+						</wizard-step>
+
+						<wizard-step [isValid]="secondForm.form.valid" (onComplete)="onComplete($event)">
+							<form #secondForm="ngForm">
+								<div class="row">
+									<div class="form-group">
+										<label for="newPass">New password</label>
+										<i class="i-Eye show-pass" (click)="triggerShowPass($event)"></i>
+										<input type="password" class="form-control" id="newPass" name="newPass" placeholder="New password" [(ngModel)]="data.newPass">
+									</div>
+
+									<div class="form-group col-md-12">
+										<label for="confPass">Confirm password</label>
+										<i class="i-Eye show-pass" (click)="triggerShowPass($event)"></i>
+										<input type="password" class="form-control" id="confPass" name="confPass" placeholder="Confirm password" [(ngModel)]="data.confPass">
+									</div>
+								</div>
+							</form>
+						</wizard-step>
+						<button type="button" class="btn btn-rounded btn-secondary" (click)="modal.dismiss('Cross click')">Cancel</button>
+					</form-wizard>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+		<div class="col-md-8 mb-2" *ngIf="companyId > 0">
+<div class="card p-4">
+	<div class="card-body">
+<app-company-form [id]="companyId" [isEditMood]="true"  [isCompanyUser]="true"></app-company-form>
+
+	</div>
+</div>
+	</div>
+</div>
+
+

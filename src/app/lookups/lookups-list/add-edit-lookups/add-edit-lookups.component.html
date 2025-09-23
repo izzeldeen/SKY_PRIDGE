@@ -1,0 +1,138 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isEditMood">{{('Lookups.Add' | translate) + ' ' + Title}}</h4>
+    <h4 class="modal-title" *ngIf="isEditMood">{{('common.update' | translate) + ' ' + Title}}</h4>
+    <button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="lookupAddForm" id="LookupsAddForm">
+        <div class="row">
+            <!-- Name En -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'Lookups.titleEn' | translate }}</label>
+                <input type="text" maxlength="100" placeholder="{{'Lookups.titleEn' | translate }}" class="form-control"
+                    formControlName="titleEn" [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('titleEn')?.errors">
+                <div  *ngIf="lookupAddForm.get('titleEn').invalid &&  lookupAddForm.get('titleEn').errors['required']" class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="lookupAddForm.get('titleEn').invalid &&  lookupAddForm.get('titleEn').errors['englishTextWithNumbers']">
+                    {{'common.onlyEnglishIsAllowed'|translate}}
+                </div>
+            </div>
+            <!-- Name Ar -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'Lookups.titleAr' | translate }}</label>
+                <input 
+                    type="text"
+                    maxlength="100"
+                    placeholder="{{'Lookups.titleAr' | translate }}" 
+                    class="form-control" 
+                    formControlName="titleAr"
+                    [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('titleAr')?.errors"
+                >
+                <div class="invalid-feedback" *ngIf="lookupAddForm.get('titleAr').invalid &&  lookupAddForm.get('titleAr').errors['required']">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="lookupAddForm.get('titleAr').invalid &&  lookupAddForm.get('titleAr').errors['arabicTextWithNumbers']">
+                    {{'common.onlyArabicIsAllowed'|translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Description En -->
+            <div class="col-12 col-sm-6 form-group ">
+                <label>{{'Lookups.valueEn' | translate }}</label>
+                <textarea 
+                    type="text" 
+                    placeholder="{{'Lookups.valueEn' | translate }}" 
+                    class="form-control" 
+                    formControlName="valueEn"
+                    [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('valueEn')?.errors"
+                >
+                </textarea>
+                <div class="invalid-feedback"
+                *ngIf="lookupAddForm.get('valueEn').invalid &&  lookupAddForm.get('valueEn').errors['required']">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="lookupAddForm.get('valueEn').invalid &&  lookupAddForm.get('valueEn').errors['englishTextWithNumbers']">
+                    {{'common.onlyEnglishIsAllowed'|translate}}
+                </div>
+            </div>
+            <!-- Description Ar -->
+            <div class="col-12 col-sm-6 form-group ">
+                <label>{{'Lookups.valueAr' | translate }}</label>
+                <textarea 
+                    type="text" 
+                    placeholder="{{'Lookups.valueAr' | translate }}" 
+                    class="form-control" 
+                    formControlName="valueAr"
+                    [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('valueAr')?.errors"
+                >
+                </textarea>
+                <div class="invalid-feedback"
+                *ngIf="lookupAddForm.get('valueAr').invalid &&  lookupAddForm.get('valueAr').errors['required']" >
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="lookupAddForm.get('valueAr').invalid &&  lookupAddForm.get('valueAr').errors['arabicTextWithNumbers']">
+                    {{'common.onlyArabicIsAllowed'|translate}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Value -->
+            <div class="col-12 col-sm-6 form-group ">
+                <label>{{'Lookups.numValue' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'Lookups.numValue' | translate }}" 
+                    class="form-control" 
+                    formControlName="numValue"
+                    [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('numValue')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+            <!-- Status -->
+            <div class="col-12 col-sm-6 form-group required" >
+                <label>{{'Lookups.status' | translate }}</label>
+                <select 
+                    class="form-control" 
+                    formControlName="status"  
+                    [class.is-invalid]="isSubmittedLookupAddForm && lookupAddForm.get('value')?.errors" 
+                >
+                    <option *ngFor="let status of status" [value]="status.id">{{ languageService.getCurrentLanguage() === 'en' ? status.name : status.nameAr }}</option>
+                </select>
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired' | translate}}
+                </div>
+            </div>
+        </div>
+       
+    </form>
+</div>
+<div class="modal-footer position-absolute bottom-0 w-100">
+    <!-- Cancel Event -->
+    <button 
+        type="button" 
+        class="btn btn-secondary btn-rounded" 
+        (click)="modal.dismiss('Cross click')" 
+        tabindex="-1"
+    >
+        {{'common.cancel' | translate }}
+    </button>
+    <!-- Save Event -->
+    <button 
+        type="button" 
+        (click)="submitLookup()" 
+        class="btn btn-primary btn-rounded" 
+        tabindex="-1"
+        *ngIf="(!isEditMood && authService.hasPermission('Lookups-Add')) || (isEditMood && authService.hasPermission('Lookups-Edit'))"    
+    >
+        {{'common.save' | translate }}
+    </button>
+</div>

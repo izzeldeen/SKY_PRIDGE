@@ -1,0 +1,98 @@
+<div class="main-header">
+    <h2 class="header-title" [ngClass]="{'active': navService.sidebarState.sidenavOpen || eventsDrop._open || searchService.searchOpen}">
+        {{
+            eventsDrop._open && !navService.sidebarState.sidenavOpen
+            ? 'Events'
+            : searchService.searchOpen && !navService.sidebarState.sidenavOpen
+            ? 'Search'
+            : 'Menu'
+        }}
+    </h2>
+
+
+    <div class="header-part-left" [ngClass]="{'none': navService.sidebarState.sidenavOpen || eventsDrop._open}">
+        <div class="menu-toggle" [ngClass]="{'d-none': searchService.searchOpen }" (click)="toggelSidebar()"></div>
+        <a href="#/statistics/statistics" class="logo desktop">
+        </a>
+
+        <div class="menu-search mobile" [ngClass]="{'d-none': searchService.searchOpen }" (click)="searchService.searchOpen = true"></div>
+
+      
+        
+    <div  class="logo" >
+    <img  src="../../../../../../assets/images/SKY_BRIDGE.jpg" alt="image">
+   </div>
+ <div >{{'SKY BRIDGE' | translate}}</div>
+    </div>
+
+    <a href="#/statistics/statistics" class="logo mobile" [ngClass]="{'none': navService.sidebarState.sidenavOpen || eventsDrop._open || searchService.searchOpen }">
+        <img src="./assets/images/icon2.png" alt="">
+    </a>
+
+    <div class="menu-cross" [ngClass]="{'active': navService.sidebarState.sidenavOpen }" (click)="toggelSidebar(); searchService.searchOpen = false; eventsDrop.close()"></div>
+    <div class="menu-cross" [ngClass]="{'active': searchService.searchOpen && !navService.sidebarState.sidenavOpen }" (click)="searchService.searchOpen = false"></div>
+
+  
+
+
+    <div class="header-part-right" [ngClass]="{'none': navService.sidebarState.sidenavOpen || searchService.searchOpen}">
+        <div class="header-icon notice lang" ngbDropdown [placement]="'bottom-right'">
+            <div id="langDropdown" class="icon-item" ngbDropdownToggle>{{ directionService.getCurrentLanguage() == 'en' ? languages[0].label :  languages[1].label }}</div>
+
+            <div ngbDropdownMenu aria-labelledby="langDropdown" class="header-account-dropdown">
+              <ng-container *ngFor="let lang of languages">
+                <a class="dropdown-item" (click)="changeLanguage(lang.code)">{{ lang.label }}</a>
+              </ng-container>
+            </div>
+          </div>
+
+
+            
+
+
+        <div class="header-icon events mobile-drop" ngbDropdown [placement]="'bottom-right'" [autoClose]="autocloseEnabled" #eventsDrop="ngbDropdown">
+            <div class="menu-cross m-0" [ngClass]="{'active': eventsDrop._open}" (click)="eventsDrop.close()"></div>
+
+            <div id="eventsDropdown" class="icon-item nav-item-hold badge-top-container" [ngClass]="{'none': eventsDrop._open}" ngbDropdownToggle role="button">
+                <span class="badge badge-primary">.</span>
+                <i id="dropdownIcon" class="i-Bell nav-icon"></i>
+                <span class="nav-text">Events</span>
+            </div>
+
+            <div ngbDropdownMenu class="notification-dropdown rtl-ps-none">
+                <div class="notification-wrap">
+                <div class="heading mobile-back" (click)="$event.stopPropagation(); eventsDrop.close();">Events</div>
+
+                <div class="dropdown-item d-flex" *ngFor="let item of notifications" >
+                    <div class="notification-icon">
+                    <i class="{{item.icon}} text-{{item.status}}"></i>
+                    </div>
+                    <div class="notification-details flex-grow-1">
+                    <p class="m-0 d-flex align-items-center">
+                        <span class="caption">{{item.title}}</span>
+                        <span class="flex-grow-1"></span>
+                        <span class="date ms-auto">{{item.time}}</span>
+                    </p>
+                    <p class="msg">{{item.text | slice:0:300}}</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+         <div class="header-icon help mobile-drop" ngbDropdown #helpDrop="ngbDropdown">
+          
+
+
+        <div class="header-icon user" ngbDropdown [placement]="'bottom-right'" [ngClass]="{'none': eventsDrop._open}">
+            <div id="userDropdown" ngbDropdownToggle class="icon-item">
+                <i class="i-Male-21"></i>
+            </div>
+
+            <div ngbDropdownMenu aria-labelledby="userDropdown" class="header-account-dropdown">
+                <button class="dropdown-item" (click)="signout()">{{'LogOut' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

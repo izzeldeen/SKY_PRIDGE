@@ -1,0 +1,45 @@
+<div class="c-card mb-4">
+    <div class="c-card-body">
+        <div class="c-header">
+            <div class="c-title text-20">{{'dashboard.servicesAndProducts' | translate }}</div>
+
+            <div class="c-actions">
+            </div>
+        </div>
+
+        <div class="c-list c-list-statistics">
+            <div class="item-info">
+                <div class="title">{{'dashboard.products' | translate }}</div>
+                <div class="body">
+                   <i class="icon i-Bag-Items"></i>
+                    <span  *ngIf="model" class="value">{{model.productCount}}</span>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'dashboard.addNewProduct' | translate }}</div>
+                <div class="body px-4 pt-2">
+                    <i class="icon i-Bag-Items"><i class="icon i-Add"></i>
+                </i>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'dashboard.service' | translate }}</div>
+                <div class="body">
+                   <i class="icon i-Tag"></i>
+                    <span  *ngIf="model" class="value">{{model.serviceProductCount}}</span>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'dashboard.addNewService' | translate }} </div>
+                <div class="body px-4 pt-2">
+                  <i class="icon i-Tag"><i class="icon i-Add"></i>
+</i>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

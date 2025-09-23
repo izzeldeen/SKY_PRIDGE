@@ -1,0 +1,105 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isEditMood">{{'rolesManagment.addRoles' | translate}}</h4>
+    <h4 class="modal-title" *ngIf="isEditMood">{{'rolesManagment.updateRoles' | translate}}</h4>
+    <button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="rolesAddForm"  id="rolesAddForm" >
+        <!-- Role Name -->
+        <div class="form-group required" required>
+            <label for="roleName">{{'rolesManagment.NameEn' | translate}}</label>
+            <input 
+                type="text" 
+                maxlength="100"
+                placeholder="{{'enterName' | translate}}" 
+                class="form-control" 
+                formControlName="viewName"
+                id="roleName"
+                [class.is-invalid]="rolesAddForm.get('viewName').invalid && rolesAddForm.get('viewName').touched">
+                <div class="invalid-feedback"
+                    *ngIf="rolesAddForm.get('viewName').invalid && (rolesAddForm.get('viewName').errors?.required || rolesAddForm.get('viewName').errors?.whitespace)">
+                    {{ 'common.fieldRequired' | translate }}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="rolesAddForm.get('viewName').invalid && rolesAddForm.get('viewName').errors?.englishTextWithNumbers">
+                    {{ 'common.onlyEnglishIsAllowed' | translate }}
+                </div>
+        </div>
+
+        <div class="form-group required" required>
+            <label for="roleName">{{'rolesManagment.NameAr' | translate}}</label>
+            <input 
+                type="text" 
+                maxlength="100"
+                placeholder="{{'enterNameAr' | translate}}" 
+                class="form-control" 
+                formControlName="nameAr"
+                id="roleName"
+                [class.is-invalid]="rolesAddForm.get('nameAr').invalid && rolesAddForm.get('nameAr').touched">
+                <div class="invalid-feedback"
+                    *ngIf="rolesAddForm.get('nameAr').invalid && (rolesAddForm.get('nameAr').errors?.required || rolesAddForm.get('nameAr').errors?.whitespace)">
+                    {{ 'common.fieldRequired' | translate }}
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="rolesAddForm.get('nameAr').invalid && rolesAddForm.get('nameAr').errors?.arabicTextWithNumbers">
+                    {{ 'common.onlyArabicIsAllowed' | translate }}
+                </div>
+        </div>
+        <!-- Role Status -->
+        <div class="col-12 col-sm-12 form-group required" >
+            <label>{{'status' | translate }}</label>
+            <select class="form-control" formControlName="status"  
+                [class.is-invalid]="isSubmittedRoleAddForm && rolesAddForm.get('status')?.errors" >
+                <option *ngFor="let status of status" [value]="status.id">{{ languageService.getCurrentLanguage() === 'en' ? status.name : status.nameAr }}</option>
+            </select>
+            <div class="invalid-feedback">
+                {{'common.fieldRequired' | translate}}
+            </div>
+        </div>
+        <!-- Role Permissions -->
+        <div class="col-12 col-sm-12 form-group required">
+            <label for="permissions">{{'permissionsManagment.permissions' | translate}}</label>
+            <p-multiSelect 
+                [class.is-invalid]="isSubmittedRoleAddForm && rolesAddForm.get('permissions')?.errors" 
+                [options]="allPermissions" 
+                optionLabel="label" 
+                optionValue="value" 
+                formControlName="permissions"
+                placeholder="{{'permissionsManagment.permissions' | translate}}"
+                [styleClass]="'w-100 form-control'"
+                group="true">
+                <ng-template let-group pTemplate="group">
+                    <div class="ui-multiselect-item-group">{{group.label}}</div>
+                </ng-template>
+                <ng-template let-item pTemplate="item">
+                    <div class="ui-multiselect-item">{{item.label}}</div>
+                </ng-template>
+            </p-multiSelect>
+            <div class="invalid-feedback">
+                {{'common.fieldRequired' | translate}}
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer position-absolute bottom-0 w-100">
+    <!-- Clear Event -->
+    <button 
+        type="button" 
+        class="btn btn-secondary btn-rounded" 
+        (click)="resetRoleAddForm()" 
+        tabindex="-1"
+    >
+        {{'rolesManagment.clear'|translate}}
+    </button>
+    <!-- Save Event -->
+    <button 
+        type="button" 
+        (click)="submitRoleAddForm()" 
+        class="btn btn-primary btn-rounded" 
+        tabindex="-1" 
+        *ngIf="authSerivce.hasPermission('Add-Roles') || authSerivce.hasPermission('Update-Roles')"
+    >
+        {{'rolesManagment.save'|translate}}
+    </button>
+</div>

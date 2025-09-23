@@ -1,0 +1,42 @@
+<div class="warehouse-sections">
+    <div class="breadcrumb">
+        <h1>{{'warehouse-sections.warehouse-sections-management' | translate}}</h1>
+        <ul>
+            <li>{{'warehouse-sections.warehouse-sections-Manage' | translate}}</li>
+            <li><strong class="text-primary">{{'warehouse-sections.warehouse-sections' | translate}}</strong></li>
+        </ul>
+    </div>
+    <div class="custom-table-wrap">
+        <div class="table-heading"> 
+            <div class="table-search form-group">
+                <!-- Searching Lookups -->
+                <input id="table-search" placeholder="{{'warehouse-sections.Searchby' | translate}}"
+                    class="form-control" type="text" maxlength="100" (keydown.enter)="onSearch($event)">
+            </div>
+            <div class="heading-actions">
+                <!-- Add Lookups -->
+                <button type="button" class="btn btn-rounded btn-primary"
+                    (click)="onAddWarehouseSections(AddwarehouseSectionsPopup)"
+                    *ngIf="authService.hasPermission('Warehouse-Sections-Form') ">
+                    <i class="i-Plus"></i>
+                    <span>
+                        {{ 'warehouse-sections.addWarehouseSections' | translate }}
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- Lookups -->
+        <app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"
+            (EventHandler)="onHandleAction($event , EditwarehouseSectionsPopup )" [PageSize]="baseSearch.pageSize"
+            [TotalRecords]="totalCount" (PageChange)="onPageChange($event)">
+        </app-table>
+    </div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddwarehouseSectionsPopup let-modal>
+    <app-warehouse-sections-form [modal]="modal"></app-warehouse-sections-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditwarehouseSectionsPopup let-modal>
+    <app-warehouse-sections-form [modal]="modal" [id]="id" [isEditMood]="true"></app-warehouse-sections-form>
+</ng-template>

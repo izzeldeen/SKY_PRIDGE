@@ -1,0 +1,104 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isEditMood">
+        {{ "warehouse-sections.addwarehouse-sections" | translate }}
+    </h4>
+    <h4 class="modal-title" *ngIf="isEditMood">
+        {{ "warehouse-sections.editwarehouse-sections" | translate }}
+    </h4>
+    <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body">
+    <form [formGroup]="form" id="form">
+        <div class="row">
+
+            <!-- Warehouse Dropdown -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{ "warehouse-sections.warehouseId" | translate }}</label>
+                <select class="form-control" formControlName="warehouseId"
+                    [class.is-invalid]="isFormSubmitted && form.get('warehouseId')?.invalid">
+                    <option value="" disabled selected>{{ "select" | translate }}</option>
+                    <option *ngFor="let warehouse of warehouseList" [value]="warehouse.id">
+                        {{ warehouse.name }}
+                    </option>
+                </select>
+                <div *ngIf="isFormSubmitted && form.get('warehouseId')?.errors" class="invalid-feedback">
+                    <div *ngIf="form.get('warehouseId')?.errors['required']">{{ "common.fieldRequired" | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name En -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{ "warehouse-sections.nameEn" | translate }}</label>
+                <input type="text" maxlength="100" class="form-control" formControlName="nameEn"
+                    [class.is-invalid]="isFormSubmitted && form.get('nameEn')?.invalid" />
+                <div *ngIf="isFormSubmitted && form.get('nameEn')?.errors" class="invalid-feedback">
+                    <div *ngIf="form.get('nameEn')?.errors['required']">{{ "common.fieldRequired" | translate }}</div>
+                    <div *ngIf="form.get('nameEn')?.errors['englishTextWithNumbers']">{{ "common.onlyEnglishIsAllowed" |
+                        translate }}</div>
+                    <div *ngIf="form.get('nameEn')?.errors['noWhitespace']">{{ "common.noWhitespace" | translate }}
+                    </div>
+                    <div *ngIf="form.get('nameEn')?.errors['maxlength']">
+                        {{ "common.maxLength" | translate:{length:100} }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name Ar -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{ "warehouse-sections.nameAr" | translate }}</label>
+                <input type="text" maxlength="100" class="form-control" formControlName="nameAr"
+                    [class.is-invalid]="isFormSubmitted && form.get('nameAr')?.invalid" />
+                <div *ngIf="isFormSubmitted && form.get('nameAr')?.errors" class="invalid-feedback">
+                    <div *ngIf="form.get('nameAr')?.errors['required']">{{ "common.fieldRequired" | translate }}</div>
+                    <div *ngIf="form.get('nameAr')?.errors['arabicTextWithNumbers']">{{ "common.onlyArabicIsAllowed" |
+                        translate }}</div>
+                    <div *ngIf="form.get('nameAr')?.errors['noWhitespace']">{{ "common.noWhitespace" | translate }}
+                    </div>
+                    <div *ngIf="form.get('nameAr')?.errors['maxlength']">
+                        {{ "common.maxLength" | translate:{length:100} }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Type Dropdown -->
+            <div class="col-12 col-sm-6 form-group">
+                <label>{{ "warehouse-sections.sectionType" | translate }}</label>
+                <select class="form-control" formControlName="sectionTypeId">
+                    <option [value]=null>{{ "warehouse-sections.select" | translate }}</option>
+                    <option *ngFor="let type of sectionTypeList" [value]="type.id">
+                        {{ type.title }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Note -->
+            <div class="col-12 form-group">
+                <label>{{ "warehouse-sections.note" | translate }}</label>
+                <textarea rows="3" class="form-control" formControlName="note" maxlength="500"></textarea>
+            </div>
+
+            <!-- Is Active -->
+            <div class="col-md-4 form-group">
+                <label class="switch switch-primary me-3 mt-4">
+                    <span>{{ "warehouse-sections.isActive" | translate }}</span>
+                    <input type="checkbox" formControlName="isActive" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer position-absolute bottom-0 w-100">
+    <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
+        {{ "common.cancel" | translate }}
+    </button>
+    <button type="button" (click)="submitForm()" class="btn btn-primary btn-rounded" tabindex="-1"
+        *ngIf="authSerivce.hasPermission('Warehouse-Sections-Form') || authSerivce.hasPermission('Update-Warehouse-sectionType')">
+        {{ "common.save" | translate }}
+    </button>
+</div>

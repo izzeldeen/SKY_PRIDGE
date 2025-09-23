@@ -1,0 +1,469 @@
+<div class="product-type">
+	<div class="breadcrumb">
+		<h1>Product type</h1>
+		<ul>
+			<li><strong>Settings</strong></li>
+			<li>Product type</li>
+		</ul>
+	</div>
+	
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<input id="table-search" placeholder="Search by product..."  class="form-control" type="text">
+			</div>
+			<div class="heading-actions">
+				<button class="btn btn-secondary btn-rounded" (click)="filtersModal(filtersPopup)"><i class="i-Filter-2"></i><span>Filters</span></button>
+				<button class="btn btn-primary btn-rounded" (click)="newTypeModal(newTypePopup)"><i class="i-Plus"></i><span>Add new type</span></button>
+			</div>
+		</div>
+
+		<div class="table-wrap">
+			<table class="custom-table">
+				<thead>
+					<tr>
+						<th>
+							Product type name
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th>
+							Product type code
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th>
+							Product service
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th>
+							Status
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr class="inactive">
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge">Disactivated</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr class="inactive">
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge">Disactivated</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>Product type</td>
+						<td>JTYIUIIOLL</td>
+						<td>Delivery</td>
+						<td><span class="status c-badge active">Active</span></td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item" (click)="editTypeModal(editTypePopup)">Edit</button>
+									<button class="dropdown-item delete">Delete</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="table-footer-inner">
+			<div class="pages">
+				<div class="page-count">30 total</div>
+
+				<div class="entries">
+					Show per page
+					<div class="entries-dropdown" ngbDropdown>
+						<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+				
+						<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>10</a>
+								<ng-template ngbNavContent>10</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>50</a>
+								<ng-template ngbNavContent>50</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>70</a>
+								<ng-template ngbNavContent>70</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>100</a>
+								<ng-template ngbNavContent>100</ng-template>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-pager">
+				<div class="action disabled pager-position" aria-label="go to first page">
+					<i class="datatable-icon-prev"></i>
+				</div>
+
+				<div class="action disabled pager-step"  aria-label="go to previous page">
+					<i class="datatable-icon-left"></i>
+				</div>
+
+				<div class="action pager-page active">1</div>
+				<div class="action pager-page">2</div>
+				<div class="action pager-page">3</div>
+
+				<div class="action pager-step" aria-label="go to next page">
+					<i class="datatable-icon-right"></i>
+				</div>
+
+				<div class="action pager-position"  aria-label="go to last page">
+					<i class="datatable-icon-skip"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<ng-template #filtersPopup let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Filters</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<form>
+				<div class="form-group">
+					<label>Product type name</label>
+					<input type="text" class="form-control" placeholder="Enter product type name">
+				</div>
+
+				<div class="form-group">
+					<label>Product type code</label>
+					<input type="text" class="form-control" placeholder="Enter product type code">
+				</div>
+
+				<div class="form-group">
+					<label>Product service</label>
+					<select class="form-control">
+						<option value="" disabled selected hidden>Choose product service</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Status</label>
+					<select class="form-control">
+						<option value="" disabled selected hidden>Choose status</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">Reset All</button>
+			<button type="button" class="btn btn-primary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">Apply filters</button>
+		</div>
+	</ng-template>
+
+	<ng-template #newTypePopup let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Add product type</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<form [formGroup]="addProductTypeForm" id="addProductTypeForm" (ngSubmit)="submitAddProductType()">
+				<div class="form-group required">
+					<label>Product type name</label>
+					<input type="text" class="form-control" placeholder="Enter product type name" 
+						formControlName="ProductTypeName"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('ProductTypeName')?.errors">
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label>Product type code</label>
+					<input type="text" class="form-control" placeholder="Enter product type code" 
+						formControlName="ProductTypeCode"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('ProductTypeCode')?.errors">
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label>Product service</label>
+					<select 
+						class="form-control"
+						formControlName="ProductService"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('ProductService')?.errors" 
+					>
+						<option value="" disabled selected hidden>Choose product service</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label>Status</label>
+					<select 
+						class="form-control"
+						formControlName="Status"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('Status')?.errors"
+					>
+						<option value="" disabled selected hidden>Choose status</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-caption">Translation</div>
+
+				<div class="form-group">
+					<label>English</label>
+					<input type="text" class="form-control" placeholder="Enter translation" 
+						formControlName="EnglishTranslation"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('EnglishTranslation')?.errors">
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>French</label>
+					<input type="text" class="form-control" placeholder="Saisir la traduction" 
+						formControlName="FrenchTranslation"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('FrenchTranslation')?.errors">
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Arabic</label>
+					<input type="text" class="form-control" dir="rtl" placeholder="أدخل الترجمة" 
+						formControlName="ArabicTranslation"
+						[class.is-invalid]="isSubmittedAddProductType && addProductTypeForm.get('ArabicTranslation')?.errors">
+					<div class="invalid-feedback">
+						This field is required
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button 
+				type="button" 
+				class="btn btn-secondary btn-rounded" 
+				(click)="resetAddProductType()"
+				tabindex="-1"
+			>
+				Clear fields
+			</button>
+			<button 
+				type="button" 
+				class="btn btn-primary btn-rounded" 
+				(click)="submitAddProductType()" 
+				tabindex="-1"
+			>
+				Save
+			</button>
+		</div>
+	</ng-template>
+
+	<ng-template #editTypePopup let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Edit product type</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<form [formGroup]="editProductTypeForm" id="editProductTypeForm" (ngSubmit)="submitEditProductType()">
+				<div class="form-group">
+					<label>Product type name</label>
+					<input type="text" class="form-control" placeholder="Enter product type name" formControlName="ProductTypeName">
+				</div>
+
+				<div class="form-group">
+					<label>Product type code</label>
+					<input type="text" class="form-control" placeholder="Enter product type code" formControlName="ProductTypeCode">
+				</div>
+
+				<div class="form-group">
+					<label>Product service</label>
+					<select 
+						class="form-control" 
+						formControlName="ProductService" 
+					>
+						<option value="" disabled selected hidden>Choose product service</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>Status</label>
+					<select 
+						class="form-control" 
+						formControlName="Status" 
+					>
+						<option value="" disabled selected hidden>Choose status</option>
+						<option>Option 2</option>
+						<option>Option 3</option>
+					</select>
+				</div>
+
+				<div class="form-caption">Translation</div>
+
+				<div class="form-group">
+					<label>English</label>
+					<input type="text" class="form-control" placeholder="Enter translation" formControlName="EnglishTranslation">
+				</div>
+
+				<div class="form-group">
+					<label>French</label>
+					<input type="text" class="form-control" placeholder="Saisir la traduction" formControlName="FrenchTranslation">
+				</div>
+
+				<div class="form-group">
+					<label>Arabic</label>
+					<input type="text" class="form-control" dir="rtl" placeholder="أدخل الترجمة" formControlName="ArabicTranslation">
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="resetEditProductType()" tabindex="-1">Clear fields</button>
+			<button type="button" class="btn btn-primary btn-rounded" (click)="submitEditProductType()" tabindex="-1">Apply filters</button>
+		</div>
+	</ng-template>
+</div>  

@@ -1,0 +1,17 @@
+.row {
+	&.with-btn {
+		display: flex;
+
+		> * {
+			width: auto;
+
+			&:not(.btn-wrap) {
+				flex: auto;
+			}
+		}
+		
+		.btn {
+			width: 120px;
+		}
+	}
+}

@@ -1,0 +1,131 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'quotation.convert-quotation' | translate}}</h1>
+    <ul>
+        <li>{{'quotation.quotation-management'  | translate}}</li>
+        <li><strong class="text-primary">{{'quotation.quotation'  | translate}}</strong></li>
+    </ul>
+</div>
+	
+		<div class="card">
+					<div class="card-body">
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+
+		 <div class="col-md-4 form-group required">
+        <label>{{ "quotation.customerName" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'quotation.customerName' | translate }}"
+          class="form-control"
+          formControlName="customerName"
+        />
+        <div class="invalid-feedback">
+        </div>
+      </div>
+
+				<div class="col-md-4 form-group mb-3 required">
+  <label>{{ "quotation.quotationNumber" | translate }}</label>
+  <p-autoComplete
+    formControlName="invoiceNumber"
+    [suggestions]="filteredInvoices"
+    (completeMethod)="filterInvoices($event)"
+    field="name"
+    [forceSelection]="true"
+    [inputStyle]="{
+      backgroundColor: '#f8f9fa',
+      border: '1px solid #CED4DA',
+      borderRadius: '17px',
+      height: '32px',
+      padding: '0.375rem 0.75rem',
+      width: '100%'    
+    }"
+  ></p-autoComplete>
+</div>
+               
+
+                         
+						<div class="col-md-4 form-group mb-3">
+        <label for="picker1">{{
+          "quotation.quotationDateFrom" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="invoiceDateFrom"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+	   <div class="col-md-4 form-group mb-3 ">
+        <label for="picker1">{{
+          "quotation.quotationDateTo" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDateTo"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="invoiceDateTo"
+            formControlName="invoiceDateTo"
+            ngbDatepicker
+            #invoiceDateTo="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="invoiceDateTo.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event)"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+
+

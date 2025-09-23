@@ -1,0 +1,511 @@
+<div class="bulk-upload">
+    <div class="breadcrumb">
+        <h1>Bulk upload shipments</h1>
+        <ul>
+            <li><strong>Hub Ops</strong></li>
+            <li><strong><a href="#/pages/shipments">Shipments management</a></strong></li>
+            <li>Bulk upload shipments</li>
+        </ul>
+    </div>
+
+    <div class="content-block mw-100 steps">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+                <div class="tabs-to-dropdown" id="bulk-tabs" ngbDropdown>
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs p-0 nav-fill bulk-tabs steps-column">
+                        <li ngbNavItem="Upload CSV file" class="d-flex order-0 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled d-flex steps-nav-link align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Upload CSV file'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="1" 
+                                    [class.active]="nav.activeId === 'Upload CSV file' && !step1IsDone"
+                                    [class.delete]="step1IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step1IsDone"></div>
+                                <div [class.passed-link]="step1IsDone">Upload CSV file</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">
+                                    <div class="title">
+                                        <h1>Get ready to import your data</h1>
+                                    </div>
+                            
+                                    <div class="text">
+                                        <p>Download and complete the "Shipments" template to run bulk upload</p>
+                                        <a href="assets/upload_shipment_excel_template.csv" download>
+                                            <button class="btn btn-secondary btn-rounded">Download template</button>
+                                        </a>
+                                    </div>
+                                                    
+                                    <form #curForm>    
+                                        <ng-container *ngFor="let component of componentArray">
+        
+                                            <div class="col-12 col-lg-12 form-group attachment-item attachment-ref-{{component.id}}">
+                                                <label for="file-drop-{{component.id}}">Upload document</label>
+                                                <div class="file-drop">
+                                                    <input type="file" id="file-drop-{{component.id}}" class="my-class" (change)="addNewComponent($event, errorUploadPopup)" hidden tabindex="-1"/>
+                                    
+                                                    <label for="file-drop-{{component.id}}" class="file-drop-label">
+                                                        <i class="i-Upload"></i>
+                                                        <span>Click to browse or drag and drop your file. Maximum size: 2MB</span>
+                                                    </label>
+                                                </div>
+                                    
+                                                <div class="uploaded-file col-12 col-lg-6">
+                                                    <div class="file-icon">
+                                                        <img src="assets/images/file-extensions/xlsx.svg" width="52" height="64" alt="">
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-name"></div>
+                                                        <div class="file-size"><span></span>KB</div>
+                                                    </div>
+                                    
+                                                    <button type="button" class="btn btn-rounded btn-secondary btn-icon-danger" (click)="removeFile($event)">
+                                                        <i class="i-Close-Window me-0"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </ng-container>
+                                                
+                                        <div class="action-wrap">
+                                            <button 
+                                                class="btn btn-primary btn-rounded" 
+                                                (click)="uploadFile(errorLengthPopup)"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="Check data" class="d-flex order-1 order-mobile">
+                            <a 
+                                ngbNavLink 
+                                class="disabled d-flex steps-nav-link align-items-center gap-3" 
+                                [ngClass]="{'inactive-link': nav.activeId !== 'Check data'}"
+                            >
+                                <div 
+                                    class="step-number" 
+                                    data-value="2" 
+                                    [class.active]="nav.activeId === 'Check data' && !step2IsDone"
+                                    [class.delete]="step2IsDone"
+                                ></div>
+                                <div class="circle" [class.active]="step2IsDone"></div>
+                                <div [class.passed-link]="step2IsDone">Check data</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="p-4 bg-white">
+                                    <div class="title">
+                                        <h1>Validation results</h1>
+                                    </div>
+                                    <div class="text m-0">
+                                        <p>The uploaded file contains 75 valid rows. Please check the data from the file and continue the Bulk upload process.</p>
+                                    </div>
+                                </div>
+                                <div class="table-wrap bg-white">
+                                    <table class="custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Index</th>
+                                                <th>Customer code</th>
+                                                <th>Air waybill number</th>
+                                                <th>Shipping date</th>
+                                                <th>Due date</th>
+                                                <th>Description of goods</th>
+                                                <th>Foreign HAWB</th>
+                                                <th>Number of pieces</th>
+                                                <th>COD</th>
+                                                <th>Currency code</th>
+                                                <th>Total code</th>
+                                                <th>Customs declared value</th>
+                                                <th>Customs declared value currency</th>
+                                                <th>Product type</th>
+                                                <th>Duty handling</th>
+                                                <th>Supplier code</th>
+                                                <th>Consignee contact person name</th>
+                                                <th>Consignee contact company name</th>
+                                                <th>Consignee contact phone number 1</th>
+                                                <th>Consignee contact phone number 2</th>
+                                                <th>Consignee contact cell phone</th>
+                                                <th>Consignee contact email address</th>
+                                                <th>Consignee contact type</th>
+                                                <th>Consignee contact civil ID</th>
+                                            </tr>
+                                        </thead>
+                        
+                                        <tbody>
+                                            <tr style="background-color: #FEECEB;">
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2 unavailable-event" ngbDropdown>
+                                                        <span>65</span>
+                                                        <i ngbDropdownToggle class="i-Information event-link ml-2"></i>
+                                                        <div ngbDropdownMenu class="p-1 unavailable-event-dropdown pe-none">
+                                                            <a class="dropdown-item">
+                                                                Missing required field(s): Air waybill number
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+
+                                            <tr style="background-color: #FEECEB;">
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2 unavailable-event" ngbDropdown>
+                                                        <span>67</span>
+                                                        <i ngbDropdownToggle class="i-Information event-link ml-2"></i>
+                                                        <div ngbDropdownMenu class="p-1 unavailable-event-dropdown pe-none">
+                                                            <a class="dropdown-item">
+                                                                Missing required field(s): Air waybill number
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+
+                                            <tr style="background-color: #FEECEB;">
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2 unavailable-event" ngbDropdown>
+                                                        <span>71</span>
+                                                        <i ngbDropdownToggle class="i-Information event-link ml-2"></i>
+                                                        <div ngbDropdownMenu class="p-1 unavailable-event-dropdown pe-none">
+                                                            <a class="dropdown-item">
+                                                                Missing required field(s): Air waybill number
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>1</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                        
+                                            <tr>
+                                                <td>2</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>606495</td>
+                                                <td>821747</td>
+                                                <td>GN2h6K917L</td>
+                                                <td>0/10/2022</td>
+                                                <td>10/10/2022</td>
+                                                <td>IPhone Pro</td>
+                                                <td>-</td>
+                                                <td>10</td>
+                                                <td>0</td>
+                                                <td>JOD</td>
+                                                <td>150</td>
+                                                <td>150</td>
+                                                <td>JOD</td>
+                                                <td>PLX</td>
+                                                <td>DDU</td>
+                                                <td>DDU</td>
+                                                <td>Ahmad</td>
+                                                <td>GnTeq</td>
+                                                <td>1234777</td>
+                                                <td>1234777</td>
+                                                <td>78945631</td>
+                                                <td>test@test.com</td>
+                                                <td>Residential</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-footer-inner p-3 w-100-mobile gap-3">
+                                    <button class="btn btn-secondary btn-rounded w-100-mobile" (click)="nav.select('Upload CSV file'); step1IsDone = false;">Previous</button>
+                        
+                                    <div class="table-pager w-100-mobile">                        
+                                        <button class="btn btn-primary btn-rounded w-100" (click)="nav.select('Create shipments'); step2IsDone = true;">Create shipments</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="Create shipments" class="d-flex order-2 order-mobile">
+                            <a ngbNavLink class="disabled d-flex steps-nav-link align-items-center gap-3" [ngClass]="{'inactive-link': nav.activeId !== 'Create shipments'}">
+                                <div class="step-number" data-value="3"  [class.active]="nav.activeId === 'Create shipments'"></div>
+                                <div>Create shipments</div>
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class="steps-inner" ng-app="">
+                                    <div class="steps-content">
+                                        <div class="title">
+                                            <h1>Create shipments</h1>
+                                        </div>
+                                
+                                        <div class="text">
+                                            <p>The system is currently creating new shipments from the uploaded file. This process may take some time to complete. Thank you for your patience.</p>
+                                        </div>
+
+                                        <app-progress-bar 
+                                            (progressUpdated)="onProgressUpdated($event)"
+                                        >
+                                        </app-progress-bar>
+
+                                        <div class="text-note" *ngIf="progressValue === 100">
+                                            <p>Shipment from row 65 isn’t created in the system due to a server error.</p>
+                                            <p>Shipment from row 55 isn’t created in the system due to a server error.</p>
+                                        </div>
+                                    </div>
+                                            
+                                    <div class="action-wrap">
+                                        <a class="btn btn-primary btn-rounded" [class.disabled]="progressValue !== 100" href="#/pages/shipments/file-name">View shipments</a>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <div [ngbNavOutlet]="nav" class="p-0 desktop" 
+                        [class.order-0]="nav.activeId === 'Upload CSV file'"
+                        [class.order-1]="nav.activeId === 'Check data'"
+                        [class.order-2]="nav.activeId === 'Create shipments'"
+                        class="p-0 w-100 d-flex order-mobile"></div>
+                    </ul>
+                </div>
+                
+                <ng-template #errorLengthPopup let-modal>
+                    <div class="modal-body">
+                        <i class="text-46 i-Information"></i>
+                        <div class="note">
+                            <div>Upload a .csv file to start the bulk upload.</div>
+                        </div>
+                        <div class="note size-note">
+                            <div>The document can't be added because it is over <strong>2 MB</strong></div>
+                        </div>
+                        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+                            <div>
+                                <div>Okay</div>
+                            </div>
+                        </button>
+                    </div>
+                </ng-template>
+
+                <ng-template #errorUploadPopup let-modal>
+                    <div class="modal-body">
+                        <i class="text-46 i-Information"></i>
+                        <div class="note">
+                            <div>Incorrect file format. Please upload the file in .csv format.</div>
+                        </div>
+                        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+                            <div>
+                                <div>Okay</div>
+                            </div>
+                        </button>
+                    </div>
+                </ng-template>
+
+                <ng-template #errorServerPopup let-modal>
+                    <div class="modal-body">
+                        <i class="text-46 i-Information"></i>
+                        <div class="note">
+                            <div>There was a server error during the file upload process. Please try uploading the file again.</div>
+                        </div>
+                        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+                            <div>
+                                <div>Okay</div>
+                            </div>
+                        </button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+
+
+
+.review-input {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.submit {
+    width: 100%;
+}
+
+::ng-deep p-autoComplete,
+::ng-deep p-autoComplete .p-autocomplete {
+  width: 100% !important;
+  display: block;
+}
+

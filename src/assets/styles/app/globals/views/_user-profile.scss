@@ -1,0 +1,159 @@
+.user-profile {
+    max-width: 437px;
+    padding: 20px;
+    letter-spacing: .005em;
+    background: $white;
+
+    .user-name {
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        color: $primary-black;
+    }
+
+    .user-id {
+        margin-bottom: 24px;
+        font-size: 18px;
+        color: $primary-black;
+    }
+
+    .user-info-list {
+        margin-bottom: 32px;
+        padding: 0;
+        list-style: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 23px;
+
+            &::before {
+                display: block;
+                margin-right: 19px;
+                font: 20px 'iconsmind' !important;
+            }
+
+            &.user-post::before {
+                content: '\eb2e';
+            }
+
+            &.user-mail::before {
+                content: '\ee84';
+            }
+
+            &.user-phone::before {
+                content: '\ef48';
+            }
+        }
+    }
+
+    .change-pass-action {
+        display: flex;
+        align-items: center;
+        height: 72px;
+        max-width: 403px;
+        padding: 10px 28px 10px 23px;
+        font-weight: 600;
+        letter-spacing: .015em;
+        color: $primary-black;
+        background: $white;
+        border-radius: 12px;
+        border: 1px solid $custom-border-color;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: border-color .3s;
+
+        &:hover {
+            border-color: $primary-black;
+
+            &::after {
+                transform: translate3d(5px, 0, 0);
+            }
+        }
+
+        &::after {
+            content: '\f07d';
+            font: 13px 'iconsmind' !important;
+            pointer-events: none;
+            transition: transform .3s;
+        }
+
+        input {
+            margin-left: 25px;
+            border: none;
+            flex: 1;
+            font-size: 9px;
+            letter-spacing: .005em;
+            pointer-events: none;
+        }
+    }
+}
+
+.change-password-popup {
+    wizard-step > div {
+        margin-bottom: 10px;
+    }
+
+    .modal-body {
+        text-align: left !important;
+    }
+    
+    .actions-wrap {
+        display: flex;
+        align-items: center;
+        float: right;
+        width: calc(100% - 154px);
+    }
+
+    .step-wrap {
+        flex: 1;
+        text-align: center;
+        font-weight: 700;
+        font-size: 14px;
+        color: $purple;
+    }
+
+    .btn {
+        max-width: 154px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .user-profile {
+        padding: 13px 20px;
+    }
+
+    .change-password-popup .modal-dialog {
+        max-width: 100%;
+    }
+}
+
+[dir=rtl] {
+    .user-profile {
+        .user-info-list {    
+            li {    
+                &::before {
+                    margin-right: 0;
+                    margin-left: 19px;
+                }
+            }
+        }
+
+        .change-pass-action {
+            &::after {
+                transform: rotate(180deg);
+            }
+
+            input {
+                margin-right: 25px;
+                margin-left: 0;
+            }
+        }
+    }
+
+    .change-password-popup {            
+        .actions-wrap {
+            flex-direction: row-reverse;
+        }
+    }
+}

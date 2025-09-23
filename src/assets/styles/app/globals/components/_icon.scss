@@ -1,0 +1,24 @@
+.icon-regular {
+    font-size: 18px;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.link-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: $foreground;
+    i {
+        margin: 0 8px;
+    }
+}
+
+.dashboard-icon {
+    margin-right: 1rem;
+}
+
+[dir=rtl] {
+    .dashboard-icon {
+        margin-right: 0;
+        margin-left: 1rem;
+    } 
+}

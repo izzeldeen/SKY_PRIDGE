@@ -1,0 +1,89 @@
+<div class="customers">
+  <div class="breadcrumb">
+    <!-- <h1>{{'product-history.product-history' | translate}}</h1> -->
+    <ul>
+      <li>{{'product-history.manageProductHistory' | translate}}</li>
+      <li><strong class="text-primary">{{'product-history.product-history' | translate}}</strong></li>
+    </ul>
+  </div>
+
+
+
+
+  <div class="custom-table-wrap">
+    <div class="card">
+           <div class="modal-header">
+  <h4 class="modal-title" >
+    {{'product-history.product-history' | translate}}
+  </h4>
+  	<a   (click)="router.navigate(['/product-management/products'])"   type="button" class="close" aria-label="Close" >
+						<span aria-hidden="true">&times;</span>
+    </a>
+</div>
+
+      <div class="card-body p-3">
+
+
+                 <div *ngIf="product" class="row">
+                        <div class="col-md-8">
+          <div class="row">
+                <div  class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.name' | translate}}</strong>
+                             <span class="value" > :  {{product.nameEn}} </span>
+                        </div>
+
+                           <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.type' | translate}}</strong>
+                             <span class="value" > :  {{product.typeName | translate}} </span>
+                        </div>
+
+                          <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.barCode' | translate}}</strong>
+                             <span class="value" > :  {{product.barCode}} </span>
+                        </div>
+                  <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.unitOfMeasure' | translate}}</strong>
+                             <span class="value" > :  {{product.unitOfMeasure}} </span>
+                        </div>  
+                        <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.sellPrice' | translate}}</strong>
+                             <span class="value" > :  {{product.sellPrice}} </span>
+                        </div>     
+                            <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.purchasePrice' | translate}}</strong>
+                             <span class="value" > :  {{product.purchasePrice}} </span>
+                        </div>     
+                           
+                         <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.category' | translate}}</strong>
+                             <span class="value" > :  {{product.categroy}} </span>
+                        </div>    
+                         <div class="col-md-6 form-group mb-3">
+                            <strong>{{'product-history.brand' | translate}}</strong>
+                             <span class="value" > :  {{product.brand}} </span>
+                        </div> 
+          </div>
+                        </div>
+                       <div class="col-md-4">
+                       <div class="product-image"><img *ngIf="product.imagePath" height="100%" width="100%" src="{{imageLogoPath}}" />   </div>
+                       </div>
+                        </div>
+   <p-tabView>
+ <p-tabPanel header="{{'product-history.statistics' | translate}}">
+   <app-product-statistics [productId]="productId"></app-product-statistics>
+</p-tabPanel>
+  <p-tabPanel header="{{'product-history.product-sales' | translate}}">
+  <app-product-sales-customer [productId]="productId" ></app-product-sales-customer>
+</p-tabPanel>
+
+   <p-tabPanel header="{{'product-history.product-purchase' | translate}}">
+     <app-product-purchase-supplier [productId]="productId" ></app-product-purchase-supplier>
+
+</p-tabPanel>
+
+        </p-tabView>
+      </div>
+    </div>
+ 
+
+  </div>

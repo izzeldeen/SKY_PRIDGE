@@ -1,0 +1,27 @@
+.avatar-sm {
+    width: 36px;
+    height: 36px;
+    margin-right: 1rem;
+}
+.avatar-md {
+    width: 54px;
+    height: 54px;
+    margin-right: 1rem;
+}
+.avatar-lg {
+    width: 80px;
+    height: 80px;
+}
+
+.avatar {
+    object-fit: cover;
+    object-position: center;
+}
+
+[dir=rtl] {
+    .avatar-md,
+    .avatar-sm {
+        margin-left: 1rem;
+        margin-right: 0;
+    }
+}

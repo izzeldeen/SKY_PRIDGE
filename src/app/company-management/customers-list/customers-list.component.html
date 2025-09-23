@@ -1,0 +1,41 @@
+<div class="customers">
+	<div class="breadcrumb">
+		<h1>{{'customers.managecustomers' | translate}}</h1>
+		<ul>
+			<li>{{'companyManagement.manageCompanies' | translate}}</li>
+			<li><strong class="text-primary">{{'customers.customers' | translate}}</strong></li>
+		</ul>
+	</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Lookups -->
+				<input id="table-search" placeholder="{{'customers.Searchby' | translate}}" class="form-control"
+					type="text" maxlength="100" (keydown.enter)="onSearch($event)">
+			</div>
+			<div class="heading-actions">
+				<!-- Add Lookups -->
+				<button type="button" class="btn btn-rounded btn-primary" (click)="onAddCustomers(AddCustomersPopup)"
+					*ngIf="authService.hasPermission('Add-Customers') ">
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'customers.addcustomers' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"
+			(EventHandler)="onHandleAction($event , EditCustomersPopup )" [PageSize]="baseSearch.pageSize"
+			[TotalRecords]="totalCount" (PageChange)="onPageChange($event)">
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddCustomersPopup let-modal>
+	<app-customers-form [modal]="modal"></app-customers-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditCustomersPopup let-modal>
+	<app-customers-form [modal]="modal" [id]="id" [isEditMood]="true"></app-customers-form>
+</ng-template>

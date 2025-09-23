@@ -1,0 +1,574 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>Admin</h1>
+
+        <ul>
+			<li><strong>Users</strong></li>
+			<li><a href="#/accounts/users">Users</a></li>
+			<li>Admin</li>
+		</ul>
+		<div class="action-wrap d-none d-md-block">
+			<button 
+                type="button" 
+                class="btn btn-rounded btn-secondary"
+                (click)="handleModal(EditUserPopup)"
+            >
+                <span>Edit</span>
+            </button>
+		</div>
+    </div>
+    
+    <div class="content-block mw-100">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="c-card">
+                    <div class="user-info-block mx-md-n2">
+                        <div class="mb-3 mb-lg-0 px-md-2 d-flex align-items-start gap-2">
+                        	<div>
+                        		<div class="text-12 font-weight-600 text-primary-grey mb-1">Full name:</div>
+	                            <div class="text-20 text-md-16 font-weight-400 text-primary-black">Admin</div>
+                        	</div>
+                            <button 
+				                type="button" 
+				                class="btn btn-rounded btn-secondary d-md-none"
+				                (click)="handleModal(EditUserPopup)"
+				            >
+				                <i class="i-Pen-5 m-0"></i>
+				            </button>
+                        </div>
+                        <div class="mb-3 mb-lg-0 px-md-2"> 
+                            <div class="text-12 font-weight-600 text-primary-grey mb-1">Email:</div>
+                            <div class="text-20 text-md-16 font-weight-400 text-primary-black">admin@gnteq.com</div>
+                        </div>
+                        <div class="mb-3 mb-lg-0 px-md-2">
+                            <div class="text-12 font-weight-600 text-primary-grey mb-1">Phone number:</div>
+                            <div class="text-20 text-md-16 font-weight-400 text-primary-black">+966 53 600 2778</div>
+                        </div>
+                        <div class="mb-3 mb-lg-0 px-md-2">
+                            <div class="text-12 font-weight-600 text-primary-grey mb-1">Role:</div>
+                            <div class="text-20 text-md-16 font-weight-400 text-primary-black">Administrator</div>
+                        </div>
+                        <div class="mb-3 mb-lg-0 px-md-2">
+                            <div class="text-12 font-weight-600 text-primary-grey mb-1">User type:</div>
+                            <div class="text-20 text-md-16 font-weight-400 text-primary-black">User type</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-card">
+    	<div class="c-card-body">
+    		<div class="c-header">
+    			<div class="c-title text-20 mb-2 mb-md-0">
+    			   Permissions
+    			</div>
+    			<div class="c-actions c-actions-sub col-12 col-md-auto">
+    				<button 
+		                type="button" 
+		                class="btn btn-rounded btn-secondary"
+		                (click)="handleModal(AddUserPermissionsPopup)"
+		            >
+		            	<i class="i-Plus"></i>
+		                <span>Add user permission</span>
+		            </button>
+    			</div>
+    		</div>
+   
+    		<div class="tabs-to-dropdown">
+				<div ngbDropdown #navDropdown="ngbDropdown">
+				  	<button class="mobile-drop w-100 w-auto-md text-start" id="tabDropdown" ngbDropdownToggle>{{ active }}</button>
+					<div ngbDropdownMenu  aria-labelledby="tabDropdown" class="nav-tabs">
+					    <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Administrator permissions'}" (click)="nav.select('Administrator permissions')">Administrator permissions</a>
+					    <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'User permissions'}" (click)="nav.select('User permissions')">User permissions</a>
+					</div>
+				</div>
+		        
+		        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs p-0">
+		            <li ngbNavItem="Administrator permissions">
+		                <a ngbNavLink>Administrator permissions</a>
+		                <ng-template ngbNavContent>
+		                    <div class="table-wrap">
+								<table class="custom-table">
+									<thead>
+										<tr>
+											<th class="col-md-4">
+												Permission name
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+											<th class="col-md-4">
+												Page
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+											<th class="col-md-4">
+												Service
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr class="redirect-link">
+											<td>
+												Create city
+					                        </td>
+											<td>
+												City
+											</td>
+											<td>
+												Configuration
+											</td>
+										</tr>
+
+										<tr class="redirect-link inactive">
+											<td>
+												Edit city
+					                        </td>
+											<td>
+												City
+											</td>
+											<td>
+												Configuration
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="table-footer-inner">
+								<div class="pages">
+									<div class="page-count">20 total</div>
+
+									<div class="entries">
+										Show per page
+										<div class="entries-dropdown" ngbDropdown>
+											<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+									
+											<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>10</a>
+													<ng-template ngbNavContent>10</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>50</a>
+													<ng-template ngbNavContent>50</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>70</a>
+													<ng-template ngbNavContent>70</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>100</a>
+													<ng-template ngbNavContent>100</ng-template>
+												</ng-container>
+											</div> 
+										</div>
+									</div>
+								</div>
+
+								<div class="table-pager">
+									<div class="action disabled pager-position" aria-label="go to first page">
+										<i class="datatable-icon-prev"></i>
+									</div>
+
+									<div class="action disabled pager-step"  aria-label="go to previous page">
+										<i class="datatable-icon-left"></i>
+									</div>
+
+									<div class="action pager-page active">1</div>
+									<div class="action pager-page">2</div>
+									<div class="action pager-page">3</div>
+
+									<div class="action pager-step" aria-label="go to next page">
+										<i class="datatable-icon-right"></i>
+									</div>
+
+									<div class="action pager-position"  aria-label="go to last page">
+										<i class="datatable-icon-skip"></i>
+									</div>
+								</div>
+							</div>
+		                </ng-template>
+		            </li>
+		            <li ngbNavItem="User permissions">
+		                <a ngbNavLink>User permissions</a>
+		                <ng-template ngbNavContent>
+		                    <div class="table-wrap">
+								<table class="custom-table">
+									<thead>
+										<tr>
+											<th class="col-md-4">
+												Permission name
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+											<th class="col-md-4">
+												Page
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+											<th class="col-md-3">
+												Service
+												<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+											</th>
+											<th class="actions col-md-1">
+												&nbsp;
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr class="redirect-link">
+											<td>
+												Create city
+					                        </td>
+											<td>
+												City
+											</td>
+											<td>
+												Configuration
+											</td>
+											<td class="actions">
+												<div class="row-menu hide-pseudo d-inline-flex">
+													<button class="dropdown-item px-1 w-100 text-center">
+														<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.87 4.44H2.12M16.32 6.76l-.42 6.39c-.17 2.46-.25 3.68-1.05 4.43-.8.75-2.03.75-4.5.75h-.71c-2.47 0-3.7 0-4.5-.75-.8-.75-.88-1.97-1.05-4.43l-.42-6.4M7.68 9.07l.46 4.63M12.31 9.07l-.46 4.63" stroke="#5F3994" stroke-linecap="round"/><path d="M4.9 4.44H5a1.85 1.85 0 0 0 1.73-1.31l.09-.27c.08-.23.12-.35.17-.45.2-.39.58-.66 1-.73l.48-.01h3.05l.47.01c.43.07.81.34 1.01.73.05.1.1.22.17.45l.09.27.03.1c.26.71.93 1.2 1.7 1.21h.1" stroke="#5F3994"/></svg>
+													</button>
+												</div>
+											</td>
+										</tr>
+
+										<tr class="redirect-link inactive">
+											<td>
+												Edit city
+					                        </td>
+											<td>
+												City
+											</td>
+											<td>
+												Configuration
+											</td>
+											<td class="actions">
+												<div class="row-menu hide-pseudo d-inline-flex">
+													<button class="dropdown-item px-1 w-100 text-center">
+														<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.87 4.44H2.12M16.32 6.76l-.42 6.39c-.17 2.46-.25 3.68-1.05 4.43-.8.75-2.03.75-4.5.75h-.71c-2.47 0-3.7 0-4.5-.75-.8-.75-.88-1.97-1.05-4.43l-.42-6.4M7.68 9.07l.46 4.63M12.31 9.07l-.46 4.63" stroke="#5F3994" stroke-linecap="round"/><path d="M4.9 4.44H5a1.85 1.85 0 0 0 1.73-1.31l.09-.27c.08-.23.12-.35.17-.45.2-.39.58-.66 1-.73l.48-.01h3.05l.47.01c.43.07.81.34 1.01.73.05.1.1.22.17.45l.09.27.03.1c.26.71.93 1.2 1.7 1.21h.1" stroke="#5F3994"/></svg>
+													</button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="table-footer-inner">
+								<div class="pages">
+									<div class="page-count">20 total</div>
+
+									<div class="entries">
+										Show per page
+										<div class="entries-dropdown" ngbDropdown>
+											<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+									
+											<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>10</a>
+													<ng-template ngbNavContent>10</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>50</a>
+													<ng-template ngbNavContent>50</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>70</a>
+													<ng-template ngbNavContent>70</ng-template>
+												</ng-container>
+												<ng-container ngbNavItem>
+													<a class="dropdown-item" ngbNavLink>100</a>
+													<ng-template ngbNavContent>100</ng-template>
+												</ng-container>
+											</div> 
+										</div>
+									</div>
+								</div>
+
+								<div class="table-pager">
+									<div class="action disabled pager-position" aria-label="go to first page">
+										<i class="datatable-icon-prev"></i>
+									</div>
+
+									<div class="action disabled pager-step"  aria-label="go to previous page">
+										<i class="datatable-icon-left"></i>
+									</div>
+
+									<div class="action pager-page active">1</div>
+									<div class="action pager-page">2</div>
+									<div class="action pager-page">3</div>
+
+									<div class="action pager-step" aria-label="go to next page">
+										<i class="datatable-icon-right"></i>
+									</div>
+
+									<div class="action pager-position"  aria-label="go to last page">
+										<i class="datatable-icon-skip"></i>
+									</div>
+								</div>
+							</div>
+		                </ng-template>
+		            </li>
+		        </ul>
+		        <div [ngbNavOutlet]="nav" class="mt-3 p-0"></div>
+		    </div>
+    	</div>
+    </div>
+</div>
+
+<ng-template #EditUserPopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit user</h4>
+		<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="userEditForm" id="userEditForm" (ngSubmit)="submitUserEditForm()">
+        	<div class="row">
+        		<div class="col-12 col-sm-6 form-group required">
+	                <label>User name</label>
+					<input 
+                        type="text" 
+                        placeholder="Enter name" 
+                        class="form-control" 
+                        formControlName="UserName"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('UserName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+	            <div class="col-12 col-sm-6 form-group required">
+	                <label>Full name</label>
+					<input 
+                        type="text" 
+                        placeholder="Full name" 
+                        class="form-control" 
+                        formControlName="FullName"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('FullName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+        	</div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Email</label>
+                    <input 
+                        type="text" 
+                        placeholder="Enter email" 
+                        class="form-control" 
+                        formControlName="Email"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Email')?.errors"
+                    >
+                    <div *ngIf="isSubmittedUserEditForm && userEditForm.get('Email')?.errors" class="invalid-feedback">
+				        <div *ngIf="userEditForm.get('Email').errors['required']">
+				        	This field is required
+				        </div>
+				        <div *ngIf="userEditForm.get('Email').errors['invalidEmail']">
+				        	Please enter a valid email address (Ex: example@domain.com).
+				        </div>
+				    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Phone</label>
+                    <ngx-mat-intl-tel-input
+                        [preferredCountries]="['jo', 'us', 'gb']"
+                        [enablePlaceholder]="true"
+                        [enableSearch]="true"
+                        name="Phone"
+                        #phoneInput
+                        describedBy="phoneInput"
+                        class="form-control input-group input-phone-selector"
+                        formControlName="Phone"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Phone')?.errors"
+                    ></ngx-mat-intl-tel-input>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label>Password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="Password"
+                       [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Password')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+				   <div *ngIf="isSubmittedUserEditForm && userEditForm.get('Password')?.errors" class="invalid-feedback">
+					   <div *ngIf="userEditForm.get('Password').errors['required']">
+						   This field is required
+					   </div>
+					   <div *ngIf="!userEditForm.get('Password').errors['required'] && userEditForm.get('Password').errors['invalidPassword']">
+						   Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+					   </div>
+				   </div>
+                <div class="field-note" *ngIf="!isSubmittedUserEditForm || userEditForm.get('Password').errors['required']">
+                	Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label>Confirm password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="PasswordConfirm"
+                       [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('PasswordConfirm')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+                <div *ngIf="isSubmittedUserEditForm && userEditForm.get('PasswordConfirm')?.errors" class="invalid-feedback">
+			        <div *ngIf="userEditForm.get('PasswordConfirm').errors['required']">
+			        	This field is required
+			        </div>
+			        <div *ngIf="userEditForm.get('PasswordConfirm').errors['matching']">
+			        	Confirm Password does not match
+			        </div>
+			    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Role</label>
+                    <select 
+	                    class="form-control" 
+	                    formControlName="Role"
+	                    [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Role')?.errors"
+	                >
+	                    <option value="" disabled selected hidden>Choose role</option>
+	                    <option value="1">Option 2</option>
+	                    <option value="2">Option 3</option>
+	                </select>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>User type</label>
+                    <select 
+                        class="form-control"
+                        formControlName="UserType"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('UserType')?.errors"
+                    >
+                        <option value="" disabled selected hidden>Choose type</option>
+                        <option value="1">Option 2</option>
+                        <option value="2">Option 3</option>
+                    </select>
+					<div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field mb-5">
+                <label class="checkbox checkbox-primary text-13">
+                    <input 
+                        type="checkbox"
+                        formControlName="ActiveUser"
+                        checked
+                    >
+                    <span>Active user</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+            type="button" 
+            class="btn btn-secondary btn-rounded" 
+            (click)="resetUserEditForm(phoneInput)"
+            tabindex="-1"
+        >
+            Clear fields
+        </button>
+
+        <button 
+            type="button"
+            (click)="submitUserEditForm()"
+            class="btn btn-primary btn-rounded"
+			tabindex="-1"
+        >
+            Save changes
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #AddUserPermissionsPopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add user permission</h4>
+		<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="userPermissionsAddForm" id="userPermissionsAddForm" (ngSubmit)="submitUserPermissionsAddForm()">
+        	<div class="form-group required">
+				<label>Service</label>
+					<select 
+						class="form-control" 
+						formControlName="Service"
+						[class.is-invalid]="isSubmittedUserPermissionsAddForm && userPermissionsAddForm.get('Service')?.errors"
+					>
+					<option value="" disabled selected hidden>Choose service</option>
+					<option value="1">Option 2</option>
+					<option value="2">Option 3</option>
+				</select>
+				<div class="invalid-feedback">
+					This field is required
+				</div>
+			</div>
+
+			<div class="form-group required">
+				<label>Permission</label>
+					<select 
+						class="form-control" 
+						formControlName="Permission"
+						[class.is-invalid]="isSubmittedUserPermissionsAddForm && userPermissionsAddForm.get('Permission')?.errors" 
+					>
+					<option value="" disabled selected hidden>Choose permission</option>
+					<option value="1">Option 2</option>
+					<option value="2">Option 3</option>
+				</select>
+				<div class="invalid-feedback">
+					This field is required
+				</div>
+			</div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+            type="button" 
+            class="btn btn-secondary btn-rounded" 
+            (click)="resetUserPermissionsAddForm()"
+            tabindex="-1"
+        >
+            Clear fields
+        </button>
+
+        <button 
+            type="button"
+            (click)="submitUserPermissionsAddForm()"
+            class="btn btn-primary btn-rounded"
+            tabindex="-1"
+        >
+            Save
+        </button>
+    </div>
+</ng-template>

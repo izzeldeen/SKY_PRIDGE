@@ -1,0 +1,35 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>{{'permissionsManagment.managepermissions' | translate}}</h1>
+        <ul>
+            <li>{{'navigation.users_management' | translate}}</li>
+            <li><strong class="text-primary">{{'permissionsManagment.managepermissions' | translate}}</strong></li>
+        </ul>
+    </div>
+  <div class="custom-table-wrap">
+    <div class="table-heading flex-row justify-content-between">
+      <div class="table-search form-group m-0">
+        <!-- Searching Permissions -->
+        <input 
+          id="table-search" 
+          placeholder="{{'permissionsManagment.SearchbyPermissions' | translate}}"  
+          class="form-control" 
+          type="text"
+          maxlength="100"
+          [formControl]="searchForm.get('searchValue')"
+          (keydown.enter)="onSearch()"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Permissions -->
+<app-table 
+  [Headers]="columns" 
+  [dataSource]="dataSource" 
+  [actionList]="actionList" 
+  [TotalRecords]="totalCount" 
+  [PageSize]="baseSearch.pageSize" 
+  (PageChange)="onPageChange($event)"
+>
+</app-table>

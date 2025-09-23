@@ -1,0 +1,320 @@
+html [type="button"], .btn[type="button"] {
+    -webkit-appearance: none !important;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+
+    &:focus {
+        box-shadow: none !important;
+    }
+
+    &.rounded, &.btn-rounded {
+        border-radius: 40px;
+    }
+    &.btn-wide {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    i {
+        margin-right: 6px;
+    }
+
+    .i-Plus {
+        position: relative;
+        width: 13px;
+        height: 13px;
+        min-width: 13px;
+
+        &::before,
+        &::after {
+            position: absolute;
+            content: '';
+            border-radius: 1px;
+            background: currentColor;
+        }
+
+        &::before {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 1px;
+        }
+
+        &::after {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 13px;
+        }
+
+        // & + span {
+        //     margin-left: 4px;
+        // }
+    }
+
+    &.btn-icon-danger {
+        &:not(:hover) {
+            i {
+                color: $danger;
+            }
+        }
+    }
+}
+
+.btn-secondary,
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.286;
+    padding: .375rem 12px;
+    
+    &.btn-lg {
+        min-width: 121px;
+        font-size: 1rem;
+        line-height: 1.625;
+        padding: .375rem 12px;
+    }
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+    background: $purple;
+}
+
+.btn-secondary,
+.btn-secondary:active,
+.btn-secondary:focus {
+    color: $purple;
+    border-color: $grey;
+    background-color: $white;
+    transition: color .2s, background-color .2s;
+
+    &:hover {
+        background-color: $purple;
+        color: $white;
+    }
+}
+
+.arrow-icon {
+    &::after {
+        display: inline-block;
+        margin: 0 -.3rem 0 .3rem;
+        content: '\f07d';
+        font: 700 .71rem 'iconsmind' !important;
+        transition: transform .3s;
+    }
+
+    &:hover:after {
+        transform: translate3d(.3rem, 0, 0);
+    }
+}
+
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    [class^="i-"], .icon {
+        vertical-align: middle;
+        margin: 0 2px;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+.btn-icon-text {
+    [class^="i-"], .icon {
+        vertical-align: middle;
+        margin: 0 2px;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+
+.btn-facebook {
+    background: $facebook;
+    border-color: $facebook;
+    &:hover {
+        background: darken($facebook, 5%);
+        border-color: darken($facebook, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($facebook, 0.5)
+    }
+}
+.btn-facebook {
+    background: $google;
+    border-color: $google;
+    &:hover {
+        background: darken($google, 5%);
+        border-color: darken($google, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($google, 0.5)
+    }
+}
+.btn-twitter {
+    background: $twitter;
+    border-color: $twitter;
+    &:hover {
+        background: darken($twitter, 5%);
+        border-color: darken($twitter, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($twitter, 0.5)
+    }
+}
+
+.btn-outline-facebook {
+    color: $facebook;
+    border-color: $facebook;
+    background: rgba($gray-200, .6);
+    &:hover {
+        background: darken($facebook, 5%);
+        border-color: darken($facebook, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($facebook, 0.5)
+    }
+}
+.btn-outline-google {
+    color: $google;
+    border-color: $google;
+    background: rgba($gray-200, .6);
+    &:hover {
+        background: darken($google, 5%);
+        border-color: darken($google, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($google, 0.5)
+    }
+}
+.btn-outline-twitter {
+    color: $twitter;
+    border-color: $twitter;
+    background: rgba($gray-200, .6);
+    &:hover {
+        background: darken($twitter, 5%);
+        border-color: darken($twitter, 5%);
+    }
+    &:focus {
+        box-shadow: 0 0 0 0.2rem rgba($twitter, 0.5)
+    }
+}
+
+.btn-outline-email {
+    background: rgba($gray-200, .6);
+}
+
+.btn-spinner {
+    width: 1em;
+    height: 1em;
+    background: transparent;
+    border-radius: 50%;
+    margin: 0 16px 0 0;
+    border: 2px solid transparent;
+}
+.btn-checkbox {
+    .checkbox {
+        display: inline;
+    }
+}
+
+.btn.btn-outline-light.btn-svg {
+    border-color: $gray-700;
+    &.active, &:hover {
+        background: $primary;
+        border-color: $primary;
+        svg {
+            fill: #ffffff;
+        }
+    }
+    &:focus {
+        box-shadow: none !important;
+    }
+
+    &.list-pag-button {
+        margin-right: 0.5rem;
+    }
+}
+
+@each $name, $value in $theme-colors {
+    .btn-#{$name} {
+        .btn-spinner {
+            animation: btn-glow-#{$name} 1s ease infinite;
+        }
+    }
+    @keyframes host-my-cmp_btn-glow-#{$name} {
+        0% { box-shadow: 0 0 0 .4em darken($value, 10%), 0 0 0 .1em darken($value, 10%); transform:rotate(360deg); }
+        50% { border-top-color: #ffffff;}
+        100% { box-shadow: 0 0 0 .4em darken($value, 10%), 0 0 0 1.2em transparent; }
+    }
+}
+
+.link {
+    transition: color .2s;
+    cursor: pointer;
+
+    &:hover {
+        color: $purple;
+
+        i {
+            opacity: 1;
+        }
+    }
+
+    i {
+        margin-left: 12px;
+        opacity: 0;
+        transition: opacity .2s;
+    }
+}
+
+.action-button-container {
+    @media (max-width: 768px) {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .action-button {
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}
+
+.action-button-mobile {
+    @media (max-width: 380px) {
+        margin: 10px 0;
+        width: 100%;
+    }
+    .action-button {
+        @media (max-width: 380px) {
+            width: 100%;
+        }
+    }
+}
+
+[dir=rtl] {
+    .btn {
+        i {
+            margin-right: 0;
+        }
+
+        .i-Plus + span, .i-Filter-2 + span, .i-Upload + span, .i-Add-File + span {
+            margin-right: 6px;
+            margin-left: 0;
+        }
+    }
+
+    .btn.btn-outline-light.btn-svg {    
+        &.list-pag-button {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
+    }
+}

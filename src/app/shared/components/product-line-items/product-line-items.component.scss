@@ -1,0 +1,63 @@
+::ng-deep .p-autocomplete.p-component {
+  width: 100%;
+}
+
+::ng-deep .p-autocomplete.form-control {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: 1px solid #CED4DA;
+  background-color: #f8f9fa;
+  height: 32px;
+  overflow: visible;
+  position: relative; /* dropdown panel positioning */
+}
+
+/* Inner input */
+::ng-deep .p-autocomplete-input {
+  height: 32px;
+  outline: initial !important;
+  background: #f8f9fa !important;
+  border: none !important;
+  color: #6E6579;
+  padding: 0.375rem 0.75rem;
+  flex: 1;
+  font-size: 14px;
+}
+
+/* Dropdown icon button */
+::ng-deep .p-autocomplete-dropdown {
+  border: none;
+  border-left: 1px solid #CED4DA;
+  background-color: #2f47c2;
+  color: white;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 0 !important;
+}
+
+/* Dropdown panel (suggestions list) */
+::ng-deep .p-autocomplete-panel {
+  z-index: 9999 !important;
+  background: #fff;
+  border: 1px solid #CED4DA;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: 100% !important; /* ✅ Full width fix */
+  border-radius: 0 !important;
+}
+
+
+::ng-deep p-autoComplete,
+::ng-deep p-autoComplete .p-autocomplete {
+  width: 100% !important;
+  display: flex !important;
+}
+

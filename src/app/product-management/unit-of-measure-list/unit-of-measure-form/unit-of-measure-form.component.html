@@ -1,0 +1,145 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isEditMood">
+    {{ "unitOfMeasure.addUnitOfMeasure" | translate }}
+  </h4>
+  <h4 class="modal-title" *ngIf="isEditMood">
+    {{ "unitOfMeasure.editUnitOfMeasure" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" id="form">
+    <div class="row">
+
+           <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "unitOfMeasure.templateName" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'unitOfMeasure.templateName' | translate }}"
+          class="form-control"
+          formControlName="templateName"
+          [class.is-invalid]=" isFormSubmitted && form && form.get('templateName')?.errors"
+        />
+        <div  class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+       
+      </div>
+
+
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "unitOfMeasure.name" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'unitOfMeasure.name' | translate }}"
+          class="form-control"
+          formControlName="name"
+          [class.is-invalid]=" isFormSubmitted && form && form.get('name')?.errors"
+        />
+        <div  class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+       
+      </div>
+
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "unitOfMeasure.code" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'unitOfMeasure.code' | translate }}"
+          class="form-control"
+          formControlName="code"
+          [class.is-invalid]="isFormSubmitted && form && form.get('code')?.errors" />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+      <div class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "unitOfMeasure.isActive" | translate }}
+          </span>
+          <input type="checkbox" checked formControlName="isActive" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+  </form>
+   <div class="col-md-12">
+        <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> {{ "unitOfMeasure.parentUnitName" | translate }}</th>
+        <th>{{ "unitOfMeasure.unitValue" | translate }}</th>
+        <th>{{ "unitOfMeasure.parentCode" | translate }}</th>
+        <th>{{ "unitOfMeasure.addDelete" | translate }}</th>
+      </tr>
+    </thead>
+    <tbody  *ngIf="unitOfMeasures?.length > 0">
+      <tr *ngFor="let item of unitOfMeasures; let i = index" >
+        <td>
+          <input type="text" class="form-control"   [(ngModel)]="item.name" name="name-{{i}}"
+          [class.is-invalid]="isFormSubmitted  && !item.name"
+          />
+        </td>
+        <td *ngIf="type == recivingType">
+          <input type="number" class="form-control"   [(ngModel)]="item.value" name="value-{{i}}" [min]="1" 
+           [attr.min]="0"
+           [class.is-invalid]="isFormSubmitted  && item.value <= 0"
+          />
+        </td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="item.code"  name="code-{{i}}" 
+          
+          />
+        </td>
+        <td>
+          <button *ngIf="item.index == unitOfMeasures.length - 1" type="button"  class="btn btn-success btn-sm me-1" (click)="addRow()">
+           <span class="text-white">+ </span> 
+          </button>
+          <button *ngIf="!(unitOfMeasures?.length === 1)"
+            type="button"
+            class="btn btn-danger btn-sm mx-1p"
+            (click)="removeRow(item.index)"
+           
+          >
+            ×
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+
+</div>
+<div class="modal-footer position-absolute bottom-0 w-100">
+  <!-- Cancel Event -->
+  <button
+    type="button"
+    class="btn btn-secondary btn-rounded"
+    (click)="modal.dismiss('Cross click')"
+    tabindex="-1"
+  >
+    {{ "common.cancel" | translate }}
+  </button>
+  <!-- Save Event -->
+  <button
+    type="button"
+    (click)="submitForm()"
+    class="btn btn-primary btn-rounded"
+    tabindex="-1"
+    *ngIf="authSerivce.hasPermission('Add-Branch')"
+  >
+    {{ "common.save" | translate }}
+  </button>
+</div>

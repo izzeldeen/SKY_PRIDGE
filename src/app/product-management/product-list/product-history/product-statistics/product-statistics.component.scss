@@ -1,0 +1,91 @@
+ body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    .product-header, .tabs {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .product-header {
+      display: flex;
+      gap: 30px;
+    }
+    .product-info {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .product-info label {
+      font-weight: bold;
+    }
+    .product-image {
+      width: 150px;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #eee;
+      background-image: url('https://via.placeholder.com/150');
+      background-size: cover;
+      background-position: center;
+    }
+    .tabs nav {
+      margin-bottom: 20px;
+    }
+    .tabs nav button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      cursor: pointer;
+      border: none;
+      background-color: #e9ecef;
+      border-radius: 8px;
+    }
+    .tabs nav button.active {
+      background-color: #007bff;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f1f1f1;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .stats div {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .filters {
+      margin-bottom: 15px;
+    }
+    .filters label {
+      margin-left: 10px;
+    }
+    .filters input {
+      margin-left: 20px;
+    }

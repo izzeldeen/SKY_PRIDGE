@@ -1,0 +1,58 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'unitOfMeasure.unitOfMeasure' | translate}}</h1>
+    <ul>
+        <li>{{'unitOfMeasure.manageUnitOfMeasure'  | translate}}</li>
+        <li><strong class="text-primary">{{'unitOfMeasure.unitOfMeasure'  | translate}}</strong></li>
+    </ul>
+</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Lookups -->
+				<input 
+					id="table-search" 
+					placeholder="{{'branch.search' | translate}}"
+					class="form-control" 
+					type="text"
+					maxlength="100"
+					(keydown.enter)="onSearch($event)"
+				>
+			</div>
+			<div class="heading-actions">
+				<!-- Add Lookups -->
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddUnitOfMeasure(AddUnitOfMeasurePopup)" 
+					*ngIf="authService.hasPermission('UnitOfMeasure-Form') "
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'unitOfMeasure.addNewUnitOfMeasure' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , EditUnitOfMeasurePopup )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddUnitOfMeasurePopup let-modal>
+	<app-unit-of-measure-form [modal]="modal" ></app-unit-of-measure-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditUnitOfMeasurePopup let-modal>
+ <app-unit-of-measure-form [modal]="modal"  [id]="id" [isEditMood]="true" ></app-unit-of-measure-form>
+
+</ng-template>

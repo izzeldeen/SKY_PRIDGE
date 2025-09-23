@@ -1,0 +1,55 @@
+.file-drop {
+    label {
+        display: block;
+        padding: 23px 16px 16px;
+
+        text-align: center;
+
+        border: 2px dashed #ECEAEF;
+        border-radius: 8px;
+
+        cursor: pointer;
+    }
+
+    i {
+        margin-bottom: 12px;
+        display: block;
+        font-size: 47px;
+        color: $primary;
+    }
+
+    span {
+        font-size: 12px;
+    }
+}
+
+.file-dropped-wrapper {
+    .file-upload-item {
+        padding: 12px 13px;
+        display: flex;
+    
+        border: 1px solid $c-gray;
+
+        .file-item-icon {
+            flex: 0 0 40px;
+        }
+
+        .file-item-body {
+            margin-left: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: calc(100% - 54px);
+        }
+
+        .title {
+            padding-right: 14px;
+            
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

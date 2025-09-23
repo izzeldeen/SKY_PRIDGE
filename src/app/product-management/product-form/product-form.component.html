@@ -1,0 +1,537 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isEditMood">
+    {{ "product-management.addNewProduct" | translate }}
+  </h4>
+  <h4 class="modal-title" *ngIf="isEditMood">
+    {{ "product-management.editProduct" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button 
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+ 
+<p-steps [model]="steps" [activeIndex]="activeIndex" [readonly]="true"></p-steps>
+
+
+<div *ngIf="activeIndex === 0" >
+     <form [formGroup]="basicForm" id="form">
+      <div class="row">
+ <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "product-management.nameEn" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.nameEn' | translate }}"
+          class="form-control"
+          formControlName="nameEn"
+          [class.is-invalid]="isFormSubmitted &&  basicForm && basicForm.get('nameEn')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+       <!-- <div  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "product-management.nameAr" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.nameAr' | translate }}"
+          class="form-control"
+          formControlName="nameAr"
+          [class.is-invalid]="isFormSubmitted &&  basicForm && basicForm.get('nameAr')?.errors"
+        />
+        <div *ngIf="basicForm.get('nameAr').invalid &&  basicForm.get('nameAr').errors['required']" class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+
+          <div class="invalid-feedback"
+                                *ngIf="basicForm.get('nameAr').invalid &&  basicForm.get('nameAr').errors['arabicTextWithNumbers']">
+                                {{'common.onlyArabicIsAllowed'|translate}}
+          </div>
+      </div> -->
+
+                <div class="col-12 col-sm-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "product-management.type" | translate }}</label>
+                            <select class="form-control" formControlName="type" name="type" (change)="onProductTypeChange(basicForm.get('type').value)">
+                              <option *ngFor="let item of productTypes" value="{{item.id}}" >{{item.name | translate}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && basicForm.get('type').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                   </div>
+
+
+           <div class="col-md-6 form-group mb-3" *ngIf="!isEditMood">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "product-management.hasBarCode" | translate }}
+          </span>
+          <input type="checkbox"  formControlName="hasBarCode"
+          (change)="onHasBarCodeChange()"  />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+       <div *ngIf="basicForm.get('hasBarCode')?.value == true || isEditMood"  class="col-12 col-sm-6 form-group required" >
+        <label>{{ "product-management.code" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.code' | translate }}"
+          class="form-control"
+          formControlName="barCode"
+          [class.is-invalid]="isFormSubmitted &&  basicForm && basicForm.get('barCode')?.errors"
+        />
+        <div *ngIf="basicForm.get('barCode').invalid &&  basicForm.get('barCode').errors['required']" class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+
+
+        <div *ngIf="!isProductService" class="col-12 col-sm-6 form-group required">
+                <label>{{'product-management.purchasePrice' | translate }}</label>
+                <input 
+                    placeholder="{{'product-management.purchasePrice' | translate }}" 
+                    class="form-control" 
+                    formControlName="purchasePrice"
+                    [class.is-invalid]="isFormSubmitted && basicForm.get('purchasePrice')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+              <div class="col-12 col-sm-6 form-group required">
+                <label>{{'product-management.sellPrice' | translate }}</label>
+                <input 
+                    placeholder="{{'product-management.sellPrice' | translate }}" 
+                    class="form-control" 
+                    formControlName="sellPrice"
+                    [class.is-invalid]="isFormSubmitted && basicForm.get('sellPrice')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+             <ng-container *ngIf="!isProductService"  > 
+          <div class="col-md-6 form-group mb-3 required">
+            <label for="picker1"> {{ searchUnitOfMeasuer }}</label>
+                     <p-autoComplete
+                         formControlName="unitOfMeasureId"
+                          [suggestions]="filteredUnitOfMeasuers"
+                          (completeMethod)="filterUnitOfMeauers($event)"
+                          [forceSelection]="false" 
+                          field="name"
+                          [placeholder]="searchUnitOfMeasuer"
+                          [inputStyle]="{
+                            backgroundColor: '#f8f9fa',
+                            border: '1px solid #CED4DA',
+                            borderRadius: '17px',
+                            height: '32px',
+                            padding: '0.375rem 0.75rem'
+                          }"
+                           [class.is-invalid]="isFormSubmitted && basicForm.get('unitOfMeasureId')?.errors"
+                        />
+
+                         <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+
+          </div>
+
+             
+             <div class="col-md-6 form-group mb-3 required">
+            <label for="picker1"> {{ "product-management.category" | translate }}</label>
+                     <p-autoComplete
+                         formControlName="categoryId"
+                          [suggestions]="filteredCategories"
+                          (completeMethod)="filterCategories($event)"
+                          [forceSelection]="false" 
+                          field="name"
+                          [placeholder]="('product-management.category' | translate)"
+                          [inputStyle]="{
+                            backgroundColor: '#f8f9fa',
+                            border: '1px solid #CED4DA',
+                            borderRadius: '17px',
+                            height: '32px',
+                            padding: '0.375rem 0.75rem'
+                          }"
+                        />
+
+          </div>
+
+            
+
+                    <!-- <div class="col-md-6 form-group mb-3">
+               <label for="picker1"> {{ "product-management.brand" | translate }}</label>
+               <select class="form-control" formControlName="brandId" name="brandId"
+               >
+               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+               <option *ngFor="let item of brands" value="{{item.id}}" >{{item.title}}</option>
+               </select>
+                
+             </div> -->
+
+                       <div class="col-md-6 form-group mb-3 required">
+            <label for="picker1"> {{ "product-management.brand" | translate }} </label>
+                     <p-autoComplete
+                         formControlName="brandId"
+                          [suggestions]="filteredBrands"
+                          (completeMethod)="filterBrands($event)"
+                          [forceSelection]="false" 
+                          field="name"
+                          [placeholder]="('product-management.brand' | translate)"
+                          [inputStyle]="{
+                            backgroundColor: '#f8f9fa',
+                            border: '1px solid #CED4DA',
+                            borderRadius: '17px',
+                            height: '32px',
+                            padding: '0.375rem 0.75rem'
+                          }"
+                        />
+
+          </div>
+
+
+             </ng-container>
+            
+
+
+
+             <div class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "product-management.isActive" | translate }}
+          </span>
+          <input type="checkbox" checked formControlName="isActive" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      </div>
+       
+
+
+     </form>
+  </div>
+
+
+  <div *ngIf="activeIndex === 1"  >
+       <form [formGroup]="detailsForm" id="form">
+      <div class="row">
+
+         <div  class="col-12 col-sm-6 form-group" >
+        <label>{{ "product-management.descriptionEn" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.descriptionEn' | translate }}"
+          class="form-control"
+          formControlName="descriptionEn"
+          [class.is-invalid]="isDetailsFormSubmitted &&  detailsForm && detailsForm.get('descriptionEn')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+       <div  class="col-12 col-sm-6 form-group" >
+        <label>{{ "product-management.descriptionAr" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.descriptionAr' | translate }}"
+          class="form-control"
+          formControlName="descriptionAr"
+          [class.is-invalid]="isDetailsFormSubmitted &&  detailsForm && detailsForm.get('descriptionAr')?.errors"
+        />
+
+          <div class="invalid-feedback"
+                *ngIf="detailsForm.get('descriptionAr').invalid &&  detailsForm.get('nameAr').errors['arabicTextWithNumbers']">
+                                {{'common.onlyArabicIsAllowed'|translate}}
+          </div>
+      </div>
+
+  <div class="col-12 col-sm-6 form-group ">
+                <label>{{'product-management.salesTax' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'product-management.salesTax' | translate }}" 
+                    class="form-control" 
+                    formControlName="salesTax"
+                    [class.is-invalid]="isDetailsFormSubmitted && detailsForm.get('salesTax')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+              <div class="col-12 col-sm-6 form-group ">
+                <label>{{'product-management.discount' | translate }}</label>
+                <input 
+                    type="number" 
+                    max="100" 
+                    placeholder="{{'product-management.discount' | translate }}" 
+                    class="form-control" 
+                    formControlName="discount"
+                    [class.is-invalid]="isDetailsFormSubmitted &&  detailsForm && detailsForm.get('discount')?.errors"
+                >
+                <div class="invalid-feedback"
+                                *ngIf="detailsForm.get('discount').invalid &&  detailsForm.get('discount').errors['maxValue']">
+                                {{'common.maxValue'|translate}}
+          </div>
+
+          
+            </div>
+
+             <div *ngIf="!isProductService" class="col-12 col-sm-6 form-group ">
+                <label>{{'product-management.purchaseTax' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'product-management.purchaseTax' | translate }}" 
+                    class="form-control" 
+                    formControlName="purchaseTax"
+                    [class.is-invalid]="isDetailsFormSubmitted && detailsForm.get('purchaseTax')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+              <div *ngIf="!isProductService" class="col-12 col-sm-6 form-group ">
+                <label>{{'product-management.purchaseDiscount' | translate }}</label>
+                <input 
+                    type="number" 
+                    max="100" 
+                    placeholder="{{'product-management.purchaseDiscount' | translate }}" 
+                    class="form-control" 
+                    formControlName="purchaseDiscount"
+                    [class.is-invalid]="isDetailsFormSubmitted &&  detailsForm && detailsForm.get('purchaseDiscount')?.errors"
+                >
+                <div class="invalid-feedback"
+                                *ngIf="detailsForm.get('purchaseDiscount').invalid &&  detailsForm.get('purchaseDiscount').errors['maxValue']">
+                                {{'common.maxValue'|translate}}
+          </div>
+
+          
+            </div>
+
+            <ng-container *ngIf="!isEditMood && !isProductService"> 
+      <div class="col-md-6 form-group mb-3">
+                            <label for="picker1"> {{ "product-management.defaultWarehouse" | translate }}</label>
+                            <select class="form-control" formControlName="defaultWarehouseId" name="defaultWarehouseId" (change)="onWarehouseChange(detailsForm.get('defaultWarehouseId').value)">
+                                <option *ngFor="let item of warehouses" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div *ngIf="isFormSubmitted && detailsForm.get('defaultWarehouseId').invalid" class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                      <ng-container *ngIf="detailsForm.get('defaultWarehouseId')?.value > 0" > 
+
+                  <div class="col-md-6 form-group mb-3 required">
+                            <label for="picker1"> {{ "product-management.section" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseSectionId" name="warehouseSectionId"
+                            [class.is-invalid]="isDetailsFormSubmitted &&  detailsForm && detailsForm.get('warehouseSectionId')?.errors"
+                            >
+                                <option *ngFor="let item of sections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                            <div  class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+                                 </div>
+                        </div>
+
+                         <div class="col-12 col-sm-6 form-group required">
+                <label>{{'product-management.currentStock' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'product-management.currentStock' | translate }}" 
+                    class="form-control" 
+                    formControlName="currentStock"
+                    [class.is-invalid]="isDetailsFormSubmitted && detailsForm.get('currentStock')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+                      </ng-container>
+
+            </ng-container>
+         
+                        
+
+
+
+      <div *ngIf="entity?.imagePath" class="col-md-12 form-group">
+        <img  class="image-max-height" src="{{this.entity.imagePath}}"    />
+        <label>{{ "product-management.image" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'product-management.image' | translate }}"
+          class="form-control"
+          (change)="onFileChange($event)"
+           />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+
+         <div *ngIf="!entity?.imagePath && !isProductService" class="col-12 col-sm-6 form-group">
+        <label>{{ "product-management.image" | translate }}</label>
+        <input
+          type="file"
+          maxlength="100"
+          placeholder="{{ 'product-management.image' | translate }}"
+          class="form-control"
+          (change)="onFileChange($event)"
+           />
+        <div class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+        
+
+         <div *ngIf="!isProductService" class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "product-management.followItem" | translate }}
+          </span>
+          <input type="checkbox" checked formControlName="followItem" (change)="onFollowItemChange($event?.target?.value)" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <ng-container  *ngIf="detailsForm.get('followItem')?.value">
+ <div class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>
+            {{ "product-management.onlyDefault" | translate }}
+          </span>
+          <input type="checkbox" checked formControlName="onlyDefault" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+         <div class="col-md-6 form-group mb-3">
+               <label for="picker1"> {{ "product-management.followType" | translate }}</label>
+               <select class="form-control" formControlName="followType" name="followType"  (change)="onFollowTypeChange()"
+               >
+               <option *ngFor="let item of followTypes" value="{{item.id}}" >{{item.title}}</option>
+               </select>
+         </div>
+
+
+           <div class="col-12 col-sm-6 form-group" *ngIf="detailsForm.get('followType')?.value == 0 || detailsForm.get('followType')?.value == 2">
+                <label>{{'product-management.quantityValue' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'product-management.quantityValue' | translate }}" 
+                    class="form-control" 
+                    formControlName="quantityValue"
+                    [class.is-invalid]="isDetailsFormSubmitted && detailsForm.get('quantityValue')?.errors"
+                >
+               <div class="invalid-feedback" *ngIf="isDetailsFormSubmitted && detailsForm.get('quantityValue')?.errors">
+                        <ng-container *ngIf="detailsForm.get('quantityValue')?.errors['required']">
+                                   {{ 'common.fieldRequired' | translate }}
+           </ng-container>
+           <ng-container *ngIf="detailsForm.get('quantityValue')?.errors['min']">
+                         {{ 'common.mustBeGreaterThanZero' | translate }}
+            </ng-container>
+</div>
+            </div>
+
+
+      <ng-container *ngIf="detailsForm.get('followType')?.value == 1 || detailsForm.get('followType')?.value == 2"> 
+   <div class="col-md-6 form-group mb-3">
+        <label for="picker1">{{
+          "product-management.expirationDate" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="expDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="expDate"
+            ngbDatepicker
+            #dp="ngbDatepicker" />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+   <div class="col-12 col-sm-6 form-group ">
+                <label>{{'product-management.expirationDays' | translate }}</label>
+                <input 
+                    type="number" 
+                    placeholder="{{'product-management.expirationDays' | translate }}" 
+                    class="form-control" 
+                    formControlName="expirationDays"
+                    [class.is-invalid]="isDetailsFormSubmitted && detailsForm.get('expirationDays')?.errors"
+                >
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+      </ng-container>
+              
+
+
+      </ng-container>
+      
+
+
+
+        </div>
+        </form>
+  </div>
+
+
+
+<div class="mt-3 d-flex justify-content-between">
+  <!-- Previous Button -->
+  <button
+    type="button"
+    class="btn btn-light btn-rounded"
+    tabindex="-1"
+    (click)="previous()"
+    [disabled]="activeIndex === 0"
+  >
+    {{ "Previous" | translate }}
+  </button>
+
+  <!-- Next/Save Button -->
+  <button
+    *ngIf="authSerivce.hasPermission('Product-Form')"
+    type="button"
+    (click)="next()"
+    class="btn btn-primary btn-rounded"
+  >
+    {{ (activeIndex === steps.length - 1 ? "Save" : "Next") | translate }}
+  </button>
+</div>
+
+
+
+
+</div>

@@ -1,0 +1,475 @@
+.attachments-wrap {
+    min-height: 100vh;
+    background: $gray-100;
+    padding: 80px 96px;
+    letter-spacing: 0;
+
+    .attachments-inner {
+        padding: 24px 24px 32px;
+        background: $white;
+    }
+
+    .attachment-items {
+        counter-reset: custom-counter;
+    }
+
+    .attachment-item {
+        margin-bottom: 25px;
+        padding-bottom: 3px;
+        border-bottom: 1px solid $gray-300;
+        counter-increment: custom-counter;
+
+        &.show-file-info {
+            .file-drop {
+                display: none;
+            }
+    
+            .uploaded-file {
+                display: flex;
+            }
+
+            .caption .btn {
+                display: block;
+            }
+        }
+    }
+
+
+    .title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+
+        img {
+            margin-left: 15px;
+        }
+
+        h1 {
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 29px;
+            flex: 1;
+        }
+
+        span {
+            font-weight: 500;
+        }
+    }
+
+    .text {
+        display: flex;
+        margin-bottom: 9px;
+        font-size: 14px;
+
+        p {
+            flex: 1;
+            margin: 0 2rem 0 0;
+        }
+
+        span {
+            max-width: 50%;
+        }
+    }
+
+    .shipment-id {
+        margin-bottom: 25px;
+        padding-bottom: 23px;
+        font-weight: 700;
+        font-size: 14px;
+        border-bottom: 1px solid $gray-300;
+    }
+
+    .caption {
+        display: flex;
+        margin-bottom: 17px;
+        font-size: 20px;
+        font-weight: 600;
+
+        span::after {
+            content: counter(custom-counter);
+        }
+
+        .sub-lang {
+            font-weight: 500;
+        }
+
+        .btn {
+            display: none;
+            margin-left: auto;
+
+            i:before {
+                display: block;
+                content: '';
+                width: 14px;
+                height: 18px;
+                background-image: url($cart);
+                background-repeat: no-repeat;
+                background-position: center;
+                transition: filter .2s;
+            }
+
+            &:hover i::before {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    .file-drop {
+        label {
+            margin: 0;
+            padding: 17px 1rem 13px;
+        }
+
+        i {
+            font-size: 33px;
+        }
+    }
+
+    textarea {
+        height: 96px;
+        background: $gray-100;
+    }
+
+    .action-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 31px;
+
+        .btn {
+            min-width: 150px;
+
+            &:not(:last-child) {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    .uploaded-file {
+        display: none;
+        align-items: flex-start;
+        min-height: 96px;
+        padding: 12px 14px;
+        border: 1px solid $grey;
+
+        .file-info {
+            padding: 0 14px;
+        }
+
+        .file-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: $primary-black;
+        }
+
+        .file-size {
+            font-size: 12px;
+        }
+
+        .btn {
+            margin-left: auto;
+        }
+    }
+}
+
+// success
+.attachments-success {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 1rem;
+    min-height: 100vh;
+    background: $gray-100;
+
+    .success-inner {
+        max-width: 1144px;
+        width: 100%;
+        padding: 56px 20px;
+        background: $white;
+        text-align: center;
+    }
+
+    .text {
+        display: flex;
+        margin-top: 41px;
+        font-weight: 600;
+        font-size: 29px;
+        line-height: 1.3;
+        letter-spacing: 0;
+        color: $primary-black;
+
+        span {
+            flex: 1;
+        }
+
+        .with-devider {
+            position: relative;
+            font-weight: 400;
+
+            &::before {
+                position: absolute;
+                left: 0;
+                top: 0;
+                content: '';
+                width: 1px;
+                height: 100%;
+                background: $gray-300;
+            }
+        }
+    }
+}
+
+// language separator
+.sub-lang::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 1.3em;
+    background: $gray-300;
+    margin: 0 1rem;
+    font-weight: 500;
+}
+
+// alert modal
+.attachments-alert-popup {
+    &.size-alert .note:not(.size-note),
+    &:not(.size-alert) .size-note {
+        display: none;
+    }
+
+    .modal-dialog {
+        max-width: 608px;
+    }
+
+    .modal-body {
+        padding: 36px 12px 32px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    i {
+        transform: rotate(180deg);
+        display: block;
+        margin-bottom: 21px;
+        color: $red;
+    }
+
+    .note {
+        margin-bottom: 15px;
+    }
+
+    .columns {
+        display: flex;
+        width: 100%;
+
+        &.size-note .col {
+            text-align: center !important;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0 12px;
+            text-align: right;
+
+            &:not(:first-child) {
+                position: relative;
+                text-align: left;
+
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    content: '';
+                    width: 1px;
+                    height: 100%;
+                    background: $gray-300;
+                }
+            }
+        }
+    }
+
+    .btn {
+        max-width: 240px !important;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .attachments-wrap {
+        padding: 3rem 2.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .attachments-wrap {
+        padding: 40px 1rem;
+
+        .attachments-inner {
+            padding: 1.75rem 1rem 32px;
+        }
+
+        .attachment-item {
+            margin-bottom: 29px;
+        }
+
+        .attachment-gap {
+            gap: 1rem;
+        }
+
+        .title,
+        .text,
+        .shipment-id {
+            text-align: center;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column-reverse;
+            margin-bottom: 23px;
+            
+            h1 {
+                font-size: 24px;
+            }
+
+            img {
+                margin: 0 0 20px;
+                max-width: 118px;
+            }
+
+            span {
+                display: block;
+                margin-top: 6px;
+
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        .text {
+            display: block;
+            margin-bottom: 1rem;
+
+            p {
+                margin: 0;
+            }
+
+            span {
+                display: block;
+                max-width: 100%;
+                margin-top: 9px;
+            }
+        }
+
+        .file-drop {
+            .sub-lang {
+                display: block;
+
+                &::before {
+                    width: 100%;
+                    height: 1px;
+                    margin: 10px 0;
+                }
+            }
+
+            label {
+                padding: 18px 1rem 1rem;
+            }
+        }
+
+        textarea {
+            height: 56px;
+        }
+    }
+
+    // alert modal
+    .attachments-alert-popup {
+        .note.columns {
+            flex-direction: column;
+
+            .col {
+                text-align: center !important;
+
+                &:not(:first-child) {
+                    padding-top: 18px;
+
+                    &::before {
+                        top: 8px;
+                        left: 1rem;
+                        right: 1rem;
+                        width: auto;
+                        height: 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    // success
+    .attachments-success {
+        .success-inner {
+            padding: 2rem 1rem;
+        }
+
+        img {
+            max-width: 118px;
+        }
+
+        .text {
+            flex-direction: column;
+            font-size: 24px;
+            margin-top: 14px;
+
+            .with-devider::before {
+                position: static;
+                display: block;
+                width: 100%;
+                height: 1px;
+                margin: 21px 0;
+            }
+        }
+    }
+}
+
+[dir=rtl] {
+    .attachments-wrap {
+        .action-wrap {
+            .btn {    
+                &:not(:last-child) {
+                    margin-left: 1rem;
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .uploaded-file {    
+            .btn {
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+
+        .caption {
+            display: flex;
+            margin-bottom: 17px;
+            font-size: 20px;
+            font-weight: 600;
+    
+            span::after {
+                content: counter(custom-counter);
+            }
+    
+            .sub-lang {
+                font-weight: 500;
+            }
+    
+            .btn {
+                margin-right: auto;
+                margin-left: initial;
+            }
+        }
+        .text p {
+            margin: 0;
+        }
+    }
+}

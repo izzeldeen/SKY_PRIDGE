@@ -1,0 +1,513 @@
+<div class="page-container">
+	<div class="breadcrumb">
+		<h1>MFST5638716</h1>
+
+		<ul>
+			<li><strong>Hub Ops</strong></li>
+			<li><a href="#/pages/containers">Containers list</a></li>
+			<li>MFST5638716</li>
+		</ul>
+
+		<div class="action-wrap">
+			<button class="btn btn-secondary btn-rounded" (click)="editContainerModal(editContainer)">Edit</button>
+		</div>
+	</div>
+
+	<div class="content-block mw-100">
+		<div class="c-card c-card-hover c-card-branch-inf mb-4">
+			<div class="c-card-body">
+				<div class="c-list">
+					<div class="item-type-1 grid-5x">
+						<div class="box-info">
+							<div class="label">Container type:</div>
+							<div class="value">Document & Non-Document</div>
+						</div>
+
+						<div class="box-info">
+							<div class="label">Origin (ISO):</div>
+							<div class="value">JOR</div>
+						</div>
+
+						<div class="box-info">
+							<div class="label">Destination (ISO):</div>
+							<div class="value">GBR</div>
+						</div>
+
+						<div class="box-info">
+							<div class="label">Truck number:</div>
+							<div class="value">1</div>
+						</div>
+
+						<div class="box-info">
+							<div class="label">Client reference:</div>
+							<div class="value">70</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h4 class="text-20 font-weight-600 text-primary-black mb-3">Shipments</h4>
+
+		<div class="custom-table-wrap">
+			<div class="table-wrap">
+				<table class="custom-table">
+					<thead>
+						<tr>
+							<th>
+								Shipment code
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Airwaybill number
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Destination
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Shipping date
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th>
+								Shipment tracking event
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+
+						<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+							<td>22224791556</td>
+							<td>GNTUPD0100002617GBSA</td>
+							<td>GBR</td>
+							<td>10/16/2022</td>
+							<td>Text</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div class="table-footer-inner">
+				<div class="pages">
+					<div class="page-count">30 total</div>
+	
+					<div class="entries">
+						Show per page
+						<div class="entries-dropdown" ngbDropdown>
+							<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+					
+							<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>10</a>
+									<ng-template ngbNavContent>10</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>50</a>
+									<ng-template ngbNavContent>50</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>70</a>
+									<ng-template ngbNavContent>70</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>100</a>
+									<ng-template ngbNavContent>100</ng-template>
+								</ng-container>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="table-pager">
+					<div class="action disabled pager-position" aria-label="go to first page">
+						<i class="datatable-icon-prev"></i>
+					</div>
+	
+					<div class="action disabled pager-step" aria-label="go to previous page">
+						<i class="datatable-icon-left"></i>
+					</div>
+	
+					<div class="action pager-page active">1</div>
+					<div class="action pager-page">2</div>
+					<div class="action pager-page">3</div>
+	
+					<div class="action pager-step" aria-label="go to next page">
+						<i class="datatable-icon-right"></i>
+					</div>
+	
+					<div class="action pager-position"  aria-label="go to last page">
+						<i class="datatable-icon-skip"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+	
+	<ng-template #editContainer let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Edit Container</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+		
+		<div class="modal-body" id="containerEditForm">
+			<div class="tabs-to-dropdown" id="edit-container-tabs" ngbDropdown>
+				<div ngbDropdown #editContainerNavDropdown="ngbDropdown">
+					<button class="mobile-drop w-100 w-auto-md text-start" id="editContainerTabDropdown" ngbDropdownToggle>{{ editContainerActive }}</button>
+					<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editContainerActive === 'General information'}" (click)="editContainerNav.select('General information')">General information</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editContainerActive === 'Shipments'}" (click)="editContainerNav.select('Shipments')">Shipments</a>
+					</div>
+				</div>
+
+				<ul ngbNav #editContainerNav="ngbNav" [(activeId)]="editContainerActive" class="nav-tabs p-0">
+					<li ngbNavItem="General information">
+						<a ngbNavLink>General information</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="containerEditForm" (ngSubmit)="submitContainerEditForm()">
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Origin (ISO)</label>
+										<mat-select-country  
+											class="form-control select-country" 
+											#originSelect
+											[class.is-invalid]="isSubmittedContainerEditForm && containerEditForm.get('origin')?.errors"
+											describedBy="origin"
+											placeHolder="Choose country" 
+											(onCountrySelected)="handleCountrySelected('containerEditForm', 'origin', originSelect)"
+											autocomplete="off">
+										</mat-select-country>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Destination (ISO)</label>
+										<mat-select-country  
+											class="form-control select-country" 
+											#destinationSelect
+											[class.is-invalid]="isSubmittedContainerEditForm && containerEditForm.get('destination')?.errors"
+											describedBy="destination"
+											placeHolder="Choose country" 
+											(onCountrySelected)="handleCountrySelected('containerEditForm', 'destination', destinationSelect)"
+											autocomplete="off">
+										</mat-select-country>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Truck number</label>
+										<input id="truckNumber"
+											   formControlName="truckNumber"
+											   type="text"
+											   class="form-control"
+											   placeholder="Enter truck number">
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>Client reference</label>
+										<input id="clientReference"
+											   formControlName="clientReference"
+											   type="text"
+											   class="form-control"
+											   placeholder="Enter client reference">
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Container type</label>
+										<select 
+											class="form-control" 
+											formControlName="docType"
+										>
+											<option value="" disabled selected hidden>Document & Non-Document</option>
+											<option value="option_1">Option 1</option>
+											<option value="option_2">Option 2</option>
+										</select>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="edit-general-button" 
+								(click)="resetGeneralContainerEditForm(originSelect, destinationSelect);"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Shipments">
+						<a ngbNavLink>Shipments</a>
+						<ng-template ngbNavContent>
+							<div class="form-note">Shipments can be added using the barcode scanner</div>
+
+							<div class="form-group required">
+								<label>Shipment codes</label>
+								<div class="d-flex flex-column codes-textarea-block">
+									<textarea id="shipment-code"
+											class="form-control codes-textarea border-0 border-bottom"
+											[(ngModel)]="shipment_code" 
+											(ngModelChange)="onTextAreaChange($event)"
+											placeholder="Enter shipment codes separated by commas" 
+											value=""
+											style="height: 110px"></textarea>
+									<div class="invalid-feedback">This field is required</div>
+									<div class="d-flex justify-content-end w-100">
+										<button 
+											type="button"
+											class="btn btn-rounded btn-primary m-1"
+											(click)="addShipment()"
+											style="margin-left: auto; min-width: 120px;"
+										>
+											Add shipments
+										</button>
+									</div>
+								</div>
+							</div>
+				
+							<div id="shipment-code-table" class="custom-table-wrap" style="display: none;">
+								<div class="table-wrap">
+									<table class="custom-table" id="shipmentTable">
+										<thead>
+											<tr>
+												<th>
+													Shipment code
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th>
+													Remark
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th class="desktop-hide">&nbsp;</th>
+											</tr>
+										</thead>
+						
+										<tbody>
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge">Duplicated</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>Document & Non-Document
+													32456745666</td>
+												<td><span class="status c-badge">Not valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>12345342321</td>
+												<td><span class="status c-badge">Already in Container</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>34523407986</td>
+												<td><span class="status c-badge">Already in Container</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+						
+								<div class="table-footer-inner">
+									<div class="pages">
+										<div class="page-count">16 total</div>
+						
+										<div class="entries">
+											Show per page
+											<div class="entries-dropdown" ngbDropdown>
+												<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+										
+												<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>10</a>
+														<ng-template ngbNavContent>10</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>50</a>
+														<ng-template ngbNavContent>50</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>70</a>
+														<ng-template ngbNavContent>70</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>100</a>
+														<ng-template ngbNavContent>100</ng-template>
+													</ng-container>
+												</div>
+											</div>
+										</div>
+									</div>
+						
+									<div class="table-pager">
+										<div class="action disabled pager-position" aria-label="go to first page">
+											<i class="datatable-icon-prev"></i>
+										</div>
+						
+										<div class="action disabled pager-step"  aria-label="go to previous page">
+											<i class="datatable-icon-left"></i>
+										</div>
+						
+										<div class="action pager-page active">1</div>
+										<div class="action pager-page">2</div>
+						
+										<div class="action pager-step" aria-label="go to next page">
+											<i class="datatable-icon-right"></i>
+										</div>
+						
+										<div class="action pager-position"  aria-label="go to last page">
+											<i class="datatable-icon-skip"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="edit-shipments-button" 
+								(click)="resetShipmentsContainerEditForm();"
+							>
+							</button>
+						</ng-template>
+					</li>
+				</ul>
+				<div [ngbNavOutlet]="editContainerNav" class="mt-4 p-0"></div>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="triggerEditContainerClear()" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitContainerEditForm(saveShipment, editContainerNav)" class="btn btn-primary btn-rounded" id="edit-container-button" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #deleteShipment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Delete shipment</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="deleteShipment">
+			<div class="note">Are you sure you want to delete the shipment from the container?</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded" (click)="modal.close('Close click')" ngbAutoFocus>Yes, delete it</button>
+			</div>
+		</div>
+    </ng-template>
+
+	<ng-template #saveShipment let-modal>
+		<div class="modal-header save-block">
+			<h4 class="modal-title" id="modal-basic-title">Save container</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="saveShipment">
+			<i class="text-46 i-Information alert-block"></i>
+			<div class="note save-block">There are invalid values in the Shipments, they will be deleted after saving. Are you sure you want to continue saving?</div>
+			<div class="note alert-block">Please add at least one shipment</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded save-block" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded save-block" (click)="modal.close('Close click')" ngbAutoFocus>Yes, save it</button>
+				<button type="button" class="btn btn-secondary btn-rounded alert-block" (click)="modal.close('Close click')" tabindex="-1">Okay</button>
+			</div>
+		</div>
+    </ng-template>
+</div> 

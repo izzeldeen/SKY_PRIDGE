@@ -1,0 +1,345 @@
+<div class="file-name">
+	<div class="breadcrumb">
+		<h1>File name</h1>
+		<ul>
+            <li><strong>Hub Ops</strong></li>
+            <li><strong><a href="#/pages/shipments">Shipments management</a></strong></li>
+            <li>File name</li>
+        </ul>
+	</div>
+	
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<input id="table-search" placeholder="Search by..."  class="form-control" type="text">
+			</div>
+		</div>
+
+		<div class="table-wrap">
+			<table class="custom-table">
+				<thead>
+					<tr>
+						<th>
+							Index
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th class="column-wide">
+							Airwaybill number
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th class="column-wide">
+							Shipper name
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+                        <th>
+							Destination
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th>
+							Origin
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th>
+							Shipping date
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+                        <th>
+							Estimated delivery date
+							<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="table-server-error" style="background-color: #FEECEB;" (mousemove)="showTitle($event)" (mouseout)="hideTitle()">
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions" (mousemove)="hideTitle(); $event.stopPropagation()">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+                    <tr class="table-server-error" style="background-color: #FEECEB;" (mousemove)="showTitle($event)" (mouseout)="hideTitle()">
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions" (mousemove)="hideTitle(); $event.stopPropagation()">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+                    <div id="server-error-hint"></div>
+
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+                    <tr>
+						<td>1</td>
+						<td>GN35972Hl6</td>
+						<td>Shipper name</td>
+                        <td>GBP</td>
+						<td>JOR</td>
+						<td>10/10/2023</td>
+                        <td>10/10/2023</td>
+						<td class="actions">
+							<div ngbDropdown>
+								<i ngbDropdownToggle class="row-menu"><span></span></i>
+								<div ngbDropdownMenu>
+									<button class="dropdown-item">Edit</button>
+                                    <button class="dropdown-item">Add item</button>
+									<button class="dropdown-item">Add attachment</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="table-footer-inner">
+			<div class="pages">
+				<div class="page-count">75 total</div>
+
+				<div class="entries">
+					Show per page
+					<div class="entries-dropdown" ngbDropdown>
+						<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+				
+						<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>10</a>
+								<ng-template ngbNavContent>10</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>50</a>
+								<ng-template ngbNavContent>50</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>70</a>
+								<ng-template ngbNavContent>70</ng-template>
+							</ng-container>
+							<ng-container ngbNavItem>
+								<a class="dropdown-item" ngbNavLink>100</a>
+								<ng-template ngbNavContent>100</ng-template>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-pager">
+				<div class="action disabled pager-position" aria-label="go to first page">
+					<i class="datatable-icon-prev"></i>
+				</div>
+
+				<div class="action disabled pager-step"  aria-label="go to previous page">
+					<i class="datatable-icon-left"></i>
+				</div>
+
+				<div class="action pager-page active">1</div>
+				<div class="action pager-page">2</div>
+				<div class="action pager-page">3</div>
+
+				<div class="action pager-step" aria-label="go to next page">
+					<i class="datatable-icon-right"></i>
+				</div>
+
+				<div class="action pager-position"  aria-label="go to last page">
+					<i class="datatable-icon-skip"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>  

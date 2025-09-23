@@ -1,0 +1,83 @@
+/*
+ *
+ *   GULL - Angular Bootstrap Admin Template
+ *
+ *
+*/
+
+@import 'perfect-scrollbar/css/perfect-scrollbar.css';
+// @import '@swimlane/ngx-datatable/index.css';
+// @import '@swimlane/ngx-datatable/themes/material.css';
+// @import '@swimlane/ngx-datatable/assets/icons.css';
+// @import 'ngx-toastr/toastr.css';
+// @import "angular-calendar/css/angular-calendar.css";
+@import 'highlight.js/styles/github.css';
+@import "../iconsmind/iconsmind.css";
+@import 'variables';
+
+// @import 'themes/lite-blue';
+@import 'themes/lite-blue';
+@import 'bootstrap/scss/bootstrap.scss';
+@import "bootstrap-rtl.scss";
+@import 'globals/globals';
+
+@import 'ngx-toastr/toastr';
+
+// bootstrap style toast
+// or import a bootstrap 4 alert styled design (SASS ONLY)
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+@import 'ngx-toastr/toastr-bs4-alert';
+
+// if you'd like to use it without importing all of bootstrap it requires
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+// bootstrap 4
+@import 'ngx-toastr/toastr-bs4-alert';
+// boostrap 5
+@import 'ngx-toastr/toastr-bs5-alert';
+
+
+
+.p-dropdown-items-wrapper{
+    background: #f8f9fa !important;
+    font-size: 12px !important;
+    line-height: 2px !important;
+}
+
+.p-dropdown-label{
+    width: 100%  !important;
+}
+
+.p-multiselect-items-wrapper{
+    background: #f8f9fa !important;
+}
+
+
+.p-element.p-multiselect-label-container {
+    margin: -14px;
+}
+
+span.p-element.p-dropdown-label.p-inputtext.ng-star-inserted{
+    margin: -12px !important;
+    font-size : 13px;
+}
+
+ul.p-multiselect-items.p-component.ng-star-inserted{
+    font-size: 13px !important;
+    padding:0px;
+}
+
+input.p-multiselect-filter.p-inputtext.p-component{
+    height: 10px;
+}
+
+.mapboxgl-canvas
+{
+    position: unset;
+}
+
+a:hover{
+    cursor:pointer
+}
+

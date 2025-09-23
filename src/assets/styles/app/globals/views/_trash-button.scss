@@ -1,0 +1,32 @@
+.trash-icon:before {
+    display: block;
+    content: '';
+    width: 14px;
+    height: 18px;
+    background-image: url($cart);
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: filter .2s;
+}
+
+.trash-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.btn-trash:disabled {
+    background-color: initial;
+    border-color: $gray-300;
+}
+
+.btn-trash:hover .trash-icon::before {
+    filter: brightness(0) invert(1);
+}
+
+[dir=rtl] {
+    .trash-container {
+        right: initial;
+        left: 8px;
+    } 
+}

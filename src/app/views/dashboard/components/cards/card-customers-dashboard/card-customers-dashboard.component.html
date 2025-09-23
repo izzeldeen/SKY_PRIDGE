@@ -1,0 +1,44 @@
+<div class="c-card mb-4">
+    <div class="c-card-body">
+        <div class="c-header">
+            <div class="c-title text-20">{{'Invoices' | translate}}</div>
+
+            <div class="c-actions">
+            </div>
+        </div>
+
+        <div *ngIf="model" class="c-list c-list-statistics">
+            <div class="item-info">
+                <div class="title">{{'Total Sales Amount' | translate}}</div>
+                <div class="body">
+                    <i class="icon i-Dollar-Sign-2"></i>
+                    <span class="value">{{model.totalSales}}</span>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'Total Purchase Amount' | translate}}</div>
+                <div class="body">
+                    <i class="icon i-Dollar-Sign-2"></i>
+                    <span class="value">{{model.totalPurchase}}</span>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'Total Net  Amount' | translate}}</div>
+                <div class="body">
+                     <i class="icon i-Dollar-Sign-2"></i>
+                    <span class="value">{{model.totalNet}}</span>
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="title">{{'Invoices' | translate}}</div>
+                <div class="body">
+                     <i class="icon i-Bag-Items"></i>
+                    <span class="value">{{model.count}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

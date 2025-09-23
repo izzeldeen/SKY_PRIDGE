@@ -1,0 +1,1804 @@
+<div class="shipments">
+	<div class="breadcrumb">
+		<h1>Shipments management</h1>
+		<ul>
+			<li><strong>Hub Ops</strong></li>
+			<li>Shipments management</li>
+		</ul>
+	</div>
+	
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group d-flex gap-3">
+				<input id="table-search" placeholder="Search by shipment..."  class="form-control" type="text">
+				<button class="btn btn-secondary btn-rounded filters-mobile" style="width: 90px;">
+					<i class="i-Filter-2"></i>
+					<span>Filters</span>
+				</button>
+			</div>
+			<div class="heading-actions d-flex flex-wrap">
+				<button class="btn btn-secondary btn-rounded filters-desktop">
+					<i class="i-Filter-2"></i>					
+					<span>Filters</span>
+				</button>
+				<div class="d-flex align-items-center actions-container">
+					<button class="btn btn-secondary btn-rounded" (click)="newEventModal(newEvent)">
+						<i class="i-Add-File"></i>
+						<span>Assign event</span>
+					</button>
+					<div ngbDropdown class="shipments-actions">
+						<button class="btn btn-primary btn-rounded m-0" ngbDropdownToggle>
+							Add shipments
+						</button>
+						<div ngbDropdownMenu>
+							<a class="dropdown-item" href="#/pages/shipments/shipment-new">Add new shipment</a>
+							<a class="dropdown-item" href="#/pages/shipments/bulk-upload">Bulk upload shipments</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tabs-to-dropdown" id="shipments-tabs" ngbDropdown>
+			<div ngbDropdown #shipmentsNavDropdown="ngbDropdown">
+				<button class="mobile-drop w-100 w-auto-md text-start" id="tabDropdown" ngbDropdownToggle>{{ active }}</button>
+				<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Shipments'}" (click)="nav.select('Shipments')">Shipments</a>
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Uploaded files'}" (click)="nav.select('Uploaded files')">Uploaded files</a>
+				</div>
+		   </div>
+
+			<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs p-0">
+				<li ngbNavItem="Shipments">
+					<a ngbNavLink>Shipments</a>
+					<ng-template ngbNavContent>
+						<div class="table-wrap">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th>
+											Shipper Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Airwaybill Number
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Origin
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Destination
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Shipping Date
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Tracking
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+				
+								<tbody>
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>2/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>GNTUPD0000000323</td>
+										<td>GBR</td>
+										<td>JOR</td>
+										<td>10/16/2022</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>
+											Aramex
+										</td>
+										<td>2222479145</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>2/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>UK</td>
+										<td>JO</td>
+										<td>10/17/2022</td>
+										<td>Added to Manifest</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>UK</td>
+										<td>JO</td>
+										<td>10/17/2022</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>2/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>GNTUPD0100002617</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>1/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>2/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/shipment-detail">
+										<td>Vogacloset</td>
+										<td>VogaMTest1234</td>
+										<td>GB</td>
+										<td>SA</td>
+										<td>2/3/2023</td>
+										<td>New Shipment Created</td>
+										<td class="actions">
+											<div ngbDropdown>
+												<i ngbDropdownToggle class="row-menu"><span></span></i>
+												<div ngbDropdownMenu>
+													<button class="dropdown-item" (click)="editShipmentModal(editShipment)">Edit</button>
+													<button class="dropdown-item" (click)="newItemModal(newItem)">Add item</button>
+													<button class="dropdown-item" (click)="newAttachmentModal(newAttachment)">Add attachment</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner">
+							<div class="pages">
+								<div class="page-count">30 total</div>
+				
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+				
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+				
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+				
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+				
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+				
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</li>
+				<li ngbNavItem="Uploaded files">
+					<a ngbNavLink>Uploaded files</a>
+					<ng-template ngbNavContent>
+						<div class="table-wrap">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th style="padding-right: 200px;">
+											File name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Total number of shipments
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Number of successfully added shipments
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Uploaded at
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th>
+											Remark
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+				
+								<tbody>
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>In progress (10%)</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>3 shipments haven't been created during the uploading process.</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>5 shipments haven't been created during the uploading process.</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+				
+									<tr class="redirect-link" role="link" (click)="redirect($event)" data-link="/pages/shipments/file-name">
+										<td>File name</td>
+										<td>100</td>
+										<td>75</td>
+										<td>10/10/2022</td>
+										<td>Successfully added</td>
+										<td class="actions">
+											<button class="row-menu edit">
+												<span>
+													<i class="i-Download"></i>
+												</span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner">
+							<div class="pages">
+								<div class="page-count">30 total</div>
+				
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div>
+									</div>
+								</div>
+							</div>
+				
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+				
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+				
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+				
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+				
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</li>
+			</ul>
+			<div [ngbNavOutlet]="nav" class="mt-3 p-0"></div>
+		</div>
+	</div>
+
+	<ng-template #newEvent let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Assign event</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body" id="assignEventForm">
+			<div class="tabs-to-dropdown" id="assign-event-tabs" ngbDropdown>
+				<div ngbDropdown #assignEventNavDropdown="ngbDropdown">
+					<button class="mobile-drop w-100 w-auto-md text-start" id="assignEventTabDropdown" ngbDropdownToggle>{{ assignEventActive }}</button>
+					<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+						<a class="dropdown-item nav-link" [ngClass]="{'active': assignEventActive === 'General information'}" (click)="assignEventNav.select('General information')">General information</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': assignEventActive === 'Shipments'}" (click)="assignEventNav.select('Shipments')">Shipments</a>
+					</div>
+			   </div>
+
+				<ul ngbNav #assignEventNav="ngbNav" [(activeId)]="assignEventActive" class="nav-tabs p-0">
+					<li ngbNavItem="General information">
+						<a ngbNavLink>General information</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="assignEventForm" (ngSubmit)="submitAssignEventForm(saveShipment)">
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Country</label>
+										<mat-select-country  
+											class="form-control select-country" 
+											#country
+											[class.is-invalid]="isSubmittedAssignEventForm && assignEventForm.get('Country')?.errors"
+											describedBy="country"
+											placeHolder="Choose country" 
+											(onCountrySelected)="handleCountrySelected('assignEventForm', 'Country', country)"
+											autocomplete="off">
+										</mat-select-country>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>City</label>
+										<select 
+											class="form-control" 
+											formControlName="City"
+											[class.is-invalid]="isSubmittedAssignEventForm && assignEventForm.get('City')?.errors"
+										>
+											<option value="" disabled selected hidden>Choose city</option>
+											<option value="1">Option 2</option>
+											<option value="2">Option 3</option>
+										</select>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6 required">
+										<label>Event type</label>
+										<select 
+											class="form-control" 
+											formControlName="EventType"
+											[class.is-invalid]="isSubmittedAssignEventForm && assignEventForm.get('EventType')?.errors"
+										>
+											<option value="" disabled selected hidden>Choose event type</option>
+											<option value="1">Option 2</option>
+											<option value="2">Option 3</option>
+										</select>
+										<div class="invalid-feedback">
+											This field is required
+										</div>
+									</div>
+				
+									<div class="form-group col-12 col-md-6 required">
+										<label>Arrival date time</label>
+										<div class="input-group">
+											<p-calendar 
+													formControlName="ArrivalTime"
+													[class.ng-invalid]="isSubmittedAssignEventForm && assignEventForm.get('ArrivalTime')?.errors"
+													inputStyleClass="form-control" 
+													readonlyInput="true"
+													placeholder="yyyy-mm-dd hh:mm"
+													dateFormat="yy.mm.dd"
+													[showTime]="true" 
+													(onSelect)="onDateChange($event, 'ArrivalTime', 'assignEventForm')"
+													showClear="true">
+											</p-calendar>
+											<div class="invalid-feedback">This field is required</div>
+											<div class="input-group-append">
+												<button class="btn"  type="button">
+													<i class="i-Calendar-4"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+				
+								<div class="form-group">
+									<label>Notes</label>
+									<textarea class="form-control form-control-rounded" 
+												formControlName="Notes" 
+												placeholder="Enter notes" 
+												id="notes"
+												style="height: 56px"></textarea>
+								</div>
+				
+								<hr>
+				
+								<div class="form-caption">Dimensions</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Unit of measure (length measurements)</label>
+										<select 
+											class="form-control" 
+											formControlName="LengthMeasure"
+										>
+											<option value="" disabled selected hidden>Choose unit</option>
+											<option value="1">Option 2</option>
+											<option value="2">Option 3</option>
+										</select>
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>Length</label>
+										<input id="Length"
+												formControlName="Length"
+												type="text"
+												class="form-control"
+												placeholder="Enter length">
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Width</label>
+										<input id="Width"
+												formControlName="Width"
+												type="text"
+												class="form-control"
+												placeholder="Enter width">
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>Height</label>
+										<input id="Height"
+												formControlName="Height"
+												type="text"
+												class="form-control"
+												placeholder="Enter height">
+									</div>
+								</div>
+				
+								<div class="row">
+									<div class="form-group col-12 col-md-6">
+										<label>Unit of measure (weight measurements)</label>
+										<select 
+											class="form-control" 
+											formControlName="WeightMeasure"
+										>
+											<option value="" disabled selected hidden>Choose unit</option>
+											<option value="1">Option 2</option>
+											<option value="2">Option 3</option>
+										</select>
+									</div>
+				
+									<div class="form-group col-12 col-md-6">
+										<label>Weight</label>
+										<input id="Weight"
+												formControlName="Weight"
+												type="text"
+												class="form-control"
+												placeholder="Enter weight">
+									</div>
+								</div>			
+							</form>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="assign-general-button" 
+								(click)="resetGeneralAssignEventForm(country);"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Shipments">
+						<a ngbNavLink>Shipments</a>
+						<ng-template ngbNavContent>
+							<div class="form-note">Shipments can be added using the barcode scanner</div>
+
+							<div class="form-group required">
+								<label>Shipment codes</label>
+								<div class="d-flex flex-column codes-textarea-block">
+									<textarea id="shipment-code"
+									class="form-control codes-textarea border-0 border-bottom"
+									[(ngModel)]="shipment_code" 
+									(ngModelChange)="onTextAreaChange($event)"
+									placeholder="Enter shipment codes separated by commas" 
+									value=""
+									style="height: 110px"></textarea>
+									<div class="invalid-feedback">This field is required</div>
+									<div class="d-flex justify-content-end w-100">
+										<button 
+											type="button"
+											class="btn btn-rounded btn-primary m-1"
+											(click)="addShipment()"
+											style="margin-left: auto; min-width: 120px;"
+										>
+											Add shipments
+										</button>
+									</div>
+								</div>
+							</div>
+				
+							<div id="shipment-code-table" class="custom-table-wrap" style="display: none;">
+								<div class="table-wrap">
+									<table class="custom-table" id="shipmentTable">
+										<thead>
+											<tr>
+												<th>
+													Shipment code
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th>
+													Remark
+													<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+												</th>
+												<th class="desktop-hide">&nbsp;</th>
+											</tr>
+										</thead>
+						
+										<tbody>
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge">Duplicated</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>Document & Non-Document
+													32456745666</td>
+												<td><span class="status c-badge">Not valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>12345342321</td>
+												<td><span class="status c-badge">Already in Container</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="inactive redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>34523407986</td>
+												<td><span class="status c-badge">Already in Container</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+				
+											<tr class="redirect-link" role="link" (click)="redirect($event);" data-link="/pages/shipments/shipment-detail">
+												<td>22224791556</td>
+												<td><span class="status c-badge active">Valid</span></td>
+												<td class="actions">
+													<button class="row-menu remove" (click)="deleteShipmentModal(deleteShipment)"><span></span></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+						
+								<div class="table-footer-inner">
+									<div class="pages">
+										<div class="page-count">16 total</div>
+						
+										<div class="entries">
+											Show per page
+											<div class="entries-dropdown" ngbDropdown>
+												<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+										
+												<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>10</a>
+														<ng-template ngbNavContent>10</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>50</a>
+														<ng-template ngbNavContent>50</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>70</a>
+														<ng-template ngbNavContent>70</ng-template>
+													</ng-container>
+													<ng-container ngbNavItem>
+														<a class="dropdown-item" ngbNavLink>100</a>
+														<ng-template ngbNavContent>100</ng-template>
+													</ng-container>
+												</div>
+											</div>
+										</div>
+									</div>
+						
+									<div class="table-pager">
+										<div class="action disabled pager-position" aria-label="go to first page">
+											<i class="datatable-icon-prev"></i>
+										</div>
+						
+										<div class="action disabled pager-step"  aria-label="go to previous page">
+											<i class="datatable-icon-left"></i>
+										</div>
+						
+										<div class="action pager-page active">1</div>
+										<div class="action pager-page">2</div>
+						
+										<div class="action pager-step" aria-label="go to next page">
+											<i class="datatable-icon-right"></i>
+										</div>
+						
+										<div class="action pager-position"  aria-label="go to last page">
+											<i class="datatable-icon-skip"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="assign-shipments-button" 
+								(click)="resetShipmentsAssignEventForm();"
+							>
+							</button>
+						</ng-template>
+					</li>
+				</ul>
+				<div [ngbNavOutlet]="assignEventNav" class="mt-4 p-0"></div>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="triggerAssignEventClear()" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitAssignEventForm(saveShipment, assignEventNav)" class="btn btn-primary btn-rounded" id="assign-event-button" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #newItem let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Add item</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body">
+			<form [formGroup]="addItemForm" id="addItemForm" (ngSubmit)="submitAddItemForm()">
+				<div class="row">
+					<div class="form-group col-12 col-md-6">
+						<label>HS Code</label>
+						<input 
+							type="text" 
+							placeholder="Enter code" 
+							class="form-control" 
+							formControlName="HSCode"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6">
+						<label>Country of origin</label>
+						<mat-select-country  
+	                        class="form-control select-country" 
+	                        #countryOrigin
+	                        describedBy="country"
+	                        placeHolder="Choose country" 
+							(onCountrySelected)="handleCountrySelected('addItemForm', 'CountryOrigin', countryOrigin)"
+	                        autocomplete="off">
+	                    </mat-select-country>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-6 required">
+						<label>Quantity</label>
+						<input 
+							type="text" 
+							placeholder="Enter quantity" 
+							class="form-control" 
+							formControlName="Quantity"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Quantity')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6 required">
+						<label>Amount</label>
+						<input 
+							type="text" 
+							placeholder="Enter amount" 
+							class="form-control" 
+							formControlName="Amount"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Amount')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-6 required">
+						<label>Currency</label>
+						<select 
+							class="form-control" 
+							formControlName="Currency"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Currency')?.errors"
+						>
+							<option value="" disabled selected hidden>Choose currency</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+
+					<div class="form-group col-12 col-md-6">
+						<label>Unit of measure (weight measurement)</label>
+						<select 
+							class="form-control" 
+							formControlName="WeightMeasure"
+						>
+							<option value="" disabled selected hidden>Choose unit</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-12 col-md-12 required">
+						<label>Weight</label>
+						<input 
+							type="text" 
+							placeholder="Enter weight" 
+							class="form-control" 
+							formControlName="Weight"
+							[class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Weight')?.errors"
+						>
+						<div class="invalid-feedback">
+							This field is required
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<label>Goods description</label>
+					<textarea class="form-control form-control-rounded" 
+							  formControlName="Goods" 
+							  placeholder="Enter description" 
+							  [class.is-invalid]="isSubmittedAddItemForm && addItemForm.get('Goods')?.errors"
+							  id="notes"
+							  style="height: 56px"></textarea>
+							  <div class="invalid-feedback">
+								This field is required
+							</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="resetAddItemForm(countryOrigin)" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitAddItemForm()" class="btn btn-primary btn-rounded" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #editShipment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Edit shipment</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		</div>
+
+		<div class="modal-body edit-shipment" id="editShipment">
+			<div class="tabs-to-dropdown" id="shipments-edit-tabs" ngbDropdown>
+				<div ngbDropdown #editShipmentNavDropdown="ngbDropdown">
+					<button class="mobile-drop w-100 w-auto-md text-start" id="editTabDropdown" ngbDropdownToggle>{{ editActive }}</button>
+					<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Shipment details'}" (click)="editNav.select('Shipment details')">Shipment details</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Shipper details'}" (click)="editNav.select('Shipper details')">Shipper details</a>
+						<a class="dropdown-item nav-link" [ngClass]="{'active': editActive === 'Consignee details'}" (click)="editNav.select('Consignee details')">Consignee details</a>
+					</div>
+			   </div>
+	
+				<ul ngbNav #editNav="ngbNav" [(activeId)]="editActive" class="nav-tabs p-0">
+					<li ngbNavItem="Shipment details">
+						<a ngbNavLink>Shipment details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="shipmentDetailsForm" id="shipmentDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Shipper name</label>
+															<select 
+																class="form-control" 
+																formControlName="ShipperName"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShipperName')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose name</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Shipping date</label>
+															<div class="input-group">
+																<p-calendar 
+																		formControlName="ShippingDate"
+																		[class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ShippingDate')?.errors"
+																		inputStyleClass="form-control" 
+																		readonlyInput="true"
+																		placeholder="yyyy-mm-dd hh:mm"
+																		dateFormat="yy.mm.dd"
+																		[showTime]="true" 
+																		(onSelect)="onDateChange($event, 'ShippingDate', 'shipmentDetailsForm')"
+																		showClear="true">
+																</p-calendar>
+																<div class="invalid-feedback">This field is required</div>
+																<div class="input-group-append">
+																	<button class="btn"  type="button">
+																		<i class="i-Calendar-4"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Expected delivery date</label>
+															<div class="input-group">
+																<p-calendar 
+																		formControlName="ExpectedDate"
+																		[class.ng-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ExpectedDate')?.errors"
+																		inputStyleClass="form-control" 
+																		readonlyInput="true"
+																		placeholder="yyyy-mm-dd hh:mm"
+																		dateFormat="yy.mm.dd"
+																		[showTime]="true" 
+																		(onSelect)="onDateChange($event, 'ExpectedDate', 'shipmentDetailsForm')"
+																		showClear="true">
+																</p-calendar>
+																<div class="invalid-feedback">This field is required</div>
+																<div class="input-group-append">
+																	<button class="btn"  type="button">
+																		<i class="i-Calendar-4"></i>
+																	</button>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Product type</label>
+															<select 
+																class="form-control" 
+																formControlName="ProductType"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ProductType')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose type</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Customs declared value</label>
+															<input type="text" class="form-control" 
+																placeholder="Enter value"
+																formControlName="CustomsValue"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsValue')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Customs declared currency</label>
+															<select 
+																class="form-control" 
+																formControlName="CustomsCurrency"
+																[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('CustomsCurrency')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose currency</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group">
+															<label>Shipper branch</label>
+															<select 
+																class="form-control" 
+																formControlName="ShipperBranch"
+															>
+																<option value="" disabled selected hidden>Choose branch</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>                                                   
+													</div>
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group required">
+															<label>Goods description</label>
+															<textarea class="form-control form-control-rounded" 
+																		formControlName="GoodsDescription" 
+																		placeholder="Enter description" 
+																		[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('GoodsDescription')?.errors"
+																		id="notes"
+																		style="height: 56px"></textarea>
+																		<div class="invalid-feedback">
+																		This field is required
+																	</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-12 mb-4 form-group required">
+															<label>Description of Items</label>
+															<textarea class="form-control form-control-rounded" 
+																		formControlName="ItemsDescription" 
+																		placeholder="Enter description" 
+																		[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('ItemsDescription')?.errors"
+																		id="notes"
+																		style="height: 56px"></textarea>
+																		<div class="invalid-feedback">
+																		This field is required
+																	</div>
+														</div>
+													</div>    
+													<div class="row">
+														<div class="mb-3">
+															<label class="checkbox checkbox-primary text-13">
+																<input 
+																	type="checkbox" 
+																	formControlName="COD" 
+																>
+																<span class="caption font-weight-400">COD</span>
+																<span class="checkmark"></span>
+															</label>
+														</div>
+													</div>   
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20">Dimensions</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Length</label>
+													<input type="text" class="form-control" placeholder="Enter length"
+														formControlName="Length"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Length')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Width</label>
+													<input type="text" class="form-control" placeholder="Enter width"
+														formControlName="Width"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Width')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Height</label>
+													<input type="text" class="form-control" placeholder="Enter height"
+														formControlName="Height"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Height')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Unit of measure (length measurements)</label>
+													<select 
+														class="form-control" 
+														formControlName="LengthMeasure"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('LengthMeasure')?.errors"
+													>
+														<option value="" disabled selected hidden>Choose unit</option>
+														<option value="1">Option 2</option>
+														<option value="2">Option 3</option>
+													</select>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Weight</label>
+													<input type="text" class="form-control" placeholder="Enter weight"
+														formControlName="Weight"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('Weight')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>  
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Unit of measure (weight measurements)</label>
+													<select 
+														class="form-control" 
+														formControlName="WeightMeasure"
+														[class.is-invalid]="isShipmentSubmitted && shipmentDetailsForm.get('WeightMeasure')?.errors"
+													>
+														<option value="" disabled selected hidden>Choose unit</option>
+														<option value="1">Option 2</option>
+														<option value="2">Option 3</option>
+													</select>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="shipment-button" 
+								(click)="resetShipmentDetailsForm();"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Shipper details">
+						<a ngbNavLink>Shipper details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="shipperDetailsForm" id="shipperDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">
+												<div class="c-header">
+													<div class="c-title text-20">Address info</div>
+												</div>
+						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Address line</label>
+															<input type="text" class="form-control" placeholder="Enter address" 
+																autocomplete="nope"
+																formControlName="Address"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Address')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Country</label>
+															<mat-select-country  
+																class="form-control select-country" 
+																#shipperCountry
+																describedBy="country"
+																placeHolder="Choose country" 
+																(onCountrySelected)="handleCountrySelected('shipperDetailsForm', 'Country', shipperCountry)"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Country')?.errors"
+																autocomplete="nope">
+															</mat-select-country>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>City</label>
+															<select 
+																class="form-control" 
+																formControlName="City"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('City')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose city</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>    
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Postcode</label>
+															<input type="text" class="form-control" placeholder="Enter postcode"
+																autocomplete="nope"
+																formControlName="Postcode"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Postcode')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>District</label>
+															<input type="text" class="form-control" placeholder="Enter district"
+																formControlName="District"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('District')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Latitude</label>
+															<input type="text" class="form-control" placeholder="Enter latitude"
+																formControlName="Latitude"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Latitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Longitude</label>
+															<input type="text" class="form-control" placeholder="Enter longitude"
+																formControlName="Longitude"
+																[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Longitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+													</div>                                                
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20 d-flex align-items-center">
+													Contact info
+													<span class="subtext">
+														Shipper name
+													</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Contact person name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="ContactName"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('ContactName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Email</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter email"
+														autocomplete="nope"
+														formControlName="Email"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Email')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Phone number 1</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone1"
+														#phone1
+														describedBy="phone1"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone1"
+														[class.is-invalid]="isShipperSubmitted && shipperDetailsForm.get('Phone1')?.errors"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Phone number 2</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone2"
+														#phone2
+														describedBy="phone2"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone2"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<button 
+								type="button" 
+								class="btn btn-secondary btn-rounded d-none" 
+								id="shipper-button" 
+								(click)="resetShipperDetailsForm(shipperCountry, phone1, phone2);"
+							>
+							</button>
+						</ng-template>
+					</li>
+					<li ngbNavItem="Consignee details">
+						<a ngbNavLink>Consignee details</a>
+						<ng-template ngbNavContent>
+							<form [formGroup]="consigneeDetailsForm" id="consigneeDetailsForm">
+								<div class="row">
+									<div class="col-12 col-sm-12 col-xl-12 col-xxl-12 mb-9">
+										<div class="c-card p-0">
+											<div class="card-body edit-details-content">
+												<div class="c-header">
+													<div class="c-title text-20">Address info</div>
+												</div>
+						
+												<div class="c-form">
+													<div class="row">
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Address line</label>
+															<input type="text" class="form-control" placeholder="Enter address" 
+																autocomplete="nope"
+																formControlName="Address"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Address')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Country</label>
+															<mat-select-country  
+																class="form-control select-country" 
+																#consigneeCountry
+																describedBy="country"
+																placeHolder="Choose country" 
+																(onCountrySelected)="handleCountrySelected('consigneeDetailsForm', 'Country', consigneeCountry)"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Country')?.errors"
+																autocomplete="nope">
+															</mat-select-country>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+														
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>City</label>
+															<select 
+																class="form-control" 
+																formControlName="City"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('City')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose city</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>    
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+															<label>Postcode</label>
+															<input type="text" class="form-control" placeholder="Enter postcode"
+																autocomplete="nope"
+																formControlName="Postcode"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Postcode')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>District</label>
+															<input type="text" class="form-control" placeholder="Enter district"
+																formControlName="District"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('District')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Type</label>
+															<select 
+																class="form-control" 
+																formControlName="Type"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Type')?.errors"
+															>
+																<option value="" disabled selected hidden>Choose type</option>
+																<option value="1">Option 2</option>
+																<option value="2">Option 3</option>
+															</select>
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>  
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Latitude</label>
+															<input type="text" class="form-control" placeholder="Enter latitude"
+																formControlName="Latitude"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Latitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+
+														<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+															<label>Longitude</label>
+															<input type="text" class="form-control" placeholder="Enter longitude"
+																formControlName="Longitude"
+																[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Longitude')?.errors">
+															<div class="invalid-feedback">
+																This field is required
+															</div>
+														</div>
+													</div>                                                
+												</div>
+											</div>
+
+											<div class="c-header">
+												<div class="c-title text-20">Contact info</div>
+											</div>
+											<div class="row">
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Contact person name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="ContactName"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('ContactName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+												
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Email</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter email"
+														autocomplete="nope"
+														formControlName="Email"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Email')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div> 
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group required">
+													<label>Phone number 1</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone1"
+														#phone1
+														describedBy="phone1"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone1"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('Phone1')?.errors"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Phone number 2</label>
+													<ngx-mat-intl-tel-input
+														[preferredCountries]="['gb', 'us', 'jo']"
+														[enablePlaceholder]="true"
+														[enableSearch]="true"
+														name="Phone2"
+														#phone2
+														describedBy="phone2"
+														class="form-control input-group input-phone-selector"
+														formControlName="Phone2"
+													></ngx-mat-intl-tel-input>
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+
+												<div class="col-12 col-md-6 col-xl-6 mb-4 form-group">
+													<label>Company name</label>
+													<input type="text" class="form-control" 
+														placeholder="Enter name"
+														autocomplete="nope"
+														formControlName="CompanyName"
+														[class.is-invalid]="isConsigneeSubmitted && consigneeDetailsForm.get('CompanyName')?.errors">
+													<div class="invalid-feedback">
+														This field is required
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+								</form>
+								<button 
+									type="button" 
+									class="btn btn-secondary btn-rounded d-none" 
+									id="consignee-button" 
+									(click)="resetConsigneeDetailsForm(consigneeCountry, phone1, phone2);"
+								>
+								</button>
+						</ng-template>
+					</li>
+				</ul>
+				<div [ngbNavOutlet]="editNav" class="mt-3 p-0"></div>
+			</div>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="triggerEditClear()" tabindex="-1">Clear fields</button>
+		  	<button type="button" (click)="submitEditShipmentForm(editNav)" class="btn btn-primary btn-rounded" id="edit-shipment-button" tabindex="-1">Save</button>
+	  	</div>
+	</ng-template>
+
+	<ng-template #newAttachment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">Add attachment</h4>
+			<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); componentArray = [{id: 0}]"></button>
+		</div>
+
+		<div class="modal-body attachments-wrap shipment-attachments">
+			<form id="addAttachmentForm">
+				<div id="create-attachment" (click)="addNewComponent()"></div>
+	
+				<div class="attachment-items">
+					<ng-container *ngFor="let component of componentArray">
+						<app-attachment-modal-item [id]="component.id"></app-attachment-modal-item>
+					</ng-container>
+				</div>
+			</form>
+		</div>
+
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click'); componentArray = [{id: 0}]" tabindex="-1">Cancel</button>
+		  	<button type="button" (click)="uploadFile(errorLengthPopup)" class="btn btn-primary btn-rounded" tabindex="-1">Save</button>
+	  </div>
+	</ng-template>
+
+	<ng-template #errorLengthPopup let-modal>
+		<div class="modal-body" id="errorLengthPopup">
+			<i class="text-46 i-Information"></i>
+			<div class="note">
+				<div>Please upload at least one document</div>
+			</div>
+			<div class="note size-note">
+				<div>The document can't be added because it is over <strong>2 MB</strong></div>
+			</div>
+			<button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')">
+				<div>
+					<div>Okay</div>
+				</div>
+			</button>
+		</div>
+	</ng-template>
+
+	<ng-template #deleteShipment let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Delete shipment</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="deleteShipment">
+			<div class="note">Are you sure you want to delete the shipment from the event?</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded" (click)="modal.close('Close click')" ngbAutoFocus>Yes, delete it</button>
+			</div>
+		</div>
+    </ng-template>
+
+	<ng-template #saveShipment let-modal>
+		<div class="modal-header save-block">
+			<h4 class="modal-title" id="modal-basic-title">Save event</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" tabindex="-1"></button>
+		</div>
+
+		<div class="modal-body" id="saveShipment">
+			<i class="text-46 i-Information alert-block"></i>
+			<div class="note save-block">There are invalid values in the Shipments, they will be deleted after saving. Are you sure you want to continue saving?</div>
+			<div class="note alert-block">Please add at least one shipment</div>
+			<div class="actions">
+				<button type="button" class="btn btn-secondary btn-rounded save-block" (click)="modal.close('Close click')" tabindex="-1">Cancel</button>
+		  		<button type="button" class="btn btn-primary btn-rounded save-block" (click)="modal.close('Close click')" ngbAutoFocus>Yes, save it</button>
+				<button type="button" class="btn btn-secondary btn-rounded alert-block" (click)="modal.close('Close click')" tabindex="-1">Okay</button>
+			</div>
+		</div>
+    </ng-template>
+</div>  

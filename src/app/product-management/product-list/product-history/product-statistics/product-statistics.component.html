@@ -1,0 +1,84 @@
+  
+  
+  <div class="tab-content active">
+      <div class="filters">
+      	
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+                         
+						<div class="col-md-4 form-group mb-3">
+        <label for="picker1">{{
+          "product-history.dateFrom" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="dateFrom"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+	   <div class="col-md-4 form-group mb-3 ">
+        <label for="picker1">{{
+          "product-history.dateTo" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="invoiceDateTo"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="invoiceDateTo"
+            formControlName="dateTo"
+            ngbDatepicker
+            #invoiceDateTo="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="invoiceDateTo.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+				
+
+      </div>
+      <div *ngIf="statisticsModel" class="stats">
+        <div>📦 {{'product-history.totalBalance' | translate}}: <strong>{{statisticsModel.totalBalance}}</strong> {{'Unit' | translate}}</div>
+        <div>🛒 {{'product-history.productSalesCount' | translate}}: <strong>{{statisticsModel.productSalesCount}}</strong> {{'Unit' | translate}}</div>
+        <div>📥 {{'product-history.productPurchaseCount' | translate}}: <strong>{{statisticsModel.productPurchaseCount}}</strong> {{'Unit' | translate}}</div>
+        <div>💰 {{'product-history.avgPurchasePrice' | translate}}: <strong>{{statisticsModel.avgPurchasePrice}} {{'IRQ' | translate}}</strong></div>
+        <div>💵 {{'product-history.avgSellPrice' | translate}}: <strong>{{statisticsModel.avgSellPrice}} {{'IRQ' | translate}}</strong></div>
+      </div>
+    </div>

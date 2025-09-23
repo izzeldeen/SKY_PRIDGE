@@ -1,0 +1,103 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'warehouse-balance.warehouseBalanceManagement' | translate}}</h1>
+    <ul>
+        <li>{{'warehouse-balance.manageWarehouse'  | translate}}</li>
+        <li><strong class="text-primary">{{'warehouse-balance.balance'  | translate}}</strong></li>
+    </ul>
+</div>
+	<div class="custom-table-wrap">
+		<div class="card mb-50">
+			<div class="card-body form-group ">
+				<form [formGroup]="searchForm" id="form" (submit)="onSearch()" >
+
+				
+				<div class="row">
+               <div class=" col-md-4 form-group mb-3">
+                        <label for="product"> {{ "warehouse-balance.product" | translate }}</label>
+<p-autoComplete
+formControlName="product"
+  [suggestions]="filteredProducts"
+  (completeMethod)="filterProducts($event)"
+  field="name"
+  [forceSelection]="true"
+  [placeholder]="searchProduct"
+  [inputStyle]="{
+    backgroundColor: '#f8f9fa',
+    border: '1px solid #CED4DA',
+    borderRadius: '17px',
+    height: '32px',
+    width: '486px',
+    padding: '0.375rem 0.75rem'
+  }"
+/>
+  </div>
+
+	              <!-- <div class="col-md-4 form-group mb-3">
+                            <label for="picker1"> {{ "warehouse-balance.warehouse" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseId" name="warehouseId" (change)="getWarehouseSections(searchForm.get('warehouseId').value)">
+                            <option  [ngValue]="null" selected >{{ "select" | translate }}</option>
+                                <option *ngFor="let item of warehouses" value="{{item.id}}" >{{item.nameEn}}</option>
+                            </select>
+             </div> -->
+
+			 
+	              <div class="col-md-4 form-group mb-3">
+                            <label for="picker1"> {{ "warehouse-balance.section" | translate }}</label>
+                            <select class="form-control" formControlName="sectionId" name="sectionId" >
+                            <option  [ngValue]="null" selected >{{ "select" | translate }}</option>
+                                <option *ngFor="let item of sections" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+             </div>
+
+
+			    <!-- <div class="col-md-4 form-group mb-3">
+                            <label for="picker1"> {{ "warehouse-balance.branch" | translate }}</label>
+                            <select class="form-control" formControlName="branchId" name="branchId">
+                             <option  [ngValue]="null" selected>{{ "select" | translate }}</option>
+                                <option *ngFor="let item of branchies" value="{{item.id}}" >{{item.description}}</option>
+                            </select>
+             </div> -->
+
+			     <!-- <div class="col-md-4 form-group mb-3">
+                            <label for="picker1"> {{ "warehouse-balance.product" | translate }}</label>
+                            <select  class="form-control" formControlName="productId" name="productId">
+                                                            <option [ngValue]="null"  selected>{{ "select" | translate }}</option>
+
+                                <option *ngFor="let item of products" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+             </div> -->
+
+                 
+          
+
+
+
+
+				</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+				</form>
+			</div>
+
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event  )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->

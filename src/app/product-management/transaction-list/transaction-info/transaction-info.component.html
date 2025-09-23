@@ -1,0 +1,114 @@
+<div class="breadcrumb">
+    <h1>{{ 'transaction.info' | translate }}</h1>
+    <ul>
+        <li>
+         <a (click)="router.navigate(['/product-management/transaction'])">
+            {{'transaction.transaction' | translate}}
+
+         </a>
+        
+        </li>
+        <li>
+                <strong>{{'transaction.info' | translate}}</strong>
+        </li>
+      
+    </ul>
+
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+             <div class="card-header">
+                    <h4>{{ entity.type | translate}} <span *ngIf="entity.invoiceNumber"> | {{ entity.invoiceNumber}}</span> </h4>
+                 </div>
+
+            <div class="card-body">
+                    <div *ngIf="entity" class="row">
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.type' | translate}}</label>
+                             <span class="value" > {{entity.type | translate}} </span>
+                        </div>
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.warehouse' | translate}}</label>
+                             <span class="value" > {{entity.warehouseName}} </span>
+                        </div>
+
+                         <div class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.section' | translate}}</label>
+                             <span class="value" > {{entity.sectionName}} </span>
+                        </div>
+
+                           <div class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.branch' | translate}}</label>
+                             <span class="value" > {{entity.branchName}} </span>
+                        </div>
+
+                        
+
+                           <div *ngIf="entity.toWarehouseName" class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.towarehouse' | translate}}</label>
+                             <span class="value" > {{entity.toWarehouseName}} </span>
+                        </div>
+
+
+                         <div  *ngIf="entity.toSectionName" class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.tosection' | translate}}</label>
+                             <span class="value" > {{entity.toSectionName}} </span>
+                        </div>
+
+                         <div *ngIf="entity.toBranchName" class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.tobranch' | translate}}</label>
+                             <span class="value" > {{entity.toBranchName  }} </span>
+                        </div>
+
+                           <div  class="col-md-4 form-group mb-3">
+                            <label>{{'transaction.transactionDate' | translate}}</label>
+                             <span class="value" > {{entity.creationDate | date:'MM-dd-yyyy' }} </span>
+                        </div>
+                        
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+         <div class="card mb-4">
+             <div class="card-header">
+                    <h4>{{'transaction.transactionitems' | translate}}</h4>
+                 </div>
+
+            <div class="card-body">
+                    <div *ngIf="entity" class="row">
+                          <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th >{{'transaction.product' | translate }}</th>
+        <th *ngIf="entity.type == 'Reciving'"> {{'transaction.orderQuantity' | translate }} </th>
+        <th>{{'transaction.quantity' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody  *ngIf="entity?.transactionProduct?.length > 0">
+      <tr *ngFor="let item of entity?.transactionProduct; let i = index" >
+        <td>
+            <p> {{ item.name }} </p>
+        
+        </td>
+        <td *ngIf="entity.type == 'Reciving'">
+            <p> {{ item.orderedQuantity }} </p>
+        </td>
+        <td>
+           <p> {{ item.quantity }} </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

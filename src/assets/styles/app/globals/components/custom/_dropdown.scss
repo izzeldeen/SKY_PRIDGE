@@ -1,0 +1,52 @@
+.dropdown-more {
+    .dropdown-toggle {
+        &:after{
+            content: none;
+        }
+
+        padding: 0;
+        width: 40px;
+        height: 28px;
+        justify-content: center;
+
+        i.more-vertical {
+            margin: 0;
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 13px;
+            height: 13px;
+            text-align: center;
+
+            span {
+                display: inline-block;
+                width: 2px;
+                height: 2px;
+                background-color: currentColor;
+                border-radius: 50%;
+
+                &:after,
+                &:before{
+                    content: '';
+                    display: block;
+                    width: 2px;
+                    height: 2px;
+                    position: absolute;
+                    background-color: currentColor;
+
+                    border-radius: 50%;
+                }
+
+                &:after{
+                    top: 0;                    
+                }
+
+                &:before{
+                    bottom: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,153 @@
+[role="tab"] {
+    .btn {
+        width: 100%;
+        text-align: left;
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+    }
+}
+
+.accordion {
+    &> .card {
+        overflow: hidden;
+    }
+}
+
+// accordion row
+.accordion-row {
+    position: relative;
+    margin-bottom: 17px;
+    padding-left: 40px;
+    letter-spacing: 0;
+    color: $primary-black;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid $gray-300;
+    }
+
+    &.active {
+        .row-toggle::before {
+            transform: translate3d(0, -50%, 0) rotate(0);
+        }
+
+        .checkbox-list {
+            display: block;
+        }
+    }
+
+    .checkbox-list {
+        display: none;
+    }
+
+    .checkbox-item {
+        margin-bottom: 2px;
+    }
+
+    .col-toggle {
+        margin-bottom: 11px;
+
+        .caption {
+            margin-bottom: 11px;
+            font-weight: 600;
+            font-size: 14px;
+            pointer-events: none;
+        }
+    }
+
+    .row-toggle {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translate3d(0, -50%, 0) rotate(-90deg);
+            right: 18px !important;
+            content: '';
+            width: 11px;
+            height: 5px;
+            border: none;
+            background-image: url($arrow);
+            transition: transform .3s;
+        }
+    }
+}
+
+@media (max-width: 767px)  {
+    .accordion-row {
+        margin-bottom: 0;
+        padding: 0;
+        border: none !important;
+
+        &:first-of-type .col-toggle:first-of-type .caption {
+            border: none;
+        }
+
+        .row-toggle {
+            display: none;
+        }
+
+        .col-toggle {
+            margin-bottom: 0;
+
+            &.active {
+                .caption::after {
+                    transform: translate3d(0, -50%, 0) rotateX(180deg);
+                }
+
+                .checkbox-list {
+                    display: block !important;
+                }
+            }
+
+            .caption {
+                position: relative;
+                margin-bottom: 0;
+                padding: 13px 0;
+                line-height: 1.57;
+                pointer-events: all;
+                border-top: 1px solid $gray-300;
+                cursor: pointer;
+
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate3d(0, -50%, 0);
+                    right: 6px !important;
+                    content: '';
+                    width: 11px;
+                    height: 5px;
+                    border: none;
+                    background-image: url($arrow);
+                    transition: transform .3s;
+                }
+            }
+        }
+
+        .checkbox-list {
+            display: none !important;
+            margin: -3px 0 9px;
+        }
+    }
+}
+
+[dir=rtl] {
+    @media (max-width: 767px)  {
+        .accordion-row {    
+            .col-toggle {
+                .caption {
+                    &::after {
+                        right: initial !important;
+                        left: 6px;
+                    }
+                }
+            }
+        }
+    }
+}

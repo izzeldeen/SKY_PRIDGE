@@ -1,0 +1,2457 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>Permissions</h1>
+
+        <ul>
+			<li><strong>Users</strong></li>
+			<li>Permissions</li>
+		</ul>
+    </div>
+    
+ 	<div class="custom-table-wrap">
+		<div class="table-heading flex-row justify-content-between">
+			<div class="table-search form-group m-0">
+				<input id="table-search" placeholder="Search by permission..."  class="form-control" type="text">
+			</div>
+			<div class="heading-actions trigger-grid-table ms-4">
+				<button 
+	                type="button" 
+	                class="btn btn-rounded btn-secondary btn-show-grid me-2" 
+	                (click)="toogleViewMode($event.target)"
+	            >
+	                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linejoin="round" d="M1.17 1.17h13.67v13.67H1.17z"/><path stroke="currentColor" d="M5.97 1.33v13.34M1.33 5.63h13.34M1.33 10.07h13.34M10.4 1.33v13.34"/></svg>
+	            </button>
+	            <button 
+                	type="button" 
+                	class="btn btn-rounded btn-primary btn-show-table" 
+                	(click)="toogleViewMode($event.target)"
+            	>
+                	<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" d="M1.83 4.17h12.34M1.83 8.17h12.34M1.83 12.17h12.34"/></svg>
+            	</button>
+			</div>
+		</div>
+
+		<div class="tabs-to-dropdown">
+			<div ngbDropdown #permissionsNavDropdown="ngbDropdown">
+			  	<button class="mobile-drop w-100 w-auto-md text-start" id="tabDropdown" ngbDropdownToggle>{{ active }}</button>
+				<div ngbDropdownMenu aria-labelledby="tabDropdown" class="nav-tabs">
+				    <a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Configuration'}" (click)="permissionsTabs.select('Configuration')">Configuration</a>
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'CRM'}" (click)="permissionsTabs.select('CRM')">CRM</a>
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'GNConnect'}" (click)="permissionsTabs.select('GNConnect')">GNConnect</a>
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Billing'}" (click)="permissionsTabs.select('Billing')">Billing</a>
+					<a class="dropdown-item nav-link" [ngClass]="{'active': active === 'Identify'}" (click)="permissionsTabs.select('Identify')">Identify</a>
+				</div>
+			</div>
+
+			<ul ngbNav #permissionsTabs="ngbNav" [(activeId)]="active" class="nav-tabs p-0">
+	            <li ngbNavItem="Configuration">
+	                <a ngbNavLink>Configuration</a>
+	                <ng-template ngbNavContent>
+	                    <div class="table-wrap table-view">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th class="col-md-3">
+											Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Page
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-2">
+											Status
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="actions col-md-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge active">Active</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-flex">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge">Disactivated</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-block">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner table-view">
+							<div class="pages">
+								<div class="page-count">20 total</div>
+
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="c-card grid-view pt-0 pt-md-3">
+							<div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">City</div>
+                                        <div class="checkbox-list">
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read city</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create city</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            	  	  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit city</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		 (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete city</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Product type</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read product type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create product type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit product type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete product type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Event</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read event</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create event</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit event</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete event</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Global zone</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read global zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create global zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit global zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete global zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Local zone</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read local zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create local zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit local zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete local zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Product service</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read product service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create product service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit product service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete product service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipping type</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipping type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipping type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipping type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete shipping type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Weight</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read weight</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create weight</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit weight</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete weight</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Weight envelope</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read weight envelope</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create weight envelope</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit weight envelope</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete weight envelope</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Zone</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">User type</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read user type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create user type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit user type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete user type</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipment service</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipment service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipment service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipment service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete shipment service</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Airport</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read airport</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create airport</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit airport</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete airport</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Carrier</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read carrier</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create carrier</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit carrier</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete carrier</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+	                </ng-template>
+	            </li>
+	            <li ngbNavItem="CRM">
+	                <a ngbNavLink>CRM</a>
+	                <ng-template ngbNavContent>
+	                	<div class="table-wrap table-view">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th class="col-md-3">
+											Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Page
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-2">
+											Status
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="actions col-md-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge active">Active</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-flex">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge">Disactivated</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-block">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner table-view">
+							<div class="pages">
+								<div class="page-count">20 total</div>
+
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="c-card grid-view pt-0 pt-md-3">
+							<div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Customer</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read customer</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create customer</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit customer</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete customer</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Branch</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read branch</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create branch</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit branch</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete branch</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Branch attachment</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read branch attachment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create branch attachment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit branch attachment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete branch attachment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Branch e-invoice</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read branch e-invoice</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create branch e-invoice</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit branch e-invoice</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete branch e-invoice</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Branch SLA</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read branch SLA</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create branch SLA</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit branch SLA</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete branch SLA</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	                </ng-template>
+	            </li>
+	            <li ngbNavItem="GNConnect">
+	                <a ngbNavLink>GNConnect</a>
+	                <ng-template ngbNavContent>
+	                	<div class="table-wrap table-view">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th class="col-md-3">
+											Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Page
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-2">
+											Status
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="actions col-md-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge active">Active</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-flex">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge">Disactivated</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-block">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner table-view">
+							<div class="pages">
+								<div class="page-count">20 total</div>
+
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="c-card grid-view pt-0 pt-md-3">
+							<div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipment</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipment void</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipment tracking</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Manifest</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read manifest</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create manifest</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit manifest</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete manifest</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create manifest shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete manifest shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Master air waybill</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read master air waybill</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create master air waybill</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit master air waybill</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Export master air waybills items as Excel</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete master air waybill</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create master air waybill manifests</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete master air waybill manifests</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Failure tower dashboard</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read connect result</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create connect result</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit connect result</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete connect result</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Tracking</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read tracking</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create tracking</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit tracking</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete tracking</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Control tower dashboard</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Verify shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read control tower dashboard</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Control tower dashboard invalid address</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Resend Shipment</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	                </ng-template>
+	            </li>
+	            <li ngbNavItem="Billing">
+	                <a ngbNavLink>Billing</a>
+	                <ng-template ngbNavContent>
+	                	<div class="table-wrap table-view">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th class="col-md-3">
+											Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Page
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-2">
+											Status
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="actions col-md-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge active">Active</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-flex">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge">Disactivated</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-block">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner table-view">
+							<div class="pages">
+								<div class="page-count">20 total</div>
+
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="c-card grid-view pt-0 pt-md-3">
+							<div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Rate sheet</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create rate sheet</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit rate sheet</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete rate sheet</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Rate sheet product</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet product</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create rate sheet product</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit rate sheet product</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete rate sheet product</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create rate sheet zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit rate sheet zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete rate sheet zone</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone extra value</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet zone extra value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet zone extra value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit rate sheet zone extra value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete rate sheet zone extra value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Rate sheet zone value</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read rate sheet zone value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create rate sheet zone value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit rate sheet zone value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete rate sheet zone value</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Billing setting</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read billing setting</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create billing setting</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit billing setting</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete billing setting</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Top up shipping credit</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Top up customs credit</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Customer billing profile</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read customer billing profile</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create customer billing profile</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit customer billing profile</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete customer billing profile</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Surcharge</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read surcharge</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create surcharge</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit surcharge</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete surcharge</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Customs charges</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		 <span>Delete customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Calculate customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Identify customs charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipping charges</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Calculate shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Identify shipping charges</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Customs credit transaction</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read customs credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create customs credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit customs credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete customs credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipping credit transaction</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipping credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipping credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipping credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete shipping credit transaction</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Customs invoices</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read customs invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create customs invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit customs invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete customs invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Shipping invoices</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read shipping invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create shipping invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit shipping invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete shipping invoices</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	                </ng-template>
+	            </li>
+	            <li ngbNavItem="Identify">
+	                <a ngbNavLink>Identify</a>
+	                <ng-template ngbNavContent>
+	                	<div class="table-wrap table-view">
+							<table class="custom-table">
+								<thead>
+									<tr>
+										<th class="col-md-3">
+											Name
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Code
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-3">
+											Page
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="col-md-2">
+											Status
+											<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+										</th>
+										<th class="actions col-md-1">
+											&nbsp;
+										</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge active">Active</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-flex">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											Read city
+				                        </td>
+										<td>
+											ReadCity
+										</td>
+										<td>
+											City
+										</td>
+										<td>
+											<span class="status c-badge">Disactivated</span>
+										</td>
+										<td class="actions">
+											<div class="row-menu hide-pseudo d-inline-block">
+												<button class="dropdown-item fs-4 px-1 w-100 text-center"
+														(click)="handleModal(AddAssignPermissionsPopup)">
+													<i class="i-Add-User"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="table-footer-inner table-view">
+							<div class="pages">
+								<div class="page-count">20 total</div>
+
+								<div class="entries">
+									Show per page
+									<div class="entries-dropdown" ngbDropdown>
+										<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+								
+										<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>10</a>
+												<ng-template ngbNavContent>10</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>50</a>
+												<ng-template ngbNavContent>50</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>70</a>
+												<ng-template ngbNavContent>70</ng-template>
+											</ng-container>
+											<ng-container ngbNavItem>
+												<a class="dropdown-item" ngbNavLink>100</a>
+												<ng-template ngbNavContent>100</ng-template>
+											</ng-container>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="table-pager">
+								<div class="action disabled pager-position" aria-label="go to first page">
+									<i class="datatable-icon-prev"></i>
+								</div>
+
+								<div class="action disabled pager-step"  aria-label="go to previous page">
+									<i class="datatable-icon-left"></i>
+								</div>
+
+								<div class="action pager-page active">1</div>
+								<div class="action pager-page">2</div>
+								<div class="action pager-page">3</div>
+
+								<div class="action pager-step" aria-label="go to next page">
+									<i class="datatable-icon-right"></i>
+								</div>
+
+								<div class="action pager-position"  aria-label="go to last page">
+									<i class="datatable-icon-skip"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="c-card grid-view pt-0 pt-md-3">
+							<div class="accordion-row parent-toggle active">
+                                <div class="row-toggle" (click)="toggleClass($event.target)"></div>
+                                <div class="row">
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Users</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read users</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create users</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit users</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete users</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Roles</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read roles</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create roles</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit roles</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete roles</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-toggle parent-toggle col-12 col-md-6 col-xxl-3">
+                                        <div class="caption" (click)="toggleClass($event.target)">Permissions</div>
+                                        <div class="checkbox-list">
+                                        	<div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Read permissions</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Create permissions</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Edit permissions</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                            <div class="checkbox-item">
+                                            	<span class="link text-13" 
+                                            		  (click)="handleModal(AddAssignPermissionsPopup)">
+                                            		<span>Delete permissions</span>
+                                            		<i class="i-Add-User"></i>
+                                            	</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	                </ng-template>
+	            </li>
+	        </ul>
+	        <div [ngbNavOutlet]="permissionsTabs" class="mt-3 p-0"></div>
+       </div>
+	</div>
+</div>
+
+<ng-template #AddAssignPermissionsPopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Assign permission</h4>
+		<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); clearUsersArray()"></button>
+    </div>
+
+    <div class="modal-body">
+        <form (ngSubmit)="submitAssignPermissionsAddForm()">
+        	<div class="row with-btn">
+        		<div class="form-group">
+					<label>User</label>
+					<div ngbDropdown class="form-control form-control-permission p-0" tabindex="-1">
+						<div ngbDropdownToggle>
+							{{ userName || 'Select user' }}
+						</div>
+						<div ngbDropdownMenu class="permission-dropdown">
+							<div class="permission-search">
+								<i class="i-Magnifi-Glass1 permission-search-icon"></i>
+								<input class="form-control" type="text" (keydown.enter)="$event.preventDefault()">
+							</div>
+							<div class="dropdown-item" (click)="onUserSelected('User 1')">User 1</div>
+							<div class="dropdown-item" (click)="onUserSelected('User 2')">User 2</div>
+							<div class="dropdown-item" (click)="onUserSelected('User 3')">User 3</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group btn-wrap">
+					<label>&nbsp;</label>
+    				<button 
+		                type="button" 
+		                class="btn btn-rounded btn-primary"
+						(click)="submitAddUser()"
+		            >
+		            	<i class="i-Plus"></i>
+		                <span>Add user</span>
+		            </button>
+    			</div>
+        	</div>
+        	
+			<div class="table-wrap" *ngIf="usersArray.length">
+				<table class="custom-table">
+					<thead>
+						<tr>
+							<th class="col-md-5">
+								Full name
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th class="col-md-5">
+								Role
+								<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+							</th>
+							<th class="actions col-md-2 d-table-cell">
+								&nbsp;
+							</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr *ngFor="let user of usersArray let i = index;" class="redirect-link" role="link" (click)="redirect($event, modal)" data-link="/accounts/user">
+							<td>
+								{{ user }}
+		                    </td>
+							<td>
+								Administrator
+							</td>
+							<td class="d-table-cell actions">
+								<div class="row-menu hide-pseudo d-inline-flex">
+									<button class="btn-delete dropdown-item px-1 w-100 text-center" (click)="deleteUser(i)">
+										<svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.87 4.44H2.12M16.32 6.76l-.42 6.39c-.17 2.46-.25 3.68-1.05 4.43-.8.75-2.03.75-4.5.75h-.71c-2.47 0-3.7 0-4.5-.75-.8-.75-.88-1.97-1.05-4.43l-.42-6.4M7.68 9.07l.46 4.63M12.31 9.07l-.46 4.63" stroke="#5F3994" stroke-linecap="round"/><path d="M4.9 4.44H5a1.85 1.85 0 0 0 1.73-1.31l.09-.27c.08-.23.12-.35.17-.45.2-.39.58-.66 1-.73l.48-.01h3.05l.47.01c.43.07.81.34 1.01.73.05.1.1.22.17.45l.09.27.03.1c.26.71.93 1.2 1.7 1.21h.1" stroke="#5F3994"/></svg>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="table-footer-inner table-view" *ngIf="usersArray.length">
+				<div class="pages">
+					<div class="page-count">20 total</div>
+
+					<div class="entries">
+						Show per page
+						<div class="entries-dropdown" ngbDropdown>
+							<div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+					
+							<div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>10</a>
+									<ng-template ngbNavContent>10</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>50</a>
+									<ng-template ngbNavContent>50</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>70</a>
+									<ng-template ngbNavContent>70</ng-template>
+								</ng-container>
+								<ng-container ngbNavItem>
+									<a class="dropdown-item" ngbNavLink>100</a>
+									<ng-template ngbNavContent>100</ng-template>
+								</ng-container>
+							</div> 
+						</div>
+					</div>
+				</div>
+
+				<div class="table-pager">
+					<div class="action disabled pager-position" aria-label="go to first page">
+						<i class="datatable-icon-prev"></i>
+					</div>
+
+					<div class="action disabled pager-step"  aria-label="go to previous page">
+						<i class="datatable-icon-left"></i>
+					</div>
+
+					<div class="action pager-page active">1</div>
+					<div class="action pager-page">2</div>
+					<div class="action pager-page">3</div>
+
+					<div class="action pager-step" aria-label="go to next page">
+						<i class="datatable-icon-right"></i>
+					</div>
+
+					<div class="action pager-position"  aria-label="go to last page">
+						<i class="datatable-icon-skip"></i>
+					</div>
+				</div>
+			</div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+            type="button" 
+            class="btn btn-secondary btn-rounded" 
+            (click)="resetAssignPermissionsAddForm()"
+            tabindex="-1"
+        >
+            Clear fields
+        </button>
+
+        <button 
+            type="button"
+            (click)="submitAssignPermissionsAddForm()"
+            class="btn btn-primary btn-rounded"
+            tabindex="-1"
+        >
+            Save changes
+        </button>
+    </div>
+</ng-template>

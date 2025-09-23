@@ -1,0 +1,58 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'branch.manageBranch' | translate}}</h1>
+    <ul>
+        <li>{{'companyManagement.manageCompanies'  | translate}}</li>
+        <li><strong class="text-primary">{{'branch.branch'  | translate}}</strong></li>
+    </ul>
+</div>
+	<div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<!-- Searching Lookups -->
+				<input 
+					id="table-search" 
+					placeholder="{{'branch.search' | translate}}"
+					class="form-control" 
+					type="text"
+					maxlength="100"
+					(keydown.enter)="onSearch($event)"
+				>
+			</div>
+			<div class="heading-actions">
+				<!-- Add Lookups -->
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddBranch(AddBranchPopup)" 
+					*ngIf="authService.hasPermission('Add-Branch') "
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'branch.addBranch' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , EditBranchPopup )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+<!-- Add Lookups -->
+<ng-template #AddBranchPopup let-modal>
+	<app-branch-form [modal]="modal" ></app-branch-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditBranchPopup let-modal>
+ <app-branch-form [modal]="modal"  [id]="id" [isEditMood]="true" ></app-branch-form>
+
+</ng-template>

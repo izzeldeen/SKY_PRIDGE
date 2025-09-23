@@ -1,0 +1,234 @@
+<div class="modal-header">
+    <h4 class="modal-title" *ngIf="!isEditMood">{{'userManagment.AddNewUser' | translate}}</h4>
+    <h4 class="modal-title" *ngIf="isEditMood">{{'userManagment.UpdateUser' | translate}}</h4>
+    <button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="userAddForm" id="userAddForm">
+        <div class="row">
+
+             <!-- Warehouses -->
+                <div class="col-md-6 form-group mb-3">
+                            <label for="picker1"> {{ "userManagment.warehouse" | translate }}</label>
+                            <select class="form-control" formControlName="warehouseId" name="warehouseId"
+                            >
+                            <option   selected [ngValue]="null">{{ "customers.select" | translate }}</option>
+                             <option *ngFor="let item of warehouseies" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                             <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                        </div>
+
+
+            <!-- Branchies -->
+              <div class="col-md-6 form-group mb-3">
+                            <label for="branchId"> {{ "userManagment.branch" | translate }}</label>
+                            <select class="form-control" formControlName="branchId" name="branchId"
+                            [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('branchId')?.errors"
+                            >
+                                <option   selected [ngValue]="null" >{{ "customers.select" | translate }}</option>
+                                <option *ngFor="let item of branchies" value="{{item.id}}" >{{item.name}}</option>
+                            </select>
+                             <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+                        </div>
+
+            <!-- Full Name -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'userManagment.fullName' | translate }}</label>
+                <input type="text"
+                       maxlength="100"
+                       placeholder="{{'userManagment.fullName' | translate }}"
+                       class="form-control"
+                       formControlName="fullName"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('fullName')?.errors">
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+            <!-- UserName -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'userManagment.userName' | translate }}</label>
+                <input type="text"
+                       maxlength="100"
+                       placeholder="{{'userManagment.userName' | translate }}"
+                       class="form-control"
+                       formControlName="userName"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('userName')?.errors">
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+            <!-- Email Address -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'userManagment.email' |translate}} </label>
+                <input type="text"
+                       maxlength="100"
+                       placeholder="{{'userManagment.email' |translate}}"
+                       class="form-control"
+                       formControlName="email"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('email')?.errors">
+                <div *ngIf="isSubmittedUserAddForm && userAddForm.get('email')?.errors" class="invalid-feedback">
+                    <div *ngIf="userAddForm.get('email').errors['required']">
+                        {{'common.fieldRequired' | translate}}
+                    </div>
+                    <div *ngIf="userAddForm.get('email').errors['invalidEmail']">
+                        {{'common.emailFormat' | translate}}
+                    </div>
+                </div>
+            </div>
+            <!-- Phone Number -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'userManagment.phoneNumber' | translate}}</label>
+                <ngx-mat-intl-tel-input [preferredCountries]="['iq']"
+                                        [onlyCountries]="onlyCountries"
+                                        [enablePlaceholder]="true"
+                                        [enableSearch]="true"
+                                        name="Phone"
+                                        #phoneInput
+                                        describedBy="phoneInput"
+                                        class="form-control input-group input-phone-selector"
+                                        formControlName="phoneNumber"
+                                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('phoneNumber')?.errors">
+                </ngx-mat-intl-tel-input>
+                <div class="invalid-feedback" *ngIf="isSubmittedUserAddForm && userAddForm.get('phoneNumber')?.errors">
+                    <div *ngIf="userAddForm.get('phoneNumber')?.errors?.validatePhoneNumber ">
+                        {{ 'common.insertCorrectPhoneNumber' | translate }}
+                    </div>
+                    <div *ngIf="userAddForm.get('phoneNumber')?.errors?.required">
+                        {{ 'common.fieldRequired' | translate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Roles -->
+            <div class="col-12 col-sm-6 form-group required">
+                <label>{{'userManagment.roles' | translate }}</label>
+                <p-multiSelect [options]="Roles" [styleClass]="'form-control'" optionLabel="viewName"
+                               optionValue="name"
+                               formControlName="roles"
+                               [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('roles')?.errors">
+                </p-multiSelect>
+
+                <div class="invalid-feedback" *ngIf="isSubmittedUserAddForm && userAddForm.get('roles')?.errors">
+                    <div *ngIf="userAddForm.get('roles')?.errors?.required">
+                        {{ 'common.fieldRequired' | translate }}
+                    </div>
+                </div>
+            </div>
+
+          
+         <div class="col-md-6 form-group mb-3">
+
+<label class="switch switch-primary me-3 mt-4">
+                    <span>
+
+                        {{
+          "companyManagement.isActive" | translate
+        }}
+                    </span>
+                    <input type="checkbox"   formControlName="isActive" >
+                    <span class="slider"></span>
+                </label>
+         </div>
+
+        </div>
+
+          <!-- Password -->
+        <div class="form-group required" *ngIf="!isEditMood">
+            <label>{{'userManagment.password' | translate}}</label>
+            <input type="password"
+                   placeholder="{{'userManagment.Enterpassword' | translate}}"
+                   class="form-control"
+                   formControlName="password"
+                   [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('password')?.errors">
+            <i class="i-Eye show-pass" (click)="triggerShowPass($event)"></i>
+            <div *ngIf="isSubmittedUserAddForm && userAddForm.get('password')?.errors" class="invalid-feedback">
+                <div *ngIf="userAddForm.get('password').errors['required']">
+                    {{'common.fieldRequired' | translate}}
+                </div>
+                <div *ngIf="!userAddForm.get('password').errors['required'] && userAddForm.get('password').errors['invalidPassword']">
+                    {{'common.passwordFormat' | translate}}
+                </div>
+            </div>
+        </div>
+        <!-- Confirm Password -->
+        <div class="form-group required" *ngIf="!isEditMood">
+            <label>{{'userManagment.confirmPassword' | translate}}</label>
+            <input type="password"
+                   placeholder="{{'userManagment.Enterpassword' | translate}}"
+                   class="form-control"
+                   formControlName="PasswordConfirm"
+                   [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('PasswordConfirm')?.errors">
+            <i class="i-Eye show-pass" (click)="triggerShowPass($event)"></i>
+            <div *ngIf="isSubmittedUserAddForm && userAddForm.get('PasswordConfirm')?.errors" class="invalid-feedback">
+                <div *ngIf="userAddForm.get('PasswordConfirm').errors['required']">
+                    {{'common.fieldRequired' | translate}}
+                </div>
+                <div *ngIf="userAddForm.get('PasswordConfirm').errors['matching']">
+                    {{'common.passwordNotMatch' | translate}}
+                </div>
+            </div>
+        </div>
+
+
+         <div class="row">
+    <div class="col-md-6 col-sm-6 form-group">
+                <label>{{'userManagment.jobDescription' | translate }}</label>
+                <input type="text"
+                       maxlength="100"
+                       placeholder="{{'userManagment.jobDescription' | translate }}"
+                       class="form-control"
+                       formControlName="jobDescription"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('jobDescription')?.errors">
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+     <div class="col-md-6 form-group mb-3">
+                            <label for="picker1"> {{ "userManagment.preferredLanguage" | translate }}</label>
+                            <select class="form-control" formControlName="preferredLanguageId" name="preferredLanguageId">
+                                <option *ngFor="let item of preferredLanguages" value="{{item.id}}" >{{item.title}}</option>
+                            </select>
+                        </div>
+         </div>
+           
+
+             <div class="col-md-12 col-sm-6 form-group">
+                <label>{{'userManagment.address' | translate }}</label>
+                <input type="textarea"
+                       maxlength="100"
+                       placeholder="{{'userManagment.address' | translate }}"
+                       class="form-control"
+                       formControlName="address"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('address')?.errors">
+                <div class="invalid-feedback">
+                    {{'common.fieldRequired'|translate}}
+                </div>
+            </div>
+
+      
+    </form>
+</div>
+<div class="modal-footer position-absolute bottom-0 w-100">
+    <!-- Cancel Event -->
+    <button type="button"
+            class="btn btn-secondary btn-rounded"
+            (click)="modal.dismiss('Cross click')"
+            tabindex="-1">
+        {{'common.cancel' | translate}}
+    </button>
+    <!-- Save Event -->
+    <button type="button"
+            (click)="submitUserAddForm()"
+            class="btn btn-primary btn-rounded"
+            tabindex="-1"
+            *ngIf="authSerivce.hasPermission('Add-Admin') || authSerivce.hasPermission('Update-Admin')">
+        {{'common.save' | translate}}
+    </button>
+</div>

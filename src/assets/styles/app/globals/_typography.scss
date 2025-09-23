@@ -1,0 +1,56 @@
+h1, h2, h3, h4, h5, h6, .card-title, .text-title {
+  color: #46404E;
+}
+
+
+.text-small {
+  font-size: .75rem;
+}
+
+// 
+// 
+// Text font weight:
+@for $i from 300 through 900 {
+  .font-weight-#{$i} {
+    font-weight: $i;
+  }
+}
+
+
+
+// 
+// 
+// Font size:
+@for $i from 10 through 78 {
+  .text-#{$i} {
+    font-size: #{$i}px;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  @for $i from 10 through 78 {
+    .text-md-#{$i} {
+      font-size: #{$i}px;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  @for $i from 10 through 78 {
+    .text-lg-#{$i} {
+      font-size: #{$i}px;
+    }
+  }
+}
+
+
+// 
+// 
+// Text color:
+.text-primary-grey {
+  color: $primary-grey;
+}
+
+.text-primary-black {
+  color: $primary-black;
+}

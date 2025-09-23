@@ -1,0 +1,33 @@
+<button class="btn bg-transparent search-overlay" (click)="searchService.searchOpen = false"></button>
+
+<div class="search-dropdown rtl-ps-none" perfectScrollbar [@animate]="{value:'*',params:{y:'-10px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+	<div class="search-results">
+		<div class="category-search">
+			<!-- <div ng-repeat="showInfo in informations">
+				{{showInfo.inputName}}
+			</div> -->
+			
+			<input id="two" type="text" class="search-val" value="Pickup Facility"/>
+			<button class="category-link btn">
+				In Shipments
+				<i class="i-Arrow-Right nav-icon"></i>
+			</button>
+		</div>
+
+		<div class="category-search">
+			<input type="text" class="search-val" value="Pickup Facility"/>
+			<button class="category-link btn">
+				In Shipments
+				<i class="i-Arrow-Right nav-icon"></i>
+			</button>
+		</div>
+
+		<div class="category-search">
+			<input type="text" class="search-val" value="Pickup Facility"/>
+			<button class="category-link btn">
+				In Shipments
+				<i class="i-Arrow-Right nav-icon"></i>
+			</button>
+		</div>
+	</div>
+</div>

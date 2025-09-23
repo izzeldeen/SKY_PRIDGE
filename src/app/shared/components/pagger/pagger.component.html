@@ -1,0 +1,39 @@
+<div class="table-footer-inner">
+    <div class="pages">
+        <div class="page-count">{{TotalRecords}} {{'Total' | translate}}</div>
+        <div class="entries">
+            {{'Per Page' | translate}}
+            <div class="entries-dropdown" ngbDropdown>
+                <div id="entriesDropdown" ngbDropdownToggle [ngbNavOutlet]="entries"></div>
+                <div ngbDropdownMenu aria-labelledby="entriesDropdown" ngbNav #entries="ngbNav" class="entries-dropdown">
+                    <ng-container ngbNavItem *ngFor="let page of pageSizeOptions">
+                        <a class="dropdown-item" ngbNavLink (click)="OnPageChange(page)" [class.active]="page === pageSize">{{page}}</a>
+                        <ng-template ngbNavContent>{{pageSize}}</ng-template>
+                    </ng-container>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="table-pager">
+        <div class="action  pager-position" [class.disabled]="pageIndex === 1 || pageIndex === 0" aria-label="go to first page" (click)="firstPage()">
+            <i class="datatable-icon-prev"></i>
+        </div>
+
+        <div class="action pager-step" [class.disabled]="pageIndex === 1 || pageIndex === 0" aria-label="go to previous page" (click)="previousPage()" >
+            <i class="datatable-icon-left"></i>
+        </div>
+
+        <div *ngFor="let page of getPageNumbers()" class="action pager-page" [class.active]="pageIndex === page" (click)="page !== '...' && pageIndexChange(page)">
+            {{ page }}
+        </div>
+
+        <div class="action pager-step" aria-label="go to next page" (click)="nextPage()" >
+            <i class="datatable-icon-right"></i>
+        </div>
+
+        <div class="action pager-position"  aria-label="go to last page" (click)="lastPage()" >
+            <i class="datatable-icon-skip"></i>
+        </div>
+    </div>
+</div>

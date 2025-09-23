@@ -1,0 +1,194 @@
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="!isEditMood">
+    {{ "customers.addcustomers" | translate }}
+  </h4>
+  <h4 class="modal-title" *ngIf="isEditMood">
+    {{ "customers.editcustomers" | translate }}
+  </h4>
+  <button style="opacity: 0; pointer-events: none" ngbAutoFocus></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="form" id="form">
+    <div class="row">
+
+           <!-- Name Arabic -->
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "customers.nameAr" | translate }}</label>
+        <input type="text" maxlength="100" class="form-control" formControlName="nameAr"
+          placeholder="{{ 'customers.nameAr' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('nameAr')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('nameAr')?.errors" class="invalid-feedback">
+          <div *ngIf="form.get('nameAr')?.errors['required']">
+            {{ "common.fieldRequired" | translate }}
+          </div>
+          <div *ngIf="form.get('nameAr')?.errors['arabicTextWithNumbers']">
+            {{ "common.onlyArabicIsAllowed" | translate }}
+          </div>
+          <div *ngIf="form.get('nameAr')?.errors['noWhitespace']">
+            {{ "common.noWhitespace" | translate }}
+          </div>
+          <div *ngIf="form.get('nameAr')?.errors['maxlength']">
+            {{ "common.maxLength" | translate:{length:100} }}
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Name English -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.nameEn" | translate }}</label>
+        <input type="text" maxlength="100" class="form-control" formControlName="nameEn"
+          placeholder="{{ 'customers.nameEn' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('nameEn')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('nameEn')?.errors" class="invalid-feedback">
+          <div *ngIf="form.get('nameEn')?.errors['required']">
+            {{ "common.fieldRequired" | translate }}
+          </div>
+          <div *ngIf="form.get('nameEn')?.errors['englishTextWithNumbers']">
+            {{ "common.onlyEnglishIsAllowed" | translate }}
+          </div>
+          <div *ngIf="form.get('nameEn')?.errors['noWhitespace']">
+            {{ "common.noWhitespace" | translate }}
+          </div>
+          <div *ngIf="form.get('nameEn')?.errors['maxlength']">
+            {{ "common.maxLength" | translate:{length:100} }}
+          </div>
+        </div>
+      </div>
+
+ 
+      <!-- Address -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.address" | translate }}</label>
+        <input type="text" maxlength="100" class="form-control" formControlName="address"
+          placeholder="{{ 'customers.address' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('address')?.invalid" />
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ 'customers.mobileNumber' | translate }}</label>
+        <ngx-mat-intl-tel-input [preferredCountries]="['iq']" [onlyCountries]="onlyCountries" [enablePlaceholder]="true"
+          [enableSearch]="true" class="form-control input-group input-phone-selector" formControlName="mobileNumber"
+          [class.is-invalid]="isFormSubmitted && form.get('mobileNumber')?.invalid">
+        </ngx-mat-intl-tel-input>
+        <div *ngIf="isFormSubmitted && form.get('mobileNumber')?.errors?.['pattern']" class="invalid-feedback">
+          {{ "common.invalidMobile" | translate }}
+        </div>
+      </div>
+
+      <!-- Initial Balance -->
+      <div class="col-12 col-sm-6 form-group required">
+        <label>{{ "customers.initialBalance" | translate }}</label>
+        <input type="number" class="form-control" formControlName="initialBalance"
+          [class.is-invalid]="isFormSubmitted && form.get('initialBalance')?.invalid"
+          placeholder="{{ 'customers.initialBalance' | translate }}" />
+        <div *ngIf="isFormSubmitted && form.get('initialBalance')?.errors" class="invalid-feedback">
+          <div *ngIf="form.get('initialBalance')?.errors['required']">
+            {{ "common.fieldRequired" | translate }}
+          </div>
+          <div *ngIf="form.get('initialBalance')?.errors['min']">
+            {{ "common.minValue" | translate:{min:0} }}
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Credit Limit -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.creditLimit" | translate }}</label>
+        <input type="number" class="form-control" formControlName="creditLimit"
+          placeholder="{{ 'customers.creditLimit' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('creditLimit')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('creditLimit')?.errors?.['min']" class="invalid-feedback">
+          {{ "common.minValue" | translate:{min:0} }}
+        </div>
+      </div>
+
+      <!-- Period in Days -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.periodInDays" | translate }}</label>
+        <input type="number" class="form-control" formControlName="periodInDays"
+          placeholder="{{ 'customers.periodInDays' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('periodInDays')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('periodInDays')?.errors?.['min']" class="invalid-feedback">
+          {{ "common.minValue" | translate:{min:0} }}
+        </div>
+      </div>
+
+      <!-- Discount -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.discount" | translate }}</label>
+        <input type="number" class="form-control" formControlName="discount"
+          placeholder="{{ 'customers.discount' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('discount')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('discount')?.errors" class="invalid-feedback">
+          <div *ngIf="form.get('discount')?.errors['min']">
+            {{ "common.minValue" | translate:{min:0} }}
+          </div>
+          <div *ngIf="form.get('discount')?.errors['max']">
+            {{ "common.maxValue" | translate:{max:100} }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Number -->
+      <div class="col-12 col-sm-6 form-group">
+        <label>{{ "customers.accountNumber" | translate }}</label>
+        <input type="text" maxlength="50" class="form-control" formControlName="accountNumber"
+          placeholder="{{ 'customers.accountNumber' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('accountNumber')?.invalid" />
+        <div *ngIf="isFormSubmitted && form.get('accountNumber')?.errors?.['maxlength']" class="invalid-feedback">
+          {{ "common.maxLength" | translate:{length:50} }}
+        </div>
+      </div>
+
+      <!-- Customer Type -->
+      <div class="col-md-6 form-group mb-3">
+        <label for="customerTypeId">{{ "customers.customerTypeId" | translate }}</label>
+        <select class="form-control" formControlName="customerTypeId"
+          [class.is-invalid]="isFormSubmitted && form.get('customerTypeId')?.invalid" id="customerTypeId">
+          <option value="" disabled selected>{{ "customers.select" | translate }}</option>
+          <option *ngFor="let item of customerTypesList" [value]="item.id">{{ item.title }}</option>
+        </select>
+        <div *ngIf="isFormSubmitted && form.get('customerTypeId')?.errors?.['required']" class="invalid-feedback">
+          {{ "common.fieldRequired" | translate }}
+        </div>
+      </div>
+
+      <!-- Is Active -->
+      <div class="col-md-6 form-group mb-3">
+        <label class="switch switch-primary me-3 mt-4">
+          <span>{{ "customers.isActive" | translate }}</span>
+          <input type="checkbox" checked formControlName="isActive" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Notes -->
+      <div class="col-12 form-group">
+        <label>{{ "customers.notes" | translate }}</label>
+        <textarea class="form-control" formControlName="notes" rows="3"
+          placeholder="{{ 'customers.notes' | translate }}"
+          [class.is-invalid]="isFormSubmitted && form.get('notes')?.invalid"></textarea>
+        <div *ngIf="isFormSubmitted && form.get('notes')?.errors?.['maxlength']" class="invalid-feedback">
+          {{ "common.maxLength" | translate:{length:500} }}
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+
+<div class="modal-footer position-absolute bottom-0 w-100">
+  <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
+    {{ "common.cancel" | translate }}
+  </button>
+  <button type="button" (click)="submitForm()" class="btn btn-primary btn-rounded" tabindex="-1" *ngIf="
+      authSerivce.hasPermission('Add-Customers')">
+    {{ "common.save" | translate }}
+  </button>
+</div>

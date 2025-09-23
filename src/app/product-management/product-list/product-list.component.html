@@ -1,0 +1,93 @@
+<div class="customers">
+<div class="breadcrumb">
+    <h1>{{'product-management.product-management' | translate}}</h1>
+    <ul>
+        <li>{{'product-management.manageProduct'  | translate}}</li>
+        <li><strong class="text-primary">{{'product-management.product'  | translate}}</strong></li>
+    </ul>
+</div>
+
+
+	
+		<div class="card">
+					<div class="card-body">
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+ <div class="col-md-4 form-group mb-3 ">
+                            <label for="picker1"> {{ "product-management.type" | translate }}</label>
+                            <select class="form-control" formControlName="type" name="type" >
+                               <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of types" value="{{item.id}}" >{{item.name | translate }}</option>
+                            </select>
+                           
+                        </div>
+         <div class="col-md-4 form-group required">
+        <label>{{ "product-management.productSsearch" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'product-management.productSsearch' | translate }}"
+          class="form-control"
+          formControlName="searchValue"
+        />
+        <div class="invalid-feedback">
+        </div>
+      </div>
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+		<div class="table-heading">
+			<div class="table-search form-group">
+
+				
+				
+			</div>
+			<div *ngIf="authService.hasPermission('Transaction-Form')" class="heading-actions">
+				<button 
+					type="button" 
+					class="btn btn-rounded btn-primary" 
+					(click)="onAddProduct(AddProductPopup)" 
+					*ngIf="authService.hasPermission('Transaction-Form') "
+				>
+					<i class="i-Plus"></i>
+					<span>
+						{{ 'product-management.addNewProduct' | translate }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event , EditProductPopup )"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+
+
+<!-- Add Lookups -->
+<ng-template #AddProductPopup let-modal>
+	<app-product-form [modal]="modal" [TypeId]="TypeId"></app-product-form>
+</ng-template>
+<!-- Edit Lookups -->
+<ng-template #EditProductPopup let-modal>
+     	<app-product-form [modal]="modal" [TypeId]="TypeId" [id]="id" [isEditMood]="true" ></app-product-form>
+
+</ng-template>

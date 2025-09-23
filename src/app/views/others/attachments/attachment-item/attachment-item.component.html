@@ -1,0 +1,41 @@
+<div class="attachment-item">
+	<div class="caption">
+		<span>Attachment </span><span class="sub-lang">المرفقات </span>
+		<div type="button" class="btn btn-rounded btn-secondary btn-icon-danger" (click)="removeAttachment($event)">
+			<i class="me-0"></i>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-12 col-lg-6 form-group">
+			<label for="fileDropRef-{{id}}">Upload document<span class="sub-lang">تحميل الوثيقة</span></label>
+			<div class="file-drop">
+				<input type="file" class="my-class" id="fileDropRef-{{id}}" (change)="addNewComponent($event)" hidden tabindex="-1" ngModel/>
+
+				<label for="fileDropRef-{{id}}" class="file-drop-label">
+					<i class="i-Upload"></i>
+					<span>Click to browse or drag and drop your file<span class="sub-lang">انقر للتصفح أو السحب وإسقاط الملف الخاص بك</span></span>
+				</label>
+			</div>
+
+			<div class="uploaded-file">
+				<div class="file-icon">
+					<img src="" width="52" height="64" alt="">
+				</div>
+				<div class="file-info">
+					<div class="file-name"></div>
+					<div class="file-size"><span></span>KB</div>
+				</div>
+
+				<button type="button" class="btn btn-rounded btn-secondary btn-icon-danger" (click)="removeFile($event)">
+					<i class="i-Close-Window me-0"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-6 form-group">
+			<label>Description<span class="sub-lang">وصف</span></label>
+			<textarea [(ngModel)]="text" (ngModelChange)="onTextChange($event)" #curTextarea class="form-control form-control-rounded" placeholder="Enter description / أدخل الوصف" tabindex="-1"></textarea>
+		</div>
+	</div>
+</div>

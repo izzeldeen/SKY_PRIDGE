@@ -1,0 +1,540 @@
+<div class="customers">
+    <div class="breadcrumb">
+        <h1>Users</h1>
+
+        <ul>
+			<li><strong>Users</strong></li>
+			<li>Users</li>
+		</ul>
+    </div>
+    
+
+    <div class="custom-table-wrap">
+		<div class="table-heading">
+			<div class="table-search form-group">
+				<input id="table-search" placeholder="Search by users..."  class="form-control" type="text">
+			</div>
+			<div class="heading-actions">
+				<button 
+                    type="button" 
+                    class="btn btn-rounded btn-primary"
+                    (click)="handleModal(AddUserPopup)">
+                    <i class="i-Plus"></i>
+                    <span>Add new user</span>
+                </button>
+			</div>
+		</div>
+
+		<app-table [Headers]="columns" [dataSource]="dataSource" [actionList]="actionList"></app-table>
+		
+	</div>
+</div>
+
+
+<ng-template #AddUserPopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add new user</h4>
+		<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="userAddForm" id="userAddForm" (ngSubmit)="submitUserAddForm()">
+        	<div class="row">
+        		<div class="col-12 col-sm-6 form-group required">
+	                <label>User name</label>
+					<input 
+                        type="text" 
+                        placeholder="Enter name" 
+                        class="form-control" 
+                        formControlName="UserName"
+                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('UserName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+	            <div class="col-12 col-sm-6 form-group required">
+	                <label>Full name</label>
+					<input 
+                        type="text" 
+                        placeholder="Enter name" 
+                        class="form-control" 
+                        formControlName="FullName"
+                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('FullName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+        	</div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Email</label>
+                    <input 
+                        type="text" 
+                        placeholder="Enter email" 
+                        class="form-control" 
+                        formControlName="Email"
+                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('Email')?.errors"
+                    >
+				    <div *ngIf="isSubmittedUserAddForm && userAddForm.get('Email')?.errors" class="invalid-feedback">
+				        <div *ngIf="userAddForm.get('Email').errors['required']">
+				        	This field is required
+				        </div>
+				        <div *ngIf="userAddForm.get('Email').errors['invalidEmail']">
+				        	Please enter a valid email address (Ex: example@domain.com).
+				        </div>
+				    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Phone</label>
+                    <ngx-mat-intl-tel-input
+                        [preferredCountries]="['jo', 'us', 'gb']"
+                        [enablePlaceholder]="true"
+                        [enableSearch]="true"
+                        name="Phone"
+                        #phoneInput
+                        describedBy="phoneInput"
+                        class="form-control input-group input-phone-selector"
+                        formControlName="Phone"
+                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('Phone')?.errors"
+                    ></ngx-mat-intl-tel-input>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label>Password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="Password"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('Password')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+				<div *ngIf="isSubmittedUserAddForm && userAddForm.get('Password')?.errors" class="invalid-feedback">
+					<div *ngIf="userAddForm.get('Password').errors['required']">
+						This field is required
+					</div>
+					<div *ngIf="!userAddForm.get('Password').errors['required'] && userAddForm.get('Password').errors['invalidPassword']">
+						Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+					</div>
+				</div>
+                <div class="field-note" *ngIf="!isSubmittedUserAddForm || userAddForm.get('Password').errors['required']">
+                	Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+                </div>
+            </div>
+
+            <div class="form-group required">
+                 <label>Confirm password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="PasswordConfirm"
+                       [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('PasswordConfirm')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+                <div *ngIf="isSubmittedUserAddForm && userAddForm.get('PasswordConfirm')?.errors" class="invalid-feedback">
+			        <div *ngIf="userAddForm.get('PasswordConfirm').errors['required']">
+			        	This field is required
+			        </div>
+			        <div *ngIf="userAddForm.get('PasswordConfirm').errors['matching']">
+			        	Confirm Password does not match
+			        </div>
+			    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Role</label>
+                    <select 
+	                    class="form-control" 
+	                    formControlName="Role"
+	                    [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('Role')?.errors"
+	                >
+	                    <option value="" disabled selected hidden>Choose role</option>
+	                    <option value="1">Option 2</option>
+	                    <option value="2">Option 3</option>
+	                </select>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>User type</label>
+                    <select 
+                        class="form-control"
+                        formControlName="UserType"
+                        [class.is-invalid]="isSubmittedUserAddForm && userAddForm.get('UserType')?.errors"
+                    >
+                        <option value="" disabled selected hidden>Choose type</option>
+                        <option value="1">Option 2</option>
+                        <option value="2">Option 3</option>
+                    </select>
+					<div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="checkbox checkbox-primary text-13">
+                    <input 
+                        type="checkbox"
+                        formControlName="ActiveUser"
+                        checked
+                    >
+                    <span>Active user</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+            type="button" 
+            class="btn btn-secondary btn-rounded" 
+            (click)="resetUserAddForm(phoneInput)"
+            tabindex="-1"
+        >
+            Clear fields
+        </button>
+
+        <button 
+            type="button"
+            (click)="submitUserAddForm()"
+            class="btn btn-primary btn-rounded"
+            tabindex="-1"
+        >
+            Save
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #EditUserPopup let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit user</h4>
+		<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); clearServiceArray()"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="userEditForm" id="userEditForm">
+        	<div class="row">
+        		<div class="col-12 col-sm-6 form-group required">
+	                <label>User name</label>
+					<input 
+                        type="text" 
+                        placeholder="Enter name" 
+                        class="form-control" 
+                        formControlName="UserName"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('UserName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+	            <div class="col-12 col-sm-6 form-group required">
+	                <label>Full name</label>
+					<input 
+                        type="text" 
+                        placeholder="Enter name" 
+                        class="form-control" 
+                        formControlName="FullName"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('FullName')?.errors"
+                    >
+	                <div class="invalid-feedback">
+	                    This field is required
+	                </div>
+	            </div>
+        	</div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Email</label>
+                    <input 
+                        type="text" 
+                        placeholder="Enter email" 
+                        class="form-control" 
+                        formControlName="Email"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Email')?.errors"
+                    >
+                    <div *ngIf="isSubmittedUserEditForm && userEditForm.get('Email')?.errors" class="invalid-feedback">
+				        <div *ngIf="userEditForm.get('Email').errors['required']">
+				        	This field is required
+				        </div>
+				        <div *ngIf="userEditForm.get('Email').errors['invalidEmail']">
+				        	Please enter a valid email address (Ex: example@domain.com).
+				        </div>
+				    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Phone</label>
+                    <ngx-mat-intl-tel-input
+                        [preferredCountries]="['jo', 'us', 'gb']"
+                        [enablePlaceholder]="true"
+                        [enableSearch]="true"
+                        name="Phone"
+                        #phoneInput
+                        describedBy="phoneInput"
+                        class="form-control input-group input-phone-selector"
+                        formControlName="Phone"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Phone')?.errors"
+                    ></ngx-mat-intl-tel-input>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label>Password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="Password"
+                       [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Password')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+				<div *ngIf="isSubmittedUserEditForm && userEditForm.get('Password')?.errors" class="invalid-feedback">
+					<div *ngIf="userEditForm.get('Password').errors['required']">
+						This field is required
+					</div>
+					<div *ngIf="!userEditForm.get('Password').errors['required'] && userEditForm.get('Password').errors['invalidPassword']">
+						Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+					</div>
+				</div>
+                <div class="field-note" *ngIf="!isSubmittedUserEditForm || userEditForm.get('Password').errors['required']">
+                	Password must contain at least 8 characters, a mix of lower and upper case, 1 number, and 1 special character.
+                </div>
+            </div>
+
+            <div class="form-group required">
+                <label>Confirm password</label>
+				<input type="password" 
+					   placeholder="Enter password" 
+                       class="form-control" 
+                       formControlName="PasswordConfirm"
+                       [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('PasswordConfirm')?.errors"
+                >
+                <i class="i-Eye show-pass" 
+                   (click)="triggerShowPass($event)"></i>
+                <div *ngIf="isSubmittedUserEditForm && userEditForm.get('PasswordConfirm')?.errors" class="invalid-feedback">
+			        <div *ngIf="userEditForm.get('PasswordConfirm').errors['required']">
+			        	This field is required
+			        </div>
+			        <div *ngIf="userEditForm.get('PasswordConfirm').errors['matching']">
+			        	Confirm Password does not match
+			        </div>
+			    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>Role</label>
+                    <select 
+	                    class="form-control" 
+	                    formControlName="Role"
+	                    [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('Role')?.errors"
+	                >
+	                    <option value="" disabled selected hidden>Choose role</option>
+	                    <option value="1">Option 2</option>
+	                    <option value="2">Option 3</option>
+	                </select>
+                    <div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 form-group required">
+                    <label>User type</label>
+                    <select 
+                        class="form-control"
+                        formControlName="UserType"
+                        [class.is-invalid]="isSubmittedUserEditForm && userEditForm.get('UserType')?.errors"
+                    >
+                        <option value="" disabled selected hidden>Choose type</option>
+                        <option value="1">Option 2</option>
+                        <option value="2">Option 3</option>
+                    </select>
+					<div class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field mb-5">
+                <label class="checkbox checkbox-primary text-13">
+                    <input 
+                        type="checkbox"
+                        formControlName="ActiveUser"
+                        checked
+                    >
+                    <span>Active user</span>
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </form>
+
+        <form [formGroup]="userPermissionsAddForm" id="userPermissionsAddForm" (ngSubmit)="submitUserPermissionsAddForm()">
+        	<div class="user-permissions">
+            	<div class="row top-block">
+            		<div class="col-7 col-sm-6 form-group">
+            			<h5 class="modal-sub-title">User permissions</h5>
+	            	</div>
+
+            		<div class="col-5 col-sm-6 form-field added-button">
+            			<input #ifShowPermissions type="checkbox" id="show-permissions" formControlName="ShowPermissions" class="checkbox-show-permissions">
+						<label for="show-permissions" class="btn btn-secondary btn-rounded">
+							<span class="show">View added</span>
+							<span class="hide d-none">Hide added</span>
+						</label>
+					</div>
+            	</div>
+            	
+            	<div class="row">
+        			<div class="col-12 col-sm-5 form-group">
+						<label>Service</label>
+							<select 
+								class="form-control" 
+								formControlName="Service"
+							>
+							<option value="" disabled selected hidden>Choose service</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+					</div>
+
+					<div class="col-12 col-sm-5 form-group">
+						<label>Permission</label>
+							<select 
+								class="form-control" 
+								formControlName="Permission"
+							>
+							<option value="" disabled selected hidden>Choose permission</option>
+							<option value="1">Option 2</option>
+							<option value="2">Option 3</option>
+						</select>
+					</div>
+
+					<div class="col-12 col-sm-2 form-group">
+						<label class="d-none d-sm-block">&nbsp;</label>
+		                <button 
+				            type="button"
+				            (click)="submitUserPermissionsAddForm(permissionsNotificationPopup)"
+				            class="btn btn-rounded btn-primary w-100"
+				            tabindex="-1"
+				        >
+				            <i class="i-Plus"></i>
+		                    <span>Add</span>
+				        </button>
+					</div>
+        		</div>
+
+            	<ng-container *ngIf="ifShowPermissions.checked && serviceArray.length">
+        			<div class="table-wrap">
+						<table class="custom-table">
+							<thead>
+								<tr>
+									<th class="col-5">
+										Name
+										<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+									</th>
+									<th class="col-5">
+										Service
+										<span class="sort-btn"><i class="i-Arrow-Up"></i><i class="i-Arrow-Down"></i></span>
+									</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr *ngFor="let service of serviceArray; let i = index;" class="redirect-link" role="link" (click)="redirect($event)" data-link="/accounts/user">
+									<td>
+										Create city
+			                        </td>
+									<td>
+										{{ service }}
+									</td>
+									<td class="d-table-cell actions">
+										<button class="row-menu remove" (click)="deleteService(i)"><span></span></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+            		</div>
+				</ng-container>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button 
+            type="button" 
+            class="btn btn-secondary btn-rounded" 
+            (click)="resetUserEditForm(phoneInput)"
+            tabindex="-1"
+        >
+            Clear fields
+        </button>
+
+        <button 
+            type="button"
+            (click)="submitUserEditForm(continueSaveChangesPopup)"
+			(keydown.enter)="$event.preventDefault();"
+            class="btn btn-primary btn-rounded"
+            tabindex="-1"
+        >
+            Save changes
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #permissionsNotificationPopup let-modal>
+	<div class="modal-header">
+        <h4 class="modal-title">Add permission</h4>
+        <button tabindex="-1" type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" id="permissionsNotificationPopup">
+        <div class="note text-start">
+            <div class="col">You need to select Service and Permission then click the "Add" button to save the User's permissions.</div>
+        </div>
+        <button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" ngbAutoFocus>
+            <div class="col">Okay</div>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #continueSaveChangesPopup let-modal>
+	<div class="modal-header">
+        <h4 class="modal-title">Save changes</h4>
+        <button tabindex="-1" type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" id="continueSaveChangesPopup">
+        <div class="note text-start">
+            <div class="col">You have selected permission that is not added to the User Permissions. Are you sure you want to continue?</div>
+        </div>
+        <div class="actions">
+        	<button class="btn btn-secondary btn-rounded" (click)="modal.close('Close click')" tabindex="-1">
+	            <div class="col">Cancel</div>
+	        </button>
+
+	        <button class="btn btn-primary btn-rounded" (click)="modal.close(true)" ngbAutoFocus>
+	            <div class="col">Save changes</div>
+	        </button>
+        </div>
+    </div>
+</ng-template>

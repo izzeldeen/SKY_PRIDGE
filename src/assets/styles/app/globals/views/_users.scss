@@ -1,0 +1,63 @@
+.checkbox-show-permissions {
+	position: absolute;
+    left: -9999px;
+
+    &:checked + label {
+    	@extend .btn-primary;
+    	color: $white;
+
+		.show {
+			display: none;
+		}
+
+		.hide {
+			display: block !important;
+		}
+    }
+}
+
+.added-button {
+	text-align: right;
+}
+
+.user-info-block {
+	.btn {
+		margin-left: auto;
+	}
+
+	@media (min-width: 768px) {
+		display: flex;
+		flex-wrap: wrap;
+
+		> * {
+			flex: auto;
+		}
+	}
+}
+
+.modal-md {
+	.btn-wrap {
+		@media (max-width: 576px) {
+			.btn {
+				max-width: 44%;
+			}
+		} 
+	}
+}
+
+[dir=rtl] {
+	.checkbox-show-permissions {
+		right: -9999px;
+		left: initial;
+	}
+	.user-info-block {
+		.btn {
+			margin-right: auto;
+			margin-left: 0;
+		}
+	}
+	.added-button {
+		text-align: left;
+	}
+	
+}

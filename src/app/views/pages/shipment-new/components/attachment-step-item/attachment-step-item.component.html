@@ -1,0 +1,35 @@
+<div class="attachment-item">	
+    <div class="caption"><span>Attachment </span></div>
+	<div class="row attachment-gap">
+		<div class="col-12 col-lg-6 form-group m-0">
+			<label for="fileDropRef-{{id}}">Upload document</label>
+			<div class="file-drop">
+				<input type="file" class="my-class add-input" id="fileDropRef-{{id}}" (change)="addNewComponent($event)" hidden tabindex="-1" ngModel/>
+
+				<label for="fileDropRef-{{id}}" class="file-drop-label">
+					<i class="i-Upload"></i>
+					<span>Click to browse or drag and drop your file. Maximum size: 2MB</span>
+				</label>
+			</div>
+
+			<div class="uploaded-file">
+				<div class="file-icon">
+					<img src="" width="52" height="64" alt="">
+				</div>
+				<div class="file-info">
+					<div class="file-name"></div>
+					<div class="file-size"><span></span>KB</div>
+				</div>
+
+				<button type="button" class="btn btn-rounded btn-secondary btn-icon-danger" (click)="removeFile($event)">
+					<i class="i-Close-Window me-0"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-6 form-group">
+			<label>Description</label>
+			<textarea [(ngModel)]="text" (ngModelChange)="onTextChange($event)" #curTextarea class="form-control form-control-rounded" placeholder="Enter description" tabindex="-1"></textarea>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,152 @@
+<div class="customers">
+		<div class="card">
+					<div class="card-body">
+<form [formGroup]="searchForm" id="searchForm" (submit)="onSearch()">
+	<div class="row">
+
+	<div class="col-md-4 form-group mb-3"> 
+  <label>{{ "invoice-installment.status" | translate }}</label>
+  <select class="form-control"  name="status"   formControlName="status" >
+                              <option  [ngValue]="null" selected>{{ "select" | translate }}</option> 
+                              <option *ngFor="let item of installmentStatus" value="{{item.id}}" >{{item.name | translate}}</option>
+                            </select>
+                            <div  class="invalid-feedback">
+                                    {{ "common.fieldRequired" | translate }}
+          </div>
+    </div>
+                          
+
+                         
+						<div class="col-md-4 form-group mb-3">
+        <label for="picker1">{{
+          "invoice-installment.dueDateFrom" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="dueDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="dueDateFrom"
+            ngbDatepicker
+            #dueDateFrom="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dueDateFrom.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+	   <div class="col-md-4 form-group mb-3 ">
+        <label for="picker1">{{
+          "invoice-installment.dueDateTo" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="dueDateTo"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dueDateTo"
+            formControlName="dueDateTo"
+            ngbDatepicker
+            #dueDateTo="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dueDateTo.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+	</div>
+
+				<div class="row ">
+  <div class="col-2 search-section" >
+       <button class="btn btn-light  btn-block mt-3 mr-1" type="button" (click)="resetSearchForm()">{{'common.clear' | translate}}</button>
+		<button class="btn btn-primary btn-block mt-3 mr-1" type="submit">{{'common.search' | translate}}</button>
+  </div>
+</div>
+				
+ </form>
+					</div>
+				</div>
+
+<div class="custom-table-wrap my-3">
+		<div class="table-heading">
+			<div class="table-search form-group">
+			</div>
+		</div>
+		<!-- Lookups -->
+		<app-table 
+			[Headers]="columns" 
+			[dataSource]="dataSource" 
+			[actionList]="actionList" 
+			(EventHandler)="onHandleAction($event)"
+			[PageSize]="baseSearch.pageSize" 
+			[TotalRecords]="totalCount" 
+			(PageChange)="onPageChange($event)"
+		>
+		</app-table>
+	</div>
+</div>
+
+
+
+<ng-template #changeDeliveryDate let-modal>
+				<div class="modal-header">
+					<h4 class="modal-title" id="modal-basic-title">{{'sales-invoice.creditlimitaleart' | translate}}</h4>
+					<button style="opacity: 0; pointer-events: none;" ngbAutoFocus></button>
+					<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+             <div class="col-md-12 form-group mb-3 required">
+        <label for="picker1" class="custom-popup">{{
+          "sales-invoice.deliveryDate" | translate
+        }}</label>
+        <div class="input-group">
+          <input
+            id="deliveryDate"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="deliveryDate"
+            ngbDatepicker
+            #dp="ngbDatepicker"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary"
+              (click)="dp.toggle()"
+              type="button"
+            >
+              <i class="icon-regular i-Calendar-4"></i>
+            </button>
+          </div>
+               <div  class="invalid-feedback">
+           {{ "common.fieldRequired" | translate }}
+        </div>
+        </div>
+
+      </div>
+          </div>
+						<button type="button" class="btn btn-rounded btn-secondary m-1" (click)="modal.dismiss('Cross click')">{{'common.cancel' | translate }}</button>
+			    	<button type="button" class="btn btn-rounded btn-primary" (click)="submitDeliveryDate();modal.dismiss('Cross click')">{{'sales-invoice.change'| translate  }}</button>
+				</div>
+</ng-template>

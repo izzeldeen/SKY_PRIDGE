@@ -1,0 +1,111 @@
+<div class="customers">
+  <div class="breadcrumb">
+    <h1>{{'productBarcodes.productBarcodes' | translate}}</h1>
+    <ul>
+      <li>{{'productBarcodes.manageProductBarcodes' | translate}}</li>
+      <li><strong class="text-primary">{{'productBarcodes.productBarcodes' | translate}}</strong></li>
+    </ul>
+  </div>
+  <div class="custom-table-wrap">
+    <div class="card mb-50">
+      <div class="card-body form-group ">
+        <form [formGroup]="form" id="form">
+          <div class="row">
+
+            <div class="col-md-4 form-group mb-3">
+              <div class="form-group">
+                <label for="picker1">{{ "productBarcodes.category" | translate }}</label>
+                <select class="form-control" formControlName="categoryId" name="categoryId"
+                  [class.is-invalid]="form.get('categoryId')?.invalid && form.get('categoryId')?.touched" required>
+                  <option [value]="null" disabled selected>{{ 'select' | translate }}</option>
+                  <option *ngFor="let item of categories" [value]="item.id">{{ item.title }}</option>
+                </select>
+                <div *ngIf="form.get('categoryId')?.invalid && form.get('categoryId')?.touched"
+                  class="invalid-feedback">
+                  {{ "common.fieldRequired" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 form-group mb-3">
+              <div class="form-group">
+                <label> {{ "productBarcodes.search" | translate }}</label>
+                <input id="table-search" placeholder="{{'productBarcodes.search' | translate}}" class="form-control"
+                  type="text" maxlength="100" formControlName="searchControl" (keydown.enter)="onSearch($event)">
+              </div>
+            </div>
+
+            <div class="col-md-4 form-group mb-3">
+              <div class="row"
+                [ngStyle]="{'text-align': languageService.getCurrentLanguage() === 'en' ? 'right' : 'left'}">
+                <div class="col-md-6 search-section">
+                  <label for="picker1">{{ "" }}</label>
+                  <button class="btn btn-primary mt-2" (click)="onSearch($event)">
+                    {{'productBarcodes.search' | translate }}
+                  </button>
+                </div>
+
+                <div class="col-md-6 search-section">
+                  <label for="picker1">{{ "" }}</label>
+                  <button class="btn btn-primary mt-2" (click)="downloadSelectedBarcodes()"
+                    [disabled]="selectedIds.length === 0">
+                    {{'productBarcodes.downloadbarcodes' | translate }}
+                    
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+        <br>
+        <div class="col-md-12">
+          <div class="card  o-hidden">
+            <ngx-datatable style="height: 500px; box-shadow: none" class="material fullscreen" [columnMode]="'force'"
+              [headerHeight]="50" [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true" [rows]="filteredProducts">
+
+              <!-- Barcode column -->
+              <ngx-datatable-column name="barCodeFile" [maxWidth]="300">
+                <ng-template ngx-datatable-header-template>
+                  {{ "productBarcodes.barcode" | translate }}
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-row="row">
+                  <img *ngIf="row.barCodeFile" [src]="'data:image/png;base64,' + row.barCodeFile" height="32px"
+                    width="300px" style="border-radius: 4px" alt="barcode" />
+                </ng-template>
+              </ngx-datatable-column>
+
+              <!-- Title column -->
+              <ngx-datatable-column name="name" [width]="300">
+                <ng-template ngx-datatable-header-template>
+                  {{ "productBarcodes.title" | translate }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <!-- SellPrice column -->
+              <ngx-datatable-column name="sellPrice" [width]="30">
+                <ng-template ngx-datatable-header-template>
+                  {{ "productBarcodes.SellPrice" | translate }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <!-- Select column with Select All checkbox -->
+              <ngx-datatable-column name="select" [width]="30">
+                <ng-template ngx-datatable-header-template>
+                  <input type="checkbox" [checked]="isAllSelected()" [indeterminate]="isIndeterminate()"
+                    (change)="toggleSelectAll($event)" />
+                  {{ "productBarcodes.SelectAll" | translate }}
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-row="row">
+                  <input type="checkbox" [checked]="selectedIds.includes(row.id)"
+                    (change)="onCheckboxChange($event, row.id)" />
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
