@@ -79,6 +79,12 @@ export class NavigationService {
                     state: '/invoice-management/sales-invoice',
                     type: 'link',
                     permissions: 'sales-invoice',
+                },
+                  {
+                    name: 'Costs',
+                    state: '/invoice-management/cost-invoice',
+                    type: 'link',
+                    permissions: 'sales-invoice',
                 }
             ]
         },

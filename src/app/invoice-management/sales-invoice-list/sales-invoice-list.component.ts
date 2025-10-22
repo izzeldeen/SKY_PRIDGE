@@ -36,10 +36,14 @@ columns: any[] = [
   ];
     actionList: any[] = [
     { name: "View", icon: "change" },
+    { name: "Edit", icon: "change" },
     { name: "Change Status", icon: "change" },
-        { name: "Cancel Invoice", icon: "cancel" }
+    { name: "Cancel Invoice", icon: "cancel" },
+    { name: "Delete Invoice", icon: "delete" }
+    
 
   ];
+  invoiceId:number;
   @ViewChild('ChangeInvoiceStatus') changeInvoiceStatusComp:TemplateRef<any>;
 
   model:any;
@@ -55,6 +59,7 @@ deliveryDate:any;
 selectedInvoice:any;
   totalCount: number = 0
   id: number = null;
+  invoice:any;
   filteredInvoices:any;
   searchInvoices:string;
   loading:boolean  = false;
@@ -113,6 +118,7 @@ selectedInvoice:any;
   }
   //#region Getters
 private getList() {
+
  this.spinner.show();
   this.invoiceService.listInvoicesWithCount(this.searchKeyWord).subscribe(res => {
     debugger;
@@ -147,7 +153,7 @@ loadPage(pageNumber: number, pageSize: number) {
   }
   //#endregion
 
-    onHandleAction(event , viewInvoice , changeInvoiceStatus ) {
+    onHandleAction(event , viewInvoice , changeInvoiceStatus , addInvoicePopup ) {
       debugger;
     switch (event.action.name) {
        case "View":
@@ -162,14 +168,25 @@ loadPage(pageNumber: number, pageSize: number) {
             this.onChangeInvoiceStatus(event.data , changeInvoiceStatus);
         }
          break;
-         break;
             case "Cancel Invoice":
         {
           debugger;
             this.CancelInvoiceStatus(event.data);
         }
          break;
-
+      case "Delete Invoice":
+        {
+          debugger;
+            this.onDeleteInvoice(event.data);
+        }
+         break;
+          case "Edit":
+        {
+          this.invoiceId = event.data.id; 
+          this.invoice = event.data;
+            this.onAddSalesInvoice(addInvoicePopup);
+        }
+         break;
          
     }
   }
@@ -241,8 +258,11 @@ loadPage(pageNumber: number, pageSize: number) {
     }
  
 
-      onAddSalesInvoice(modal: any) {
-        debugger;
+      onAddSalesInvoice(modal: any , clearInvoice = false) {
+        if(clearInvoice){
+      this.invoiceId = null;
+      this.invoice = null;
+        }
     const modalRef = this.modalService.open
       (modal, { modalDialogClass: 'side-modal', backdrop: 'static', keyboard: false });
     modalRef.result.then((result) => { this.getList(); })
@@ -297,6 +317,27 @@ loadPage(pageNumber: number, pageSize: number) {
     { timeOut: 3000 })
     }
     
+}
+
+onDeleteInvoice(data){
+    if(data.status != 'Settled') {
+      this.spinner.show();
+  this.invoiceService.deleteInvoice(data.id).then(res => {
+       this.toastr.success(
+       this.translate.instant( 'Invoice Deleted  Successfully'),
+       this.translate.instant("Success"),
+    { timeOut: 3000 }
+  );
+       this.spinner.hide();
+  })
+    } else {
+         this.toastr.error(
+       this.translate.instant('error'),
+       this.translate.instant('Delete not allowed for completed invoices.'),
+    { timeOut: 3000 })
+    }
+
+
 }
 
 

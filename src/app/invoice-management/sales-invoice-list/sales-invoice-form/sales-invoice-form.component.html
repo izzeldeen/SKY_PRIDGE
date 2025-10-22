@@ -109,7 +109,9 @@
 
    
 
-      <div class="col-md-6 form-group required">
+
+
+      <div class="col-md-6 form-group"  [ngClass]="{ 'required': !isEditMode }">
         <label>{{ "Sales Invoice" | translate }}</label>
         <input
           type="file"
@@ -125,7 +127,7 @@
 
       </div>
 
-          <div class="col-md-6 form-group  required">
+          <div class="col-md-6 form-group" [ngClass]="{ 'required': !isEditMode }">
         <label>{{ "Purchase Invoice" | translate }}</label>
         <input
           type="file"
@@ -139,7 +141,6 @@
                                     {{ "Required" | translate }}
                              </div>
       </div>
-
 
 
 
@@ -169,7 +170,10 @@
   <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
     {{ "Cancel" | translate }}
   </button>
-  <button type="button" (click)="seedInvoice()" class="btn btn-primary btn-rounded" tabindex="-1" [disabled]="form.invalid || !salesInvoiceFile  || !purchaseInvoiceFile" >
+  <button *ngIf="!isEditMode" type="button" (click)="seedInvoice()" class="btn btn-primary btn-rounded" tabindex="-1" [disabled]="form.invalid || !salesInvoiceFile  || !purchaseInvoiceFile" >
     {{ "Save" | translate }}
+  </button>
+    <button *ngIf="isEditMode" type="button" (click)="updateInvoice()" class="btn btn-primary btn-rounded" tabindex="-1" [disabled]="form.invalid" >
+    {{ "Update" | translate }}
   </button>
 </div>

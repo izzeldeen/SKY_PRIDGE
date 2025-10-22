@@ -49,5 +49,23 @@
   "Sign In":"تسجيل الدخول",
   "User Name":"اسم المستخدم",
   "Password":"كلمة المرور",
-  "SKY BRIDGE":"جسر السماء لتجارة قطع الطائرات"
+  "SKY BRIDGE":"جسر السماء لتجارة قطع الطائرات",
+  "Change Status":"تغير الحالة",
+  "Cancel Invoice":"إلغاء الفاتورة",
+  "Invoice Deleted  Successfully":"تم حذف الفاتورة بنجاح",
+  "Invoice Canceled  Successfully": " تم إلغاء الفاتورة بنجاح",
+  "Delete Invoice":"حذف الفاتورة",
+  "Update":"تعديل",
+  "Edit":"تعديل",
+  "Invoice Updated Successfully":"تعديل الفاتورة بنجاح",
+  "Commission %":"العمولة",
+  "Costs":"مصاريف",
+  "Description":"تفاصيل",
+  "Amount":"القيمة",
+  "Cost Invoices":"المصاريف",
+  "Cost Invoice":"فاتورة مصاريف",
+  "New Cost Invoice":"اضافة فاتروة مصروف",
+  "Cost invoice added successfully":"تمت الإضافة بنجاح",
+  "Success":"نجاح"
+
 }

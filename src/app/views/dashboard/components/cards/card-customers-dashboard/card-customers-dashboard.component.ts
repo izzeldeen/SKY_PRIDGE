@@ -22,6 +22,7 @@ export class CardCustomersDashboardComponent implements OnInit {
 
   getInvoiceStatistics(){
     this.spinner.show();
+    debugger;
       this.invoiceService.getInvoicesTotals().subscribe(res => {
         this.model = res;
         this.spinner.hide();

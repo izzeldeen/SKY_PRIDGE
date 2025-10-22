@@ -25,6 +25,9 @@ import { CompanyManagementModule } from '../company-management/company-managemen
 import { InvoicesService } from '../shared/services/invoice.service';
 import { SalesInvoiceViewComponent } from './sales-invoice-list/sales-invoice-view/sales-invoice-view.component';
 import { ChangeInvoiceStatusComponent } from './sales-invoice-list/change-invoice-status/change-invoice-status.component';
+import { CostInvoiceListComponent } from './cost-invoice-list/cost-invoice-list.component';
+import { CostInvoiceFormComponent } from './cost-invoice-list/cost-invoice-form/cost-invoice-form.component';
+import { CostInvoicesService } from '../shared/services/cost.service';
 
 
 
@@ -39,7 +42,9 @@ import { ChangeInvoiceStatusComponent } from './sales-invoice-list/change-invoic
     ConvertQuotationComponent,
     InvoiceViewComponent,
     SalesInvoiceViewComponent,
-    ChangeInvoiceStatusComponent
+    ChangeInvoiceStatusComponent,
+    CostInvoiceListComponent,
+    CostInvoiceFormComponent
   ],
   imports: [
        CommonModule,
@@ -62,6 +67,6 @@ import { ChangeInvoiceStatusComponent } from './sales-invoice-list/change-invoic
         CompanyManagementModule
   ],
   exports:[InvoiceViewComponent],
-  providers:[InvoicesService]
+  providers:[InvoicesService, CostInvoicesService]
 })
 export class InvoiceManagementModule { }

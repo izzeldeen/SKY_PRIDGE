@@ -1,9 +1,9 @@
 <div class="customers">
 <div class="breadcrumb">
-    <h1>{{'Invoices' | translate}}</h1>
+    <h1>{{'Cost Invoices' | translate}}</h1>
     <ul>
         <li>{{'Sales Management'  | translate}}</li>
-        <li><strong class="text-primary">{{'Invoices'  | translate}}</strong></li>
+        <li><strong class="text-primary">{{'Cost Invoices'  | translate}}</strong></li>
     </ul>
 </div>
 	
@@ -12,11 +12,11 @@
 	<div class="row">
 
 		 <div class="col-md-4 form-group required">
-        <label>{{ "Customer , Supplier , Invoice number" | translate }}</label>
+        <label>{{ "Description" | translate }}</label>
         <input
           type="text"
           maxlength="100"
-          placeholder="{{ 'Customer , Supplier , Invoice number' | translate }}"
+          placeholder="{{ 'Description' | translate }}"
           class="form-control"
           [(ngModel)]="searchKeyWord"
         />
@@ -44,11 +44,11 @@
 				<button 
 					type="button" 
 					class="btn btn-rounded btn-primary" 
-					(click)="onAddSalesInvoice(AddInvoicePopup ,true)" 
+					(click)="onAddCostInvoice(AddInvoicePopup)" 
 				>
 					<i class="i-Plus"></i>
 					<span>
-						{{ 'Invoice' | translate }}
+						{{ 'Cost Invoice' | translate }}
 					</span>
 				</button>
 			</div>
@@ -58,7 +58,7 @@
 			[Headers]="columns" 
 			[dataSource]="dataSource" 
 			[actionList]="actionList" 
-			(EventHandler)="onHandleAction($event , ViewInvoicePoup , ChangeInvoiceStatus , AddInvoicePopup )"
+			(EventHandler)="onHandleAction($event)"
 			[PageSize]="baseSearch.pageSize" 
 			[TotalRecords]="totalCount" 
 			(PageChange)="onPageChange($event)"
@@ -72,22 +72,5 @@
      
 
 <ng-template #AddInvoicePopup let-modal>
-	<app-sales-invoice-form [modal]="modal"  [id]="invoiceId" [entity]="invoice"></app-sales-invoice-form>
+	<app-cost-invoice-form [modal]="modal"  ></app-cost-invoice-form>
 </ng-template>
-
-
-
-
-
-<ng-template #ViewInvoicePoup let-modal>
-	<app-sales-invoice-view [modal]="modal" [entity]="model"></app-sales-invoice-view>
-</ng-template>
-
-
-
-<ng-template #ChangeInvoiceStatus let-modal>
-		<app-change-invoice-status [invoiceId]="id" [modal]="modal" [invoice]="model"></app-change-invoice-status>
-</ng-template>
-
-
-

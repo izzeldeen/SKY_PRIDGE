@@ -12,7 +12,7 @@
                 <div class="title">{{'Total Sales Amount' | translate}}</div>
                 <div class="body">
                     <i class="icon i-Dollar-Sign-2"></i>
-                    <span class="value">{{model.totalSales}}</span>
+                    <span class="value">{{model.totalSales | number:'1.2-2'}}</span>
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
                 <div class="title">{{'Total Purchase Amount' | translate}}</div>
                 <div class="body">
                     <i class="icon i-Dollar-Sign-2"></i>
-                    <span class="value">{{model.totalPurchase}}</span>
+                    <span class="value">{{model.totalPurchase | number:'1.2-2'}}</span>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                 <div class="title">{{'Total Net  Amount' | translate}}</div>
                 <div class="body">
                      <i class="icon i-Dollar-Sign-2"></i>
-                    <span class="value">{{model.totalNet}}</span>
+                    <span class="value">{{model.totalNet | number:'1.2-2'}}</span>
                 </div>
             </div>
 

@@ -149,7 +149,7 @@ lang:string;
   
 
   printReport(printReport){
-  if(this.entity?.statusName != 'Draft' || printReport) {
+  if(this.entity?.statusName != '5' || printReport) {
 this.baseService.printReport('Invoice' , 'PrintInvoiceReport/' + this.id + '/' + 1 + '?lang=' + this.lang);
   } else {
      this.toastr.error(

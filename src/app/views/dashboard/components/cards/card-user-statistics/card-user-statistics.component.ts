@@ -23,6 +23,7 @@ export class CardUserStatisticsComponent implements OnInit {
 
 
     getEmployees(){
+        debugger;
     this.employeeService.getAllEmployees().subscribe(employees => {
    this.employees = employees;
 });

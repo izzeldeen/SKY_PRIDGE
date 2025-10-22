@@ -1,0 +1,84 @@
+
+
+<div class="card">
+    <div class="card-body">
+<div class="modal-header">
+  <h4 class="modal-title" >
+    {{ "New Cost Invoice" | translate }}
+  </h4>
+  	<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" >
+						<span aria-hidden="true">&times;</span>
+					</button>
+</div>
+<div class="modal-body">
+
+   <form [formGroup]="form" id="form">
+    <div class="row">
+
+       <div  class="col-12 col-sm-12 form-group required" >
+        <label>{{ "Description" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'Description' | translate }}"
+          class="form-control"
+          formControlName="description"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('description')?.errors"
+        />
+        <div class="invalid-feedback">
+          {{ "Required" | translate }}
+        </div>
+      </div>
+
+        <div  class="col-12 col-sm-12 form-group required" >
+        <label>{{ "Amount" | translate }}</label>
+        <input
+          type="text"
+          maxlength="100"
+          placeholder="{{ 'amount' | translate }}"
+          class="form-control"
+          formControlName="amount"
+          [class.is-invalid]="isFormSubmitted &&  form && form.get('amount')?.value <= 0"
+        />
+        <div class="invalid-feedback">
+          {{ "Required And Greater Than Zero" | translate }}
+        </div>
+      </div>
+
+
+
+         
+
+
+
+
+
+
+
+
+      </div>
+
+      </form>
+
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+<div class="modal-footer position-absolute bottom-0 w-100">
+  <button type="button" class="btn btn-secondary btn-rounded" (click)="modal.dismiss('Cross click')" tabindex="-1">
+    {{ "Cancel" | translate }}
+  </button>
+  <button type="button" (click)="onAddCostInvoice()" class="btn btn-primary btn-rounded" tabindex="-1" [disabled]="form.invalid" >
+    {{ "Save" | translate }}
+  </button>
+  
+</div>

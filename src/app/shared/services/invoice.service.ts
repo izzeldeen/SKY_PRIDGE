@@ -49,6 +49,24 @@ updateInvoiceStatus(invoiceId: string, status: string) {
   });
 }
 
+updateInvoice(invoiceId: string, data) {
+  
+  return this.afs.collection('invoices').doc(invoiceId).update({
+    customer: data.customer,
+    supplier: data.supplier,
+    saleAmount: data.saleAmount,
+    employeeId:data.employeeId,
+    commissionPerc: data.commissionPerc,
+    netAmount:data.netAmount,
+    commission:data.commission,
+    updatedAt: new Date(), // optional: track last update
+    salePDF:data.salePDF,
+    purchasePDF:data.purchasePDF,
+    purchaseAmount:data.purchaseAmount
+  });
+}
+
+
 getInvoicesTotals(): Observable<{ 
   totalSales: number, 
   totalPurchase: number, 
@@ -72,5 +90,10 @@ getInvoicesTotals(): Observable<{
     })
   );
 }
+
+deleteInvoice(invoiceId: string) {
+  return this.afs.collection('invoices').doc(invoiceId).delete();
+}
+
 
 }
