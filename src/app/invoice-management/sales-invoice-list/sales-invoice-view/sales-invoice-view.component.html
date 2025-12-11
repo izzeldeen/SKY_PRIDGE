@@ -74,7 +74,7 @@
                              <span class="value" > {{entity.createdAt | date:'medium'}} </span>
      </div>
 
-       <div class="col-md-6 form-group mb-3">
+       <div *ngIf="entity.salePDF" class="col-md-6 form-group mb-3">
          <a 
     href="{{ entity.salePDF }}" 
     target="_blank" 
@@ -84,7 +84,7 @@
     </a>
      </div>
 
-       <div class="col-md-6 form-group mb-3">
+       <div *ngIf="entity.purchasePDF" class="col-md-6 form-group mb-3">
             <a href="" type="button" class="btn btn-outline-secondary m-1" href="{{ entity.purchasePDF }}"     target="_blank"  ><i class="i-Data-Download" > </i>{{ 'Purchase Invoice' | translate}}</a>
      </div>
 
