@@ -83,7 +83,8 @@ this.getEmployees();
      
   async updateInvoice(){
      let data = this.form.value as any;
-    if(this.entity.status != 'Settled') {
+    // if(this.entity.status != 'Settled') {
+      
       this.spinner.show();
   const saleAmount = data.saleAmount;
   const purchaseAmount = data.purchaseAmount;
@@ -129,14 +130,14 @@ this.getEmployees();
        this.modal.close();
        this.spinner.hide();
   })
-    } else {
-       this.spinner.hide();
-        this.modal.close();
-         this.toastr.error(
-       this.translate.instant('error'),
-       this.translate.instant('Update Invoice is not  allowed for Settled invoices.'),
-    { timeOut: 3000 })
-    }
+    // } else {
+    //    this.spinner.hide();
+    //     this.modal.close();
+    //      this.toastr.error(
+    //    this.translate.instant('error'),
+    //    this.translate.instant('Update Invoice is not  allowed for Settled invoices.'),
+    // { timeOut: 3000 })
+    // }
     
 }
 
